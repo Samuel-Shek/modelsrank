@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="{{HTML_LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+{{ROBOTS_META}}
+<link rel="canonical" href="{{URL_SELF}}">
+<link rel="alternate" hreflang="zh-CN" href="{{URL_ZH}}">
+<link rel="alternate" hreflang="en" href="{{URL_EN}}">
+<link rel="alternate" hreflang="x-default" href="{{URL_ZH}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Models Rank">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:url" content="{{URL_SELF}}">
+<meta property="og:locale" content="{{OG_LOCALE}}">
+<meta property="og:locale:alternate" content="{{OG_LOCALE_ALT}}">
+<meta property="og:image" content="https://modelsrank.org/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{TITLE}}">
+<meta name="twitter:description" content="{{DESC}}">
+<meta name="twitter:image" content="https://modelsrank.org/og.png">
+<style>
+:root{color-scheme:dark;--bg:#0b1018;--surface:#111a26;--text:#eef3fa;--muted:#99a9bf;--line:#263448;--accent:#67d9d0}
+@media(prefers-color-scheme:light){:root{color-scheme:light;--bg:#f6f8fb;--surface:#fff;--text:#182536;--muted:#53657c;--line:#dce3ed;--accent:#087f79}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}nav,main,footer{max-width:1060px;margin:auto;padding:24px}nav,footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}nav{border-bottom:1px solid var(--line)}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}h1{font-size:clamp(28px,5vw,46px);line-height:1.2;margin:12px 0}h2{font-size:22px;margin-top:30px}h3{font-size:17px}.muted,dt,small{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}dl>div,article{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px}dt{font-size:12px}dd{margin:5px 0;overflow-wrap:anywhere}dd strong{font:600 22px/1.6 ui-monospace,monospace}small{display:block;font-size:11px}.notes p{margin:15px 0}.sources{padding-left:20px;overflow-wrap:anywhere}.sources li{margin:12px 0}article{margin:16px 0}footer{border-top:1px solid var(--line)}@media(max-width:640px){nav,main,footer{padding:18px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}dd strong{font-size:18px}}
+body{overflow-wrap:anywhere}main{max-width:900px}section{margin:36px 0}.source-group,.faq-item{border:1px solid var(--line);border-radius:12px;margin:12px 0;background:var(--surface);padding:16px}summary{cursor:pointer;font-weight:600}.source-group ul{padding-left:22px}.source-group li{margin:12px 0}.faq-item p{margin-bottom:0}.preview{border:1px solid var(--line);padding:16px;border-radius:12px}
+</style>
+<script type="application/ld+json">{{JSON_LD}}</script>
+</head>
+<body>
+<nav>{{NAV}}</nav>
+<main>{{BODY}}</main>
+<footer>{{FOOTER}}</footer>
+</body>
+</html>

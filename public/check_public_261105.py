@@ -16,6 +16,7 @@ parser.add_argument('public_html')
 parser.add_argument('private_html')
 parser.add_argument('output_dir')
 parser.add_argument('--sample-slugs', nargs='+', default=['gemini4carbon', 'kimik3', 'astra-pro'])
+parser.add_argument('--allow-placeholders', action='store_true', help='Allow missing About fields for preview only; all other checks remain strict')
 args = parser.parse_args()
 pub, priv, outdir = str(pathlib.Path(args.public_html).resolve()), str(pathlib.Path(args.private_html).resolve()), pathlib.Path(args.output_dir)
 outdir.mkdir(parents=True, exist_ok=True)
@@ -201,6 +202,350 @@ def static_reachable(home, language):
     return visited
 
 
+TEXT = json.loads((SOURCE_ROOT / 'public_text_261105.json').read_text())
+ABOUT_URLS = {'zh': ORIGIN + '/about/', 'en': ORIGIN + '/en/about/'}
+
+
+def about_input_checks():
+    """Independent validation: never import the build script (it writes files)."""
+    import html, unicodedata
+    from string import Formatter
+    missing, errors = [], []
+    config = TEXT.get('about_config', {})
+    if not isinstance(config, dict):
+        raise ValueError('Invalid about_config object')
+    operator, channel = config.get('operator', {}), config.get('corrections', {})
+    if channel is None:
+        channel = {}
+    if not isinstance(operator, dict) or not isinstance(channel, dict):
+        raise ValueError('Invalid About configuration objects')
+    raw_names = operator.get('name')
+    if raw_names is None:
+        raw_names = {}
+    if not isinstance(raw_names, dict):
+        raise ValueError('Invalid About operator names')
+    def read(value, field):
+        if value is None:
+            missing.append(field)
+            return ''
+        if not isinstance(value, str) or re.search(r'[{}<>]', value) or any(unicodedata.category(c).startswith('C') for c in value):
+            errors.append('Invalid field: ' + field)
+            return ''
+        if not value.strip():
+            missing.append(field)
+        return value.strip()
+    names = {lg: read(raw_names.get(lg), 'operator.name.' + lg) for lg in ABOUT_URLS}
+    if operator.get('entity_type') != 'Person':
+        errors.append('operator.entity_type must be Person')
+    repo_pattern = r'https://github\.com/[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[A-Za-z0-9_-][A-Za-z0-9_.-]*'
+    source_repo = read(config.get('source_repo'), 'source_repo')
+    if source_repo and not re.fullmatch(repo_pattern, source_repo):
+        errors.append('Invalid About source_repo URL')
+    raw_channels = channel.get('channels', [channel] if channel else [])
+    if raw_channels is None:
+        raw_channels = []
+    if not isinstance(raw_channels, list):
+        raise ValueError('corrections.channels must be a list')
+    channels = []
+    for entry in raw_channels:
+        if not isinstance(entry, dict):
+            raise ValueError('Correction channel must be an object')
+        before = len(missing)
+        error_count = len(errors)
+        kind = read(entry.get('type'), 'corrections.type')
+        value = read(entry.get('value'), 'corrections.value')
+        del missing[before:]
+        if kind and kind not in ('email', 'url', 'github_issues'):
+            errors.append('Invalid corrections.type')
+        if value and not kind:
+            errors.append('Missing type for correction value')
+        if value and kind == 'email':
+            parts = value.split('@')
+            valid = len(parts) == 2
+            if valid:
+                local, domain = parts
+                valid = bool(re.fullmatch(r"[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*", local))
+                valid &= len(domain.split('.')) >= 2 and all(re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?', part) for part in domain.split('.'))
+            if not valid:
+                errors.append('Invalid About email')
+        if value and kind == 'url':
+            try:
+                target = urlsplit(value)
+                port = target.port
+                valid = (target.scheme == 'https' and target.hostname and target.username is None and target.password is None
+                         and all(re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?', part) for part in target.hostname.split('.')) and not re.search(r'\s|\\|[<>"{}]', value))
+            except ValueError:
+                valid = False
+            if not valid:
+                errors.append('Invalid About HTTPS URL')
+        if value and kind == 'github_issues' and not re.fullmatch(repo_pattern + r'/issues', value):
+            errors.append('Invalid About github_issues URL')
+        if kind and value and len(errors) == error_count:
+            channels.append({'type': kind, 'value': value})
+    if not channels:
+        missing.append('corrections.channels')
+    first = next((c for c in channels if c['type'] == 'email'), channels[0] if channels else {})
+    kind, value = first.get('type', ''), first.get('value', '')
+    def check_copy(node, path):
+        if isinstance(node, dict):
+            if set(node) == {'zh', 'en'} and not all(isinstance(v, str) and v.strip() for v in node.values()):
+                errors.append('Missing About translation: ' + path)
+            for k, v in node.items():
+                check_copy(v, path + '.' + k)
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                check_copy(v, path + '.' + str(i))
+        elif isinstance(node, str):
+            normalized = unicodedata.normalize('NFKC', html.unescape(node))
+            try:
+                literals = ''
+                for literal, field, spec, conversion in Formatter().parse(normalized):
+                    literals += literal
+                    if field is not None and (field not in {'date', 'operator_name', 'correction'} or spec or conversion):
+                        errors.append('Unknown About placeholder: ' + path)
+                if re.search(r'\d|[{}]', literals):
+                    errors.append('Literal number or brace in About copy: ' + path)
+            except ValueError:
+                errors.append('Malformed About placeholder: ' + path)
+            if any(w in normalized for w in BLACK):
+                errors.append('Blacklisted About copy: ' + path)
+        else:
+            errors.append('Invalid About copy: ' + path)
+    check_copy(TEXT.get('about_page'), 'about_page')
+    check_copy(TEXT.get('about_faq'), 'about_faq')
+    check_copy({k: v for k, v in TEXT['ui'].items() if k.startswith('about_page.')}, 'ui')
+    return {'names': names, 'kind': kind, 'value': value, 'channels': channels, 'source_repo': source_repo, 'missing_fields': sorted(missing), 'errors': errors,
+            'ready': not missing and not errors}
+
+
+try:
+    ABOUT_STATE = about_input_checks()
+except (ValueError, TypeError, KeyError) as error:
+    ABOUT_STATE = {'ready': False, 'missing_fields': [], 'errors': [str(error)], 'names': {'zh': '', 'en': ''}, 'value': '', 'kind': '', 'channels': [], 'source_repo': ''}
+
+
+def expected_about_sources():
+    """Compute from raw row fields and primary-source nodes, independently of outputs."""
+    records = {s['id']: s for s in DATA['sources']}
+    ids = set()
+    for r in DATA['rows']:
+        if r.get('base') not in TARGETS or r.get('lifecycle') == 'archived':
+            continue
+        # These are the explicit fields used by detail-page source lists and links.
+        ids |= set(r.get('sources', []))
+        ids |= {sid for sid in r.get('fieldSources', {}).values() if sid}
+        if r.get('availability', {}).get('source'):
+            ids.add(r['availability']['source'])
+    source = DATA['crosscheck']['source']
+    if source not in records:
+        raise ValueError('Unknown crosscheck source: ' + source)
+    ids.add(source)
+    template = Document((SOURCE_ROOT / 'template_public_261105.html').read_text()).root
+    groups = [n for n in template.all() if 'primarysources' in n.attrs.get('class', '').split()]
+    if len(groups) != 1:
+        raise ValueError('Expected one primary source group')
+    urls = {a.attrs['href'] for a in groups[0].all('a')}
+    for url in urls:
+        candidates = [s for s in records.values() if s['url'] == url and s['checked'][:10] <= DATA['date']]
+        if not candidates:
+            raise ValueError('Missing primary source record: ' + url)
+        candidates.sort(key=lambda s: (s['checked'][:10], s['id']))
+        ids.add(candidates[-1]['id'])
+    if ids - records.keys():
+        raise ValueError('Unknown About source IDs: ' + ', '.join(sorted(ids - records.keys())))
+    by_url = {}
+    for sid in sorted(ids):
+        s = records[sid]
+        by_url.setdefault(s['url'], []).append(s)
+    result = {}
+    for url, items in by_url.items():
+        s = sorted(items, key=lambda s: (s['checked'][:10], s['id']))[-1]
+        result[url] = {'checked': s['checked'][:10], 'title': dict(zip(('zh', 'en'), TEXT['sources'][s['id']])),
+                       'historical': any(s.get('historical') for s in items)}
+    return result
+
+
+def about_checks():
+    failures = list(ABOUT_STATE['errors'])
+    def require(ok, test):
+        if not ok:
+            failures.append(test)
+    if ABOUT_STATE['missing_fields'] and not args.allow_placeholders:
+        failures.append('missing_fields: ' + ', '.join(ABOUT_STATE['missing_fields']))
+    def expand(value, lg):
+        import html, unicodedata
+        value = value.format(date=DATA['date'], operator_name=ABOUT_STATE['names'][lg], correction=ABOUT_STATE['value'])
+        require(not re.search(r'[{}]', unicodedata.normalize('NFKC', html.unescape(value))), 'Residual About placeholder: ' + lg)
+        return value
+    def copy(key, lg):
+        return expand(TEXT['about_page'][key][lg], lg)
+    sources = expected_about_sources()
+    require(len(TEXT['about_faq']) == 8, 'Eight source FAQ items')
+    require(not any('/about/' in p for p in json.loads((SOURCE_ROOT / 'published_urls.json').read_text())), 'Manifest only manages detail paths')
+    pages = []
+    for lg, url in ABOUT_URLS.items():
+        relative = 'en/about/index.html' if lg == 'en' else 'about/index.html'
+        path = SITE_ROOT / relative
+        if not path.is_file():
+            failures.append('Missing About page: ' + relative)
+            continue
+        try:
+            doc = document(path)
+            body = doc.all('body')[0]
+            language = 'en' if lg == 'en' else 'zh-CN'
+            require(doc.all('html')[0].attrs.get('lang') == language, 'About lang: ' + lg)
+            require([n.text() for n in doc.all('title')] == [copy('title', lg)], 'About title: ' + lg)
+            require([n.attrs.get('content') for n in doc.all('meta', name='description')] == [copy('description', lg)], 'About description: ' + lg)
+            require([n.attrs.get('href') for n in doc.all('link', rel='canonical')] == [url], 'About canonical: ' + lg)
+            alternates = [n for n in doc.all('link') if 'hreflang' in n.attrs]
+            require(len(alternates) == 3 and {n.attrs['hreflang']: n.attrs.get('href') for n in alternates} == {'zh-CN': ABOUT_URLS['zh'], 'en': ABOUT_URLS['en'], 'x-default': ABOUT_URLS['zh']}, 'About hreflang: ' + lg)
+            for field, value in [('og:title', copy('title', lg)), ('og:description', copy('description', lg)), ('og:url', url)]:
+                require([n.attrs.get('content') for n in doc.all('meta', property=field)] == [value], 'About ' + field + ': ' + lg)
+            require([n.text() for n in doc.all('h1')] == [copy('heading', lg)], 'About h1: ' + lg)
+            require([n.attrs.get('id') for n in body.all('section')] == ['operator', 'sources', 'methodology', 'updates', 'faq', 'disclaimer'], 'About section order: ' + lg)
+            require(bool(doc.all('meta', name='robots', content='noindex')) == (not ABOUT_STATE['ready']), 'About indexing state: ' + lg)
+            require([n.text() for n in doc.all('p', **{'class': 'preview'})] == ([] if ABOUT_STATE['ready'] else [copy('preview', lg)]), 'About preview state: ' + lg)
+            require([n.text() for n in doc.all(id='operator')[0].all('p')] == [copy('operator' if ABOUT_STATE['names'][lg] else 'operator.placeholder', lg), copy('purpose', lg)] + ([copy('source.license', lg)] if ABOUT_STATE['source_repo'] else []), 'About operator body matches config: ' + lg)
+            corrections = doc.all(id='corrections')[0]
+            value = ABOUT_STATE['value']
+            expected_links = [(('mailto:' if c['type'] == 'email' else '') + c['value'],
+                               copy('corrections.github_issues', lg) if c['type'] == 'github_issues' else c['value']) for c in ABOUT_STATE['channels']]
+            require([n.text() for n in corrections.all('p')] == ([copy('corrections', lg)] + [label for _, label in expected_links] if expected_links else [copy('corrections.placeholder', lg)]), 'About corrections body matches config: ' + lg)
+            require([(a.attrs.get('href'), a.text()) for a in corrections.all('a')] == expected_links, 'About all correction links match config: ' + lg)
+            license_links = [(a.attrs.get('href'), a.text()) for a in doc.all(id='operator')[0].all('a')]
+            require(license_links == ([(ABOUT_STATE['source_repo'], copy('source.license', lg))] if ABOUT_STATE['source_repo'] else []), 'About license link matches source_repo: ' + lg)
+            require(doc.all(id='updates')[0].all('p')[0].text() == copy('updates', lg), 'About update date: ' + lg)
+            require(doc.all(id='disclaimer')[0].all('p')[0].text() == copy('disclaimer', lg), 'About disclaimer: ' + lg)
+            method = doc.all(id='methodology')[0]
+            require([(p.attrs.get('data-method'), p.text()) for p in method.all('p', **{'class': 'method-copy'})] == [(key, Document(TEXT['ui'][key][lg]).root.text()) for key in ('method.score', 'method.cost', 'method.speed')], 'Original public methods unchanged: ' + lg)
+            faq = []
+            for i, item in enumerate(TEXT['about_faq']):
+                key = 'placeholder_answer' if (i == 0 and not ABOUT_STATE['names'][lg]) or (i == 7 and not value) else 'answer'
+                if i == 7 and value:
+                    kinds = {c['type'] for c in ABOUT_STATE['channels']}
+                    key = ('answer' if {'email', 'github_issues'} <= kinds else 'email_answer' if 'email' in kinds else 'url_answer')
+                faq.append((expand(item['question'][lg], lg), expand(item[key][lg], lg)))
+            visible_faq = [(n.all('summary')[0].text(), n.all('p')[0].text()) for n in doc.all(id='faq')[0].all('details')]
+            require(len(visible_faq) == 8 and visible_faq == faq, 'Visible FAQ matches current input: ' + lg)
+            scripts = doc.all('script')
+            require(len(scripts) == 1 and scripts[0].attrs == {'type': 'application/ld+json'}, 'Only JSON-LD script: ' + lg)
+            structured = json.loads(scripts[0].raw_text())
+            require(structured.get('@context') == 'https://schema.org', 'Schema context: ' + lg)
+            graph = structured['@graph']
+            require([n['@type'] for n in graph] == ['AboutPage', 'FAQPage'] + (['Person'] if ABOUT_STATE['ready'] else []), 'About JSON-LD types: ' + lg)
+            page, faq_entity = graph[:2]
+            expected_page = {'@type': 'AboutPage', '@id': url + '#page', 'url': url, 'name': copy('title', lg), 'description': copy('description', lg), 'inLanguage': language,
+                             'isPartOf': {'@id': ORIGIN + '/#website'}, 'about': {'@id': ORIGIN + '/#website'}, 'hasPart': {'@id': url + '#faq'}}
+            if ABOUT_STATE['ready']:
+                expected_page['publisher'] = {'@id': ORIGIN + '/#operator'}
+            require(page == expected_page, 'AboutPage properties and config state: ' + lg)
+            require(faq_entity == {'@type': 'FAQPage', '@id': url + '#faq', 'url': url + '#faq', 'inLanguage': language, 'isPartOf': {'@id': url + '#page'},
+                                  'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in visible_faq]}, 'FAQ JSON-LD equals visible FAQ: ' + lg)
+            home = '/en/' if lg == 'en' else '/'
+            homepage = document(page_file(home))
+            home_graph = json.loads(homepage.all('script', id='structured-data')[0].raw_text())['@graph']
+            website = next(n for n in home_graph if n['@type'] == 'WebSite')
+            persons = [n for n in graph if n['@type'] == 'Person']
+            home_persons = [n for n in home_graph if n['@type'] == 'Person']
+            expected_persons = [{'@type': 'Person', '@id': ORIGIN + '/#operator', 'name': ABOUT_STATE['names'][lg]}] if ABOUT_STATE['ready'] else []
+            require(persons == home_persons == expected_persons, 'Person entity matches config: ' + lg)
+            require(website.get('publisher') == ({'@id': ORIGIN + '/#operator'} if ABOUT_STATE['ready'] else None), 'WebSite publisher state: ' + lg)
+            require(website.get('sameAs') == (ABOUT_STATE['source_repo'] or None), 'WebSite sameAs matches source_repo: ' + lg)
+            dataset = next(n for n in home_graph if n['@type'] == 'Dataset')
+            require(dataset['creator'] == ({'@id': ORIGIN + '/#operator'} if ABOUT_STATE['ready'] else {'@type': 'Organization', 'name': 'Models Rank', 'url': ORIGIN + '/'}), 'Dataset creator state: ' + lg)
+            ids = {n['@id'] for n in graph} | {website['@id']}
+            def refs(node):
+                if isinstance(node, dict):
+                    if set(node) == {'@id'}:
+                        require(node['@id'] in ids, 'Dangling JSON-LD reference: ' + str(node))
+                    for v in node.values():
+                        refs(v)
+                elif isinstance(node, list):
+                    for v in node:
+                        refs(v)
+            refs(graph)
+            source_section = doc.all(id='sources')[0]
+            actual = source_section.all('a')
+            require(len(actual) == len(sources) and {a.attrs.get('href') for a in actual} == set(sources), 'Exact independently computed source URL set: ' + lg)
+            for li in source_section.all('li'):
+                link = li.all('a')[0]
+                source = sources[link.attrs['href']]
+                require(link.text() == source['title'][lg] and [n.text() for n in li.all('time')] == [source['checked']], 'Source title and retrieval date: ' + link.attrs['href'])
+                require([n.text() for n in li.all('span', **{'class': 'historical'})] == ([copy('sources.historical', lg)] if source['historical'] else []), 'Historical source marker: ' + link.attrs['href'])
+            require([n.text() for n in source_section.all('h3')] == [copy('sources.' + k, lg) for k in ('benchmark', 'preference', 'information')], 'Three source categories: ' + lg)
+            category = None
+            for node in source_section.children:
+                if not isinstance(node, Element):
+                    continue
+                if node.tag == 'h3':
+                    category = node.text()
+                elif node.tag == 'details':
+                    for link in node.all('a'):
+                        host = urlsplit(link.attrs['href']).hostname
+                        expected_category = 'benchmark' if host in ('artificialanalysis.ai', 'www.artificialanalysis.ai') else 'preference' if host in ('arena.ai', 'www.arena.ai', 'lmarena.ai') else 'information'
+                        require(category == copy('sources.' + expected_category, lg), 'Source category: ' + link.attrs['href'])
+            for group in source_section.all('details'):
+                require('open' not in group.attrs and all(urlsplit(a.attrs['href']).hostname == group.all('summary')[0].text() for a in group.all('a')), 'Native website source group: ' + lg)
+            require(not re.search(r'[{}]', body.text()) and 'mailto:null' not in path.read_text(), 'No residual About placeholders: ' + lg)
+            require(home in {a.attrs.get('href') for a in doc.all('a')} and ('/about/' if lg == 'en' else '/en/about/') in {a.attrs.get('href') for a in doc.all('a')}, 'About home and language links: ' + lg)
+            require(urlsplit(url).path in static_reachable(home, lg), 'Static BFS reaches About: ' + lg)
+            resources = []
+            for n in doc.all():
+                require(not any(k.startswith('on') for k in n.attrs), 'No About event handlers: ' + lg)
+                resources.extend(v for k, v in n.attrs.items() if k in ('src', 'srcset', 'poster', 'data', 'background'))
+                if n.tag == 'link' and n.attrs.get('rel') not in ('canonical', 'alternate'):
+                    resources.append(n.attrs.get('href'))
+            css = '\n'.join(n.raw_text() for n in doc.all('style')) + '\n'.join(n.attrs.get('style', '') for n in doc.all())
+            require(not resources and not re.search(r'url\s*\(|@import', css, re.I), 'Zero About resource dependencies: ' + lg)
+            scan_links(doc, url)
+            pages.append({'lang': lg, 'faq_count': len(visible_faq), 'source_count': len(actual)})
+        except (KeyError, IndexError, TypeError, ValueError) as error:
+            failures.append(relative + ': ' + str(error))
+    footer_pages = [SITE_ROOT / 'index.html', SITE_ROOT / 'en/index.html', SITE_ROOT / '404.html', SITE_ROOT / 'about/index.html', SITE_ROOT / 'en/about/index.html'] + sorted((SITE_ROOT / 'm').glob('*/index.html')) + sorted((SITE_ROOT / 'en/m').glob('*/index.html'))
+    for path in footer_pages:
+        relative = str(path.relative_to(SITE_ROOT))
+        targets = (['/about/', '/en/about/'] if relative == '404.html' else
+                   ['/about/' if relative.startswith('en/') else '/en/about/'] if relative.endswith('about/index.html') else
+                   ['/en/about/' if relative.startswith('en/') else '/about/'])
+        footers = document(path).all('footer')
+        links = [a for f in footers for a in f.all('a')]
+        for target in targets:
+            require(any(a.attrs.get('href') == target and a.text().strip() and 'data-detail' not in a.attrs and 'modelbtn' not in a.attrs.get('class', '').split() for a in links), 'Ordinary About footer link: ' + relative + ' ' + target)
+        expected_labels = [TEXT['ui']['about_page.source'][lg] for lg in (('zh', 'en') if relative == '404.html' else ('en',) if relative.startswith('en/') else ('zh',))] if ABOUT_STATE['source_repo'] else []
+        source_links = [a for a in links if a.attrs.get('href') == ABOUT_STATE['source_repo']]
+        require([a.text() for a in source_links] == expected_labels, 'Source footer labels and URL: ' + relative)
+        require(all(a.attrs.get('target') == '_blank' and set(a.attrs.get('rel', '').split()) == {'noopener', 'noreferrer'} and 'sociallink' in a.attrs.get('class', '').split() and 'data-detail' not in a.attrs and 'modelbtn' not in a.attrs.get('class', '').split() for a in source_links), 'Ordinary safe source footer links: ' + relative)
+    llms = (SITE_ROOT / 'llms.txt').read_text()
+    require(all(url in re.findall(r'\]\(([^)]+)\)', llms) for url in ABOUT_URLS.values()), 'Both About links in llms.txt')
+    return {'ok': not failures, 'missing_fields': ABOUT_STATE['missing_fields'], 'ready': ABOUT_STATE['ready'], 'pages': pages,
+            'source_count': len(sources), 'footer_pages': len(footer_pages), 'errors': failures}
+
+
+def about_browser_checks(browser):
+    result = {'ok': False, 'samples': [], 'errors': [], 'external_requests': []}
+    for lg, relative in [('zh', 'about/index.html'), ('en', 'en/about/index.html')]:
+        for width in (1440, 390):
+            context = browser.new_context(viewport={'width': width, 'height': 900}, is_mobile=width == 390)
+            context.route('**/*', lambda route: route.abort() if urlsplit(route.request.url).scheme in ('http', 'https') else route.continue_())
+            page = context.new_page()
+            page.on('pageerror', lambda error: result['errors'].append(str(error)))
+            page.on('console', lambda msg: result['errors'].append(msg.text) if msg.type == 'error' else None)
+            page.on('request', lambda request: result['external_requests'].append(request.url) if urlsplit(request.url).scheme in ('http', 'https') else None)
+            try:
+                page.goto((SITE_ROOT / relative).as_uri())
+                page.wait_for_load_state('load')
+                sample = page.evaluate('''()=>({scrollWidth:document.documentElement.scrollWidth, width:innerWidth, faq:document.querySelectorAll('#faq details').length})''')
+                sample.update({'lang': lg, 'viewport': width, 'ok': sample['scrollWidth'] <= width and sample['width'] == width and sample['faq'] == 8})
+                result['samples'].append(sample)
+                page.screenshot(path=str(outdir / f'about_{lg}_{width}.png'), full_page=True)
+            except Exception as error:
+                result['errors'].append(str(error))
+            finally:
+                context.close()
+    result['ok'] = len(result['samples']) == 4 and all(s['ok'] for s in result['samples']) and not result['errors'] and not result['external_requests']
+    return result
+
+
 def product_checks():
     failures = list(REDIRECT_ERRORS)
     def require(ok, test):
@@ -251,6 +596,7 @@ def product_checks():
     sitemap = ET.parse(SITE_ROOT / 'sitemap.xml').getroot()
     locations = [n.text for n in sitemap.findall('s:url/s:loc', ns)]
     expected = {ORIGIN + path for path in details.keys() - noindex} | {ORIGIN + '/', ORIGIN + '/en/'}
+    expected |= set(ABOUT_URLS.values()) if ABOUT_STATE['ready'] else set()
     require(len(locations) == len(expected) and set(locations) == expected, 'Sitemap must contain exactly indexable details and homepages')
     require(not sitemap.findall('.//s:lastmod', ns), 'Sitemap must not contain lastmod')
     for path, f in details.items():
@@ -369,6 +715,7 @@ def detail_static_checks():
     entries = ET.parse(SITE_ROOT / 'sitemap.xml').getroot().findall('s:url', ns)
     expected_urls = {ORIGIN + '/' + s.removesuffix('index.html') for s in actual
                      if not document(SITE_ROOT / s).all('meta', name='robots', content='noindex')} | {ORIGIN + '/', ORIGIN + '/en/'}
+    expected_urls |= set(ABOUT_URLS.values()) if ABOUT_STATE['ready'] else set()
     locations = [n.find('s:loc', ns).text for n in entries]
     require(len(locations) == len(expected_urls) and set(locations) == expected_urls, 'sitemap', 'exact locations')
     for entry in entries:
@@ -483,6 +830,11 @@ def detail_browser_checks(browser):
 
 
 try:
+    res['about'] = about_checks()
+except Exception as error:
+    res['about'] = {'ok': False, 'missing_fields': ABOUT_STATE['missing_fields'], 'errors': [str(error)]}
+res['production_ready'] = False
+try:
     res['detail_static'] = detail_static_checks()
 except Exception as error:
     res['detail_static'] = {'ok': False, 'failures': [{'test': 'static checks', 'error': str(error)}]}
@@ -492,14 +844,17 @@ except Exception as error:
     res['products'] = {'ok': False, 'failures': [str(error)]}
 res['links'] = {'ok': not LINK_FAILURES, 'checked': LINK_COUNT, 'failures': LINK_FAILURES}
 
+res['static_pass'] = all(res[k]['ok'] for k in ('input_html', 'about', 'products', 'detail_static', 'links'))
+
 with sync_playwright() as p:
     try:
         b = p.chromium.launch(executable_path=CHROME, args=['--no-sandbox'])
     except Exception as error:
-        res.update({'pass': False, 'browser_unavailable': str(error), 'detail_browser': {'ok': False, 'not_run': 'Chrome unavailable'}})
+        res.update({'pass': False, 'browser_unavailable': str(error), 'detail_browser': {'ok': False, 'not_run': 'Chrome unavailable'}, 'about_browser': {'ok': False, 'not_run': 'Chrome unavailable'}})
         (outdir / 'check-result-public-261105.json').write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding='utf-8')
         print(json.dumps(res, ensure_ascii=False, indent=1))
         sys.exit(1)
+    res['about_browser'] = about_browser_checks(b)
     res['detail_browser'] = detail_browser_checks(b)
     res['links'] = {'ok': not LINK_FAILURES, 'checked': LINK_COUNT, 'failures': LINK_FAILURES}
     def page(path, **kw):
@@ -638,10 +993,11 @@ with sync_playwright() as p:
     b.close()
 res['errors'] = [e for e in res['errors'] if priv not in e] + [e for e in res['errors'] if priv in e and False]
 res['pass'] = (res['speed_threshold']['ok'] and not res['errors'] and not res['external_requests'] and not res['parity']['diffs'] and all(res[f'mobile_{l}']['scrollW'] <= 390 and res[f'mobile_{l}']['innerW'] == 390 for l in ['zh', 'en']) and res['zero_dollar_cells'] == 0)
-res['pass'] = bool(res['pass'] and res['input_html']['ok'] and res['products']['ok'] and res['detail_static']['ok'] and res['detail_browser']['ok'] and res['links']['ok'] and all(x['ok'] for key in ['static_first_screen', 'language_paths', 'fixed_metadata'] for x in res[key])
+res['pass'] = bool(res['pass'] and res['about']['ok'] and res['about_browser']['ok'] and res['input_html']['ok'] and res['products']['ok'] and res['detail_static']['ok'] and res['detail_browser']['ok'] and res['links']['ok'] and all(x['ok'] for key in ['static_first_screen', 'language_paths', 'fixed_metadata'] for x in res[key])
                    and not res['han_in_en_ui']  # blacklist hits stay informational (pre-existing product names in data)
                    and res['url_restore']['canonical_en'] == res['url_restore']['canonical_zh'] == res['url_restore']['og_url_en'] == 'https://modelsrank.org/'
                    and res['mobile_en']['lang'] == 'en' and res['mobile_zh']['lang'] == 'zh-CN')
+res['production_ready'] = bool(res['pass'] and ABOUT_STATE['ready'] and not args.allow_placeholders)
 (outdir / 'check-result-public-261105.json').write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding='utf-8')
 print(json.dumps(res, ensure_ascii=False, indent=1))
 sys.exit(0 if res['pass'] else 1)

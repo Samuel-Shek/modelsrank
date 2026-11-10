@@ -740,6 +740,14 @@
   ]
  },
  "sources": {
+  "aa-board": [
+   "Artificial Analysis · 模型榜单",
+   "Artificial Analysis · Models leaderboard"
+  ],
+  "arena-text": [
+   "Arena · 文本榜",
+   "Arena · Text leaderboard"
+  ],
   "hy4-official": [
    "腾讯 · Hy4 preview 模型卡（Hugging Face）",
    "Tencent · Hy4 preview model card (Hugging Face)"
@@ -1261,6 +1269,10 @@
   "Arena is a human-preference vote on text chat answers, a different measurement from Artificial Analysis’s task benchmarks; when rank ranges overlap, the order is not settled. The table lists only entries that match models on this page; ranks are Arena’s overall ranks (gaps are models not listed here), using the default Style Control view. Page date 2026-11-09; Claude Fable 5.2 and Muse Ember do not appear on that page yet."
  ],
  "ui": {
+  "about_page.source": {
+   "zh": "开源代码",
+   "en": "Source on GitHub"
+  },
   "meta.title": {
    "zh": "Models Rank · AI 模型榜单：能力、成本与速度对比",
    "en": "Models Rank · AI Model Leaderboard: Intelligence, cost, and speed comparison"
@@ -2198,4 +2210,240 @@
    "en": "Version not recorded"
   }
  }
+,
+ "about_config": {
+  "operator": {
+   "name": {
+    "zh": "Samuel Shek",
+    "en": "Samuel Shek"
+   },
+   "entity_type": "Person"
+  },
+  "corrections": {
+   "channels": [
+    {
+     "type": "email",
+     "value": "yunp.shi@gmail.com"
+    },
+    {
+     "type": "github_issues",
+     "value": "https://github.com/Samuel-Shek/modelsrank/issues"
+    }
+   ]
+  },
+  "source_repo": "https://github.com/Samuel-Shek/modelsrank"
+ },
+ "about_page": {
+  "corrections.github_issues": {
+   "zh": "在 GitHub 开 Issue",
+   "en": "Open an issue on GitHub"
+  },
+  "source.license": {
+   "zh": "网站代码以 MIT 许可证开源，数据归各来源所有。",
+   "en": "The site code is open source under the MIT License; data belongs to its respective sources."
+  },
+  "title": {
+   "zh": "关于、方法论与常见问题 | Models Rank",
+   "en": "About, methodology and FAQ | Models Rank"
+  },
+  "description": {
+   "zh": "了解 Models Rank 的运营主体、数据来源、指标与排名方法、更新和纠错方式。",
+   "en": "Learn who operates Models Rank, where its data comes from, how metrics and rankings work, and how to report errors."
+  },
+  "heading": {
+   "zh": "关于、方法论与常见问题",
+   "en": "About, methodology and FAQ"
+  },
+  "link": {
+   "zh": "关于与方法论",
+   "en": "About and methodology"
+  },
+  "operator.heading": {
+   "zh": "运营主体与本站定位",
+   "en": "Operator and purpose"
+  },
+  "operator": {
+   "zh": "Models Rank 的运营主体为 {operator_name}。",
+   "en": "Models Rank is operated by {operator_name}."
+  },
+  "operator.placeholder": {
+   "zh": "运营主体信息待公布。",
+   "en": "Operator details will be published here."
+  },
+  "purpose": {
+   "zh": "本站整理公开的模型评测与相关资料，帮助读者比较模型，并追溯每项信息的来源。",
+   "en": "Models Rank brings together public model evaluations and related information to help readers compare models and trace information to its sources."
+  },
+  "preview": {
+   "zh": "预览页面：运营信息或纠错方式尚未完善。",
+   "en": "Preview: operator details or corrections information are incomplete."
+  },
+  "sources.heading": {
+   "zh": "数据来源",
+   "en": "Data sources"
+  },
+  "sources.intro": {
+   "zh": "以下链接来自当前活动型号的公开记录与本站方法说明。仍被引用的历史资料会单独标注；未使用的来源记录不在此列。",
+   "en": "These links come from the public records of active models and the methodology shown on this site. Historical references are marked when they remain in use; unused source records are not listed."
+  },
+  "sources.benchmark": {
+   "zh": "评测与方法",
+   "en": "Benchmarks and methodology"
+  },
+  "sources.preference": {
+   "zh": "人类偏好评测",
+   "en": "Human-preference evaluations"
+  },
+  "sources.information": {
+   "zh": "模型信息与补充资料",
+   "en": "Model information and supplementary material"
+  },
+  "sources.historical": {
+   "zh": "历史资料",
+   "en": "Historical reference"
+  },
+  "sources.retrieved": {
+   "zh": "读取日期",
+   "en": "Retrieved"
+  },
+  "method.heading": {
+   "zh": "指标与排名方法",
+   "en": "Metrics and ranking methodology"
+  },
+  "method.intro": {
+   "zh": "指标含义及适用范围如下；常见疑问见下方问答。",
+   "en": "The metrics and their scope are explained below. Common questions are answered further down this page."
+  },
+  "updates.heading": {
+   "zh": "更新频率与纠错",
+   "en": "Updates and corrections"
+  },
+  "updates": {
+   "zh": "本站每周更新，当前数据日期为 {date}。各项资料的读取日期见来源条目和模型详情。",
+   "en": "The site is updated weekly. The current data date is {date}. Retrieval dates for individual records appear in source entries and model details."
+  },
+  "corrections.heading": {
+   "zh": "纠错方式",
+   "en": "How to report corrections"
+  },
+  "corrections": {
+   "zh": "如发现问题，请通过以下渠道提供相关模型页面、需要更正的字段和公开来源。",
+   "en": "To report an issue, use the channel below and include the relevant model page, the field that needs correcting and a public source."
+  },
+  "corrections.placeholder": {
+   "zh": "纠错渠道将在确认后公布。",
+   "en": "A corrections channel will be published here once confirmed."
+  },
+  "faq.heading": {
+   "zh": "常见问题",
+   "en": "Frequently asked questions"
+  },
+  "disclaimer.heading": {
+   "zh": "免责声明",
+   "en": "Disclaimer"
+  },
+  "disclaimer": {
+   "zh": "本站内容仅供参考，不构成购买建议或对模型表现的保证。评测结果与实际使用体验可能不同，价格和开放范围请以相关服务的最新说明为准。",
+   "en": "This site is for reference only. It does not provide purchasing advice or guarantee model performance. Benchmark results may differ from real-world experience; consult the relevant service for current pricing and availability."
+  }
+ },
+ "about_faq": [
+  {
+   "question": {
+    "zh": "Models Rank 由谁运营？",
+    "en": "Who operates Models Rank?"
+   },
+   "answer": {
+    "zh": "Models Rank 的运营主体为 {operator_name}。",
+    "en": "Models Rank is operated by {operator_name}."
+   },
+   "placeholder_answer": {
+    "zh": "本页为预览版本，运营主体名称待确认。",
+    "en": "This is a preview page. The operator’s name has not yet been confirmed for publication."
+   }
+  },
+  {
+   "question": {
+    "zh": "本站会自行测评模型，或隶属于评测机构、模型厂商吗？",
+    "en": "Does Models Rank run its own benchmarks or have affiliations with benchmark providers or model vendors?"
+   },
+   "answer": {
+    "zh": "本站汇总公开的第三方模型评测，不自行跑分，也不隶属于 Artificial Analysis、Arena 或各模型厂商。发布日期、价格、开放范围和厂商自报成绩参考相关公开页面；来源链接与读取日期见本页来源区及模型详情。",
+    "en": "Models Rank compiles public third-party model benchmarks. We do not run benchmarks ourselves and are not affiliated with Artificial Analysis, Arena or model vendors. Release dates, pricing, availability and vendor-reported results are taken from the relevant public pages. Source links and retrieval dates are listed in this page’s sources section and in model details."
+   }
+  },
+  {
+   "question": {
+    "zh": "综合分和名次能说明什么？",
+    "en": "What do the scores and rankings tell me?"
+   },
+   "answer": {
+    "zh": "综合分采用 Artificial Analysis 的综合指数。默认榜单展示当前指数版本下未归档型号的代表配置，同分并列。它适合用来比较公开评测中的表现，不等同于智商、正确率或你自己的任务效果，也不构成购买建议。",
+    "en": "The intelligence score comes from the Artificial Analysis Intelligence Index. The default leaderboard shows representative configurations of non-archived models on the current index version, with equal scores sharing a rank. It helps compare performance on public benchmarks; it is not an IQ score, an accuracy rate or a guarantee of results on your own tasks, and it is not purchasing advice."
+   }
+  },
+  {
+   "question": {
+    "zh": "评测成本是 API 标价或聊天产品订阅费吗？",
+    "en": "Is evaluation cost an API list price or a chat subscription fee?"
+   },
+   "answer": {
+    "zh": "不是。评测成本是 Artificial Analysis 评测中的平均单任务美元成本，不是按 token 计费的 API 标价、聊天产品订阅费，也不是你每次提问的实际费用。成本排序先筛选达到综合分门槛的配置，再按评测成本从低到高排列。",
+    "en": "No. Evaluation cost is the average US-dollar cost per task in Artificial Analysis evaluations. It is not a token-based API list price, a chat subscription fee or the actual cost of each of your prompts. Cost rankings first filter configurations by the score threshold, then sort evaluation cost from low to high."
+   }
+  },
+  {
+   "question": {
+    "zh": "榜单中的速度代表我实际使用时的体验吗？",
+    "en": "Do the speed figures represent my experience when using a model?"
+   },
+   "answer": {
+    "zh": "速度数据来自 Artificial Analysis 对模型代表端点的测试。单任务耗时由输出 token 量与输出速度推算，是估算值；输出速度和首个答案时间描述不同的响应特征，相关测量包含思考过程。测试环境、地区、网络和所用产品会影响实际体验，不能把这些指标直接当作聊天应用的响应承诺。",
+    "en": "Speed figures come from Artificial Analysis tests of representative model endpoints. Time per task is an estimate derived from output tokens and output speed. Output speed and time to first answer describe different aspects of responsiveness, and the measurements account for the reasoning process. Test conditions, location, network and the product you use affect your experience, so these figures are not response-time promises for a chat application."
+   }
+  },
+  {
+   "question": {
+    "zh": "没有当前评分或只有旧版评分的模型怎么处理？",
+    "en": "How are models without a current score or with only a legacy score handled?"
+   },
+   "answer": {
+    "zh": "缺少当前独立评分的模型会明确标注状态，不会用旧版分数代替当前分数参与综合排名。旧版指数分数单独展示；Arena 人类偏好分和厂商自报成绩也不并入综合分。",
+    "en": "Models without a current independent score are clearly labelled. Legacy scores are not substituted for current scores in the intelligence rankings and are shown separately. Arena human-preference scores and vendor-reported results are also kept separate from the intelligence score."
+   }
+  },
+  {
+   "question": {
+    "zh": "本站多久更新？为什么数据日期和读取日期不同？",
+    "en": "How often is the site updated, and why can data and retrieval dates differ?"
+   },
+   "answer": {
+    "zh": "本站每周更新，当前数据日期为 {date}。模型详情和来源条目的读取日期表示相应资料何时读取，因此可能与全站数据日期不同。判断某个指标的新旧时，请查看该指标的读取日期。",
+    "en": "The site is updated weekly. The current data date is {date}. Retrieval dates in model details and source entries show when the corresponding information was read, so they may differ from the site-wide data date. Use the metric’s own retrieval date to judge how recent it is."
+   }
+  },
+  {
+   "question": {
+    "zh": "发现数据或说明有误，应该如何反馈？",
+    "en": "How can I report an error in the data or explanations?"
+   },
+   "answer": {
+    "zh": "请发送邮件至 {correction}，或在 GitHub 开 Issue，并附上相关模型页面、需要更正的字段和可核对的公开来源。",
+    "en": "Please send an email to {correction} or open an issue on GitHub. Include the relevant model page, the field that needs correcting and a public source that can be checked."
+   },
+   "email_answer": {
+    "zh": "请发送邮件至 {correction}，并附上相关模型页面、需要更正的字段和可核对的公开来源。",
+    "en": "Please send an email to {correction}. Include the relevant model page, the field that needs correcting and a public source that can be checked."
+   },
+   "placeholder_answer": {
+    "zh": "本预览页的公开纠错渠道待确认，暂未提供可用的反馈入口。",
+    "en": "The public corrections channel for this preview page is awaiting confirmation. No working feedback link is provided yet."
+   },
+   "url_answer": {
+    "zh": "请通过 {correction} 提交问题，并附上相关模型页面、需要更正的字段和可核对的公开来源。",
+    "en": "Please report the issue at {correction}. Include the relevant model page, the field that needs correcting and a public source that can be checked."
+   }
+  }
+ ]
+
 }

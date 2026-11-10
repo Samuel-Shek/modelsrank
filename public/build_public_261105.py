@@ -223,7 +223,7 @@ def source_citations(lg):
 
 def build_jsonld(lg, selected):
     language = 'zh-CN' if lg == 'zh' else 'en'
-    return {'@context': 'https://schema.org', '@graph': [
+    graph = [
         {'@type': 'WebSite', '@id': SITE['zh'] + '#website', 'name': 'Models Rank',
          'url': SITE['zh'], 'inLanguage': language, 'description': ui('seo.dataset.description', lg)},
         {'@type': 'Dataset', '@id': SITE[lg] + '#dataset', 'name': ui('seo.dataset.name', lg),
@@ -234,7 +234,14 @@ def build_jsonld(lg, selected):
          'numberOfItems': len(selected[:20]), 'itemListOrder': 'https://schema.org/ItemListOrderDescending',
          'itemListElement': [{'@type': 'ListItem', 'position': i, 'name': label(row, lg),
                               'url': detail_url(row['base'], lg)}
-                             for i, row in enumerate(selected[:20], 1)]}]}
+                             for i, row in enumerate(selected[:20], 1)]}]
+    if ABOUT_STATE['source_repo']:
+        graph[0]['sameAs'] = ABOUT_STATE['source_repo']
+    if ABOUT_STATE['ready']:
+        graph[0]['publisher'] = {'@id': SITE['zh'] + '#operator'}
+        graph[1]['creator'] = {'@id': SITE['zh'] + '#operator'}
+        graph.append(operator_entity(lg))
+    return {'@context': 'https://schema.org', '@graph': graph}
 
 def auxiliary_files():
     agents = ['*', 'GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended']
@@ -243,7 +250,7 @@ def auxiliary_files():
     ET.register_namespace('', ns)
     ET.register_namespace('xhtml', xhtml)
     root = ET.Element(f'{{{ns}}}urlset')
-    page_pairs = [SITE] + [{lg: detail_url(slug, lg) for lg in SITE} for slug in INDEXABLE_BASES]
+    page_pairs = [SITE] + ([ABOUT_URLS] if ABOUT_STATE['ready'] else []) + [{lg: detail_url(slug, lg) for lg in SITE} for slug in INDEXABLE_BASES]
     for pair, lg in ((pair, lg) for pair in page_pairs for lg in SITE):
         url = pair[lg]
         entry = ET.SubElement(root, f'{{{ns}}}url')
@@ -255,7 +262,7 @@ def auxiliary_files():
              '<title>' + esc(ui('seo.notfound', 'zh') + ' / ' + ui('seo.notfound', 'en')) + '</title>'
              '<style>body{background:#0b1018;color:#eef3fa;font:20px/1.6 system-ui;margin:12vh 8vw}a{color:#67d9d0;margin-right:2em}</style>'
              '</head><body><h1>' + esc(ui('seo.notfound', 'zh')) + ' / <span lang="en">' + esc(ui('seo.notfound', 'en')) + '</span></h1>'
-             '<a href="/">' + esc(ui('seo.home', 'zh')) + '</a><a lang="en" href="/en/">' + esc(ui('seo.home', 'en')) + '</a></body></html>\n')
+             '<a href="/">' + esc(ui('seo.home', 'zh')) + '</a><a lang="en" href="/en/">' + esc(ui('seo.home', 'en')) + '</a><footer>' + about_footer('zh') + ' · ' + about_footer('en') + ' · ' + source_footer('zh') + ' · ' + source_footer('en') + '</footer></body></html>\n')
     def plain(value):
         return html.unescape(re.sub(r'<[^>]+>', '', value))
     lines = ['# Models Rank', '']
@@ -267,6 +274,7 @@ def auxiliary_files():
             lines.extend([plain(ui(key, lg)), ''])
     lines.extend(['## ' + ui('seo.pages', 'zh') + ' / ' + ui('seo.pages', 'en'), ''])
     lines.extend(f'- [{ui("seo.page", lg)}]({url})' for lg, url in SITE.items())
+    lines.extend(f'- [{about_copy("link", lg)}]({url})' for lg, url in ABOUT_URLS.items())
     lines.extend(['- [Sitemap](' + SITE['zh'] + 'sitemap.xml)', '', '## ' + ui('seo.sources', 'zh') + ' / ' + ui('seo.sources', 'en'), ''])
     for sid in SELECTED_SOURCE_IDS:
         source = SOURCE_INDEX[sid]
@@ -598,6 +606,7 @@ def render_detail(row, lg, archived=False):
     footer = f'<a href="{home}">{esc(ui("detail.back", lg))}</a><a href="{esc(target)}">{esc(ui("detail.view", lg))}</a>'
     if archived:
         footer = f'<a href="{home}">{esc(ui("detail.back", lg))}</a>'
+    footer += about_footer(lg) + source_footer(lg)
     replacements = {'HTML_LANG': 'zh-CN' if lg == 'zh' else 'en', 'TITLE': esc(ui('detail.title.archived' if archived else 'detail.title', lg, name=row['name'])),
                     'ROBOTS_META': '<meta name="robots" content="noindex">' if page_noindex({'row': row, 'archived': archived}) else '',
                     'DESC': esc(description), 'URL_SELF': detail_url(row['base'], lg),
@@ -610,6 +619,271 @@ def render_detail(row, lg, archived=False):
         output = output.replace('{{' + key + '}}', value)
     if re.search(r'\{\{[A-Z_]+\}\}', output):
         raise ValueError('Unfilled detail template')
+    return output
+
+
+# About is deliberately self-contained here; the checker validates inputs independently.
+ABOUT_URLS = {lg: url + 'about/' for lg, url in SITE.items()}
+ABOUT_FIELDS = {'date', 'operator_name', 'correction'}
+ABOUT_BLACK = ['暂时保持', 'Nov 4 values', '72 小时', '72-hour', '首 token 延迟', 'speedV2', '图中型号', '截图', '双子', '本轮', '复核', 'Codex', 'SHA', '请先更新', '上版', '口径', '本次未复核', 'screenshot', 'rawPrevious', 'auditChanges', '导出当前 CSV', '完整数据 JSON', '本机', '离线快照', 'SpaceXAI', 'draft translation']
+
+def validate_about():
+    from string import Formatter
+    import unicodedata
+    config = T.get('about_config', {})
+    if not isinstance(config, dict):
+        raise ValueError('about_config must be an object')
+    op, channel = config.get('operator', {}), config.get('corrections', {})
+    if channel is None:
+        channel = {}
+    if not isinstance(op, dict) or not isinstance(channel, dict):
+        raise ValueError('About operator/corrections must be objects')
+    names = op.get('name')
+    if names is None:
+        names = {}
+    if not isinstance(names, dict):
+        raise ValueError('About operator.name must be an object or null')
+    missing = []
+    def field(value, key):
+        if value is None:
+            missing.append(key)
+            return ''
+        if not isinstance(value, str) or any(unicodedata.category(c).startswith('C') for c in value) or re.search(r'[{}<>]', value):
+            raise ValueError('Invalid About field: ' + key)
+        value = value.strip()
+        if not value:
+            missing.append(key)
+        return value
+    names = {lg: field(names.get(lg), 'operator.name.' + lg) for lg in SITE}
+    if op.get('entity_type') != 'Person':
+        raise ValueError('About operator.entity_type must be Person')
+    repo_pattern = r'https://github\.com/[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[A-Za-z0-9_-][A-Za-z0-9_.-]*'
+    source_repo = field(config.get('source_repo'), 'source_repo')
+    if source_repo and not re.fullmatch(repo_pattern, source_repo):
+        raise ValueError('Invalid About source_repo URL')
+    raw_channels = channel.get('channels', [channel] if channel else [])
+    if raw_channels is None:
+        raw_channels = []
+    if not isinstance(raw_channels, list):
+        raise ValueError('About corrections.channels must be a list')
+    channels = []
+    for entry in raw_channels:
+        if not isinstance(entry, dict):
+            raise ValueError('About correction channel must be an object')
+        before = len(missing)
+        kind = field(entry.get('type'), 'corrections.type')
+        value = field(entry.get('value'), 'corrections.value')
+        del missing[before:]
+        if kind and kind not in ('email', 'url', 'github_issues'):
+            raise ValueError('Invalid About corrections.type')
+        if value and not kind:
+            raise ValueError('About correction value needs an email or url type')
+        if value and kind == 'email' and not re.fullmatch(r"[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+", value):
+            raise ValueError('Invalid About email')
+        if value and kind == 'url':
+            u = urlsplit(value)
+            try:
+                port = u.port
+            except ValueError:
+                raise ValueError('Invalid About HTTPS URL')
+            if u.scheme != 'https' or not u.hostname or u.username is not None or u.password is not None or re.search(r'\s|\\|[<>"{}]', value) or not all(re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?', part) for part in u.hostname.split('.')):
+                raise ValueError('Invalid About HTTPS URL')
+        if value and kind == 'github_issues' and not re.fullmatch(repo_pattern + r'/issues', value):
+            raise ValueError('Invalid About github_issues URL')
+        if kind and value:
+            channels.append({'type': kind, 'value': value})
+    if not channels:
+        missing.append('corrections.channels')
+    first = next((c for c in channels if c['type'] == 'email'), channels[0] if channels else {})
+    kind, value = first.get('type', ''), first.get('value', '')
+    def copy_check(node, path):
+        if isinstance(node, dict):
+            if set(node) == {'zh', 'en'}:
+                if not all(isinstance(v, str) and v.strip() for v in node.values()):
+                    raise ValueError('Missing About translation: ' + path)
+            for key, val in node.items():
+                copy_check(val, path + '.' + key)
+        elif isinstance(node, list):
+            for i, val in enumerate(node):
+                copy_check(val, path + '.' + str(i))
+        elif isinstance(node, str):
+            value = unicodedata.normalize('NFKC', html.unescape(node))
+            literals = []
+            for literal, name, spec, conv in Formatter().parse(value):
+                literals.append(literal)
+                if name is not None and (name not in ABOUT_FIELDS or spec or conv):
+                    raise ValueError('Unknown About placeholder: ' + path)
+            literal = ''.join(literals)
+            if re.search(r'\d', literal) or re.search(r'[{}]', literal):
+                raise ValueError('Literal number or brace in About copy: ' + path)
+            if any(w in value for w in ABOUT_BLACK):
+                raise ValueError('Blacklisted About copy: ' + path)
+        else:
+            raise ValueError('Invalid About copy: ' + path)
+    copy_check(T['about_page'], 'about_page')
+    copy_check(T['about_faq'], 'about_faq')
+    # Also cover future About keys added to the existing UI table.
+    copy_check({k: v for k, v in UI.items() if k.startswith('about_page.')}, 'ui')
+    if len(T['about_faq']) != 8:
+        raise ValueError('About requires eight FAQ items')
+    return {'names': names, 'kind': kind, 'value': value, 'channels': channels, 'source_repo': source_repo,
+            'missing_fields': sorted(missing), 'ready': not missing}
+
+
+def about_copy(key, lg):
+    value = T['about_page'][key][lg]
+    return expand_about(value, lg)
+
+
+def expand_about(value, lg):
+    import unicodedata
+    result = value.format(date=date, operator_name=ABOUT_STATE['names'][lg], correction=ABOUT_STATE['value'])
+    if re.search(r'[{}]', unicodedata.normalize('NFKC', html.unescape(result))):
+        raise ValueError('Unfilled About placeholder')
+    return result
+
+
+def about_faq(lg):
+    result = []
+    for i, item in enumerate(T['about_faq']):
+        answer = 'answer'
+        if (i == 0 and not ABOUT_STATE['names'][lg]) or (i == 7 and not ABOUT_STATE['value']):
+            answer = 'placeholder_answer'
+        elif i == 7:
+            kinds = {c['type'] for c in ABOUT_STATE['channels']}
+            answer = ('answer' if {'email', 'github_issues'} <= kinds else
+                      'email_answer' if 'email' in kinds else 'url_answer')
+        result.append({'question': expand_about(item['question'][lg], lg), 'answer': expand_about(item[answer][lg], lg)})
+    return result
+
+
+def collect_about_source_usage():
+    from html.parser import HTMLParser
+    class PrimaryLinks(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.depth, self.urls = 0, set()
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            if tag == 'div':
+                if self.depth or 'primarysources' in a.get('class', '').split():
+                    self.depth += 1
+            if self.depth and tag == 'a' and a.get('href'):
+                self.urls.add(a['href'])
+        def handle_endtag(self, tag):
+            if tag == 'div' and self.depth:
+                self.depth -= 1
+    ids = set()
+    for row in pub['rows']:
+        if row.get('base') in DETAIL_INDEX and row.get('lifecycle') != 'archived':
+            ids.update(model_source_ids(row, []))
+    crosscheck = pub['crosscheck']['source']
+    if crosscheck not in SOURCE_INDEX:
+        raise ValueError('Unknown crosscheck source: ' + crosscheck)
+    ids.add(crosscheck)
+    parser = PrimaryLinks()
+    parser.feed(TPL_SRC)
+    for url in sorted(parser.urls):
+        candidates = [s for s in pub['sources'] if s['url'] == url and s['checked'] <= date]
+        if not candidates:
+            raise ValueError('No dated source for homepage primary URL: ' + url)
+        ids.add(max(candidates, key=lambda s: (s['checked'], s['id']))['id'])
+    if ids - SOURCE_INDEX.keys():
+        raise ValueError('Unknown About sources: ' + ', '.join(sorted(ids - SOURCE_INDEX.keys())))
+    return sorted(ids)
+
+
+def group_about_sources():
+    raw_index = {s['id']: s for s in raw['sources']}
+    records = {}
+    for sid in collect_about_source_usage():
+        source = SOURCE_INDEX[sid]
+        records.setdefault(source['url'], []).append(source)
+    groups = {k: {} for k in ('benchmark', 'preference', 'information')}
+    for url, sources in sorted(records.items()):
+        host = urlsplit(url).hostname
+        category = ('benchmark' if host in ('artificialanalysis.ai', 'www.artificialanalysis.ai')
+                    else 'preference' if host in ('arena.ai', 'www.arena.ai', 'lmarena.ai') else 'information')
+        source = max(sources, key=lambda s: (s['checked'], s['id']))
+        groups[category].setdefault(host, []).append({**source, 'historical': any(raw_index[s['id']].get('historical') for s in sources)})
+    return groups
+
+
+def render_about_sources(lg):
+    result = ''
+    for category, sites in ABOUT_SOURCES.items():
+        result += '<h3>' + esc(about_copy('sources.' + category, lg)) + '</h3>'
+        for host, sources in sorted(sites.items()):
+            result += '<details class="source-group"><summary>' + esc(host) + '</summary><ul>'
+            for s in sources:
+                result += '<li><a href="' + esc(s['url']) + '">' + esc(localized(s['title'], lg)) + '</a><small>' + esc(about_copy('sources.retrieved', lg)) + ' · <time>' + esc(s['checked']) + '</time>'
+                if s['historical']:
+                    result += ' · <span class="historical">' + esc(about_copy('sources.historical', lg)) + '</span>'
+                result += '</small></li>'
+            result += '</ul></details>'
+    return result
+
+
+def operator_entity(lg):
+    return {'@type': 'Person', '@id': SITE['zh'] + '#operator', 'name': ABOUT_STATE['names'][lg]}
+
+
+def source_footer(lg):
+    if not ABOUT_STATE['source_repo']:
+        return ''
+    return ('<a class="sociallink" data-i18n="about_page.source" href="' + esc(ABOUT_STATE['source_repo'])
+            + '" target="_blank" rel="noopener noreferrer">' + esc(ui('about_page.source', lg)) + '</a>')
+
+
+def about_footer(lg):
+    return '<a href="' + ('/en/about/' if lg == 'en' else '/about/') + '">' + esc(about_copy('link', lg)) + '</a>'
+
+
+def render_about(lg):
+    language, home = ('en', '/en/') if lg == 'en' else ('zh-CN', '/')
+    other = 'zh' if lg == 'en' else 'en'
+    faq = about_faq(lg)
+    title, desc, url = about_copy('title', lg), about_copy('description', lg), ABOUT_URLS[lg]
+    body = '<h1>' + esc(about_copy('heading', lg)) + '</h1>'
+    if not ABOUT_STATE['ready']:
+        body += '<p class="preview">' + esc(about_copy('preview', lg)) + '</p>'
+    def section(sid, heading, content):
+        return '<section id="' + sid + '"><h2>' + esc(about_copy(heading, lg)) + '</h2>' + content + '</section>'
+    def paragraph(key):
+        return '<p>' + esc(about_copy(key, lg)) + '</p>'
+    body += section('operator', 'operator.heading', paragraph('operator' if ABOUT_STATE['names'][lg] else 'operator.placeholder') + paragraph('purpose') + ('<p><a href="' + esc(ABOUT_STATE['source_repo']) + '">' + esc(about_copy('source.license', lg)) + '</a></p>' if ABOUT_STATE['source_repo'] else ''))
+    body += section('sources', 'sources.heading', paragraph('sources.intro') + render_about_sources(lg))
+    # Existing public HTML strings are reused exactly, with no migration or parameterization.
+    body += section('methodology', 'method.heading', paragraph('method.intro') + ''.join('<p class="method-copy" data-method="' + k + '">' + UI[k][lg] + '</p>' for k in ('method.score', 'method.cost', 'method.speed')))
+    corrections = '<h3>' + esc(about_copy('corrections.heading', lg)) + '</h3>'
+    if ABOUT_STATE['channels']:
+        corrections += paragraph('corrections')
+        for channel in ABOUT_STATE['channels']:
+            href = ('mailto:' if channel['type'] == 'email' else '') + channel['value']
+            label = about_copy('corrections.github_issues', lg) if channel['type'] == 'github_issues' else channel['value']
+            corrections += '<p><a class="correction" href="' + esc(href) + '">' + esc(label) + '</a></p>'
+    else:
+        corrections += paragraph('corrections.placeholder')
+    body += section('updates', 'updates.heading', paragraph('updates') + '<div id="corrections">' + corrections + '</div>')
+    body += section('faq', 'faq.heading', ''.join('<details class="faq-item"><summary>' + esc(f['question']) + '</summary><p>' + esc(f['answer']) + '</p></details>' for f in faq))
+    body += section('disclaimer', 'disclaimer.heading', paragraph('disclaimer'))
+    page = {'@type': 'AboutPage', '@id': url + '#page', 'url': url, 'name': title, 'description': desc, 'inLanguage': language,
+            'isPartOf': {'@id': SITE['zh'] + '#website'}, 'about': {'@id': SITE['zh'] + '#website'}, 'hasPart': {'@id': url + '#faq'}}
+    graph = [page, {'@type': 'FAQPage', '@id': url + '#faq', 'url': url + '#faq', 'inLanguage': language,
+                    'isPartOf': {'@id': url + '#page'}, 'mainEntity': [{'@type': 'Question', 'name': f['question'], 'acceptedAnswer': {'@type': 'Answer', 'text': f['answer']}} for f in faq]}]
+    if ABOUT_STATE['ready']:
+        graph.append(operator_entity(lg))
+        page['publisher'] = {'@id': SITE['zh'] + '#operator'}
+    nav = '<a href="' + home + '">' + esc(ui('detail.breadcrumb.home', lg)) + '</a><a lang="' + ('en' if other == 'en' else 'zh-CN') + '" href="' + ('/en/about/' if other == 'en' else '/about/') + '">' + ('English' if other == 'en' else '中文') + '</a>'
+    replacements = {'HTML_LANG': language, 'TITLE': esc(title), 'DESC': esc(desc), 'ROBOTS_META': '' if ABOUT_STATE['ready'] else '<meta name="robots" content="noindex">',
+                    'URL_SELF': url, 'URL_ZH': ABOUT_URLS['zh'], 'URL_EN': ABOUT_URLS['en'], 'OG_LOCALE': 'zh_CN' if lg == 'zh' else 'en_US',
+                    'OG_LOCALE_ALT': 'en_US' if lg == 'zh' else 'zh_CN', 'JSON_LD': json_text({'@context': 'https://schema.org', '@graph': graph}),
+                    'NAV': nav, 'BODY': body, 'FOOTER': '<a href="' + home + '">' + esc(ui('detail.back', lg)) + '</a>' + about_footer(other) + source_footer(lg)}
+    output = ABOUT_TPL
+    for key, value in replacements.items():
+        output = output.replace('{{' + key + '}}', value)
+    if re.search(r'\{\{[A-Z_]+\}\}', output):
+        raise ValueError('Unfilled About template')
     return output
 
 
@@ -644,6 +918,8 @@ def render(lg):
     html = static_lang(html, o)
     html = (html.replace('{{DEFAULT_ROWS}}', render_default_rows(selected, o))
             .replace('{{ALL_MODELS}}', render_all_models(o))
+            .replace('{{ABOUT_LINK}}', about_footer(o))
+            .replace('{{SOURCE_LINK}}', source_footer(o))
             .replace('{{METRIC_NOTE}}', ui('note.score', o, idx=pub['benchmarkVersion']))
             .replace('{{RESULT_COUNT}}', esc(ui('result', o, n=len(selected), valid=len(selected), scope=ui('view.primary', o))))
             .replace('{{OG_IMAGE_ALT}}', esc(ui('seo.image.alt', o)))
@@ -658,6 +934,11 @@ ARCHIVE_INDEX, DETAIL_PAGES, REDIRECT_TARGETS, NEXT_PATHS = build_page_plan()
 INDEXABLE_BASES = [slug for slug, page in DETAIL_PAGES.items() if not page_noindex(page)]
 SOURCE_INDEX = {s['id']: s for s in pub['sources']}
 SELECTED_SOURCE_IDS = selected_source_ids()
+ABOUT_TPL = (HERE / 'template_about_261105.html').read_text(encoding='utf-8')
+ABOUT_STATE = validate_about()
+if ABOUT_STATE['missing_fields']:
+    print('WARNING about: missing_fields: ' + ', '.join(ABOUT_STATE['missing_fields']), file=sys.stderr)
+ABOUT_SOURCES = group_about_sources()
 pub['detailSlugs'] = list(DETAIL_INDEX)
 payload = json_text(pub)
 zh_html, en_html = render('zh'), render('en')
@@ -668,6 +949,8 @@ outputs = {OUT: zh_html.encode(), SITE_DIR / 'index.html': zh_html.encode(),
 for slug, page in DETAIL_PAGES.items():
     for lg in SITE:
         outputs[SITE_DIR / detail_path(slug, lg).lstrip('/') / 'index.html'] = render_detail(page['row'], lg, page['archived']).encode()
+for lg in SITE:
+    outputs[SITE_DIR / ('en/about/index.html' if lg == 'en' else 'about/index.html')] = render_about(lg).encode()
 for name, content in auxiliary_files().items():
     outputs[SITE_DIR / name] = content.encode()
 image_source = HERE / 'assets/og.png'
