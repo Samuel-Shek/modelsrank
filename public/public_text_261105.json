@@ -1,0 +1,2201 @@
+{
+ "meta": {
+  "en_status": "reviewed",
+  "note": "English reviewed by Gemini 4 Argon (thinking high, web search) on 2026-11-03 via ego Lite, edits checked and applied by Grok Bot; see gemini_translation_review_261103.md. 2026-11-04: new strings for the v5.0.1 update (highlights, changes, 5 notes, 3 sources, method.score) were written by Grok Bot; not yet reviewed by Gemini. 2026-11-05: new strings for the daily update (highlights, changes, Kimi/Argon/Carbon notes, 3 sources, method.speed) written by Grok Bot; not yet reviewed by Gemini. 2026-11-05 (speed redesign): speed strings (f.*, col.*, note.*, method.speed, limits.p1, src.aa, d.*, cmp.result, highlights, changes[4], 3 sources) rewritten by Grok Bot for AA Performance Benchmarking v3.0.0; not yet reviewed by Gemini. 2026-11-05 10:30 follow-ups: speed threshold strings (speed.*), self-reviewed speed copy edits, Kimi K3 and Claude fallback note translations written by Grok Bot; not yet reviewed by Gemini. 2026-11-05 evening Hy4 GA: new highlights/changes/notes/sources written by Grok Bot; not yet reviewed by Gemini. 2026-11-06: Inkling 2 Small / Hy4 cost-speed / Muse Wonder (high) strings written by Grok Bot; not yet reviewed by Gemini. 2026-11-07 Saturday review: K-EXAONE 2.0 / Arena 11-06 / Nemotron cost strings written by Grok Bot; not yet reviewed by Gemini.",
+  "do_not_translate": [
+   "Gemini",
+   "Claude",
+   "GPT",
+   "Grok",
+   "Arena",
+   "Artificial Analysis",
+   "AA",
+   "Deep Think",
+   "Antigravity",
+   "AI Studio",
+   "Fairwind",
+   "Codex",
+   "ChatGPT",
+   "Kimi",
+   "Qwen",
+   "DeepSeek",
+   "GLM",
+   "MiMo",
+   "Muse",
+   "Llama",
+   "ERNIE",
+   "Hy4",
+   "Nemotron",
+   "Granite",
+   "Mistral",
+   "high",
+   "medium",
+   "low",
+   "xhigh",
+   "max",
+   "non-reasoning",
+   "with fallback",
+   "Inkling",
+   "Inkling 2 Small",
+   "Inkling Small",
+   "Tinker",
+   "Thinking Machines",
+   "K-EXAONE",
+   "K-EXAONE 2.0",
+   "EXAONE",
+   "LG AI Research",
+   "Apache 2.0"
+  ],
+  "blacklist": [
+   "双子",
+   "克劳德",
+   "格罗克",
+   "竞技场",
+   "人工分析",
+   "图中型号",
+   "截图",
+   "本轮",
+   "复核",
+   "Codex 与",
+   "SHA",
+   "请先更新",
+   "上版",
+   "口径"
+  ]
+ },
+ "parts": {
+  "with fallback 表示保留服务端默认回退条件，不能等同于关闭回退后的模型表现。": [
+   "with fallback：测试时保留了 Anthropic 服务端的默认回退机制，结果不等同于关闭回退时的表现。",
+   "“with fallback”: tested with Anthropic’s default server-side fallback enabled; results may differ with fallback turned off."
+  ],
+  "有完整综合分；本次公开主表缺少API成本与速度，不据此做购买/性价比判断。": [
+   "有 AA 综合分，但 AA 未公布该配置的评测成本和速度。",
+   "Has an AA Intelligence Index score, but AA has not published cost or speed for this configuration."
+  ],
+  "Meta官方将Full提供给MuseCode订阅用户；缺少AA成本/速度数据不等于产品不可用。": [
+   "Meta 向 MuseCode 订阅用户提供 Full 版本；缺少成本和速度数据不代表无法使用。",
+   "Meta offers the Full version to MuseCode subscribers; missing cost and speed data does not mean it is unavailable."
+  ],
+  "AA v5 综合分 50。官方 9月30日发布（首期仅受邀网络安全团队），10月13日面向开发者、企业与 Pro/Ultra 订阅用户全面开放，目前可直接购买使用。价格见下方“官方价格”。": [
+   "AA v5 综合分 50。Google 于 9 月 30 日发布（首期仅向受邀网络安全团队开放），10 月 13 日起向开发者、企业和 Google AI Pro/Ultra 订阅用户全面开放。价格见下方“官方价格”。",
+   "AA v5 score 50. Released by Google on Sep 30 (initially to invited cybersecurity teams only); generally available since Oct 13 to developers, businesses and Google AI Pro/Ultra subscribers. See “Official pricing” below."
+  ],
+  "v4.3.2 旧口径时与 DeepSeek 1017 同为 45（v5 下两者均为 32）；与 Kimi 的分项对比也出自旧口径。": [
+   "在旧版指数 v4.3.2 中与 DeepSeek V4.1 Flash 1017 同为 45 分，v5 中两者均为 32 分；与 Kimi 的分项对比也来自旧版指数。",
+   "Tied with DeepSeek V4.1 Flash 1017 at 45 on the legacy v4.3.2 index; both score 32 on v5. The sub-score comparison with Kimi is also from the legacy index."
+  ],
+  "总分44，长文AA-LCR 89%、GDP.pdf 22%，高于GLM同档80%、11%；不代表所有文档任务都领先。": [
+   "旧版指数下总分 44；长文本 AA-LCR 89%、GDP.pdf 22%，高于 GLM-5.3 同档的 80%、11%，但不代表所有文档任务都更强。",
+   "Scored 44 on the legacy index; AA-LCR (long context) 89% and GDP.pdf 22%, above GLM-5.3 at the same setting (80%, 11%). This does not mean it leads on every document task."
+  ],
+  "10月24日新模型发布评测再次确认旧K3 Max为44分；成本、速度和原长文对照保留10月23日快照。": [
+   "成本、速度和长文本对比数据来自 2026-10-23。",
+   "Cost, speed and long-context comparisons are from 2026-10-23."
+  ],
+  "2026-10-31 读取的 AA v5 当前榜未列此配置；速度等保留原日期，旧口径分数只在详情中展示。": [
+   "AA v5 榜单目前未收录此配置，这里只显示旧版指数的分数。",
+   "This configuration is not currently listed on the AA v5 board; only the legacy-index score is shown."
+  ],
+  "10月24日统一当前榜未列此旧版配置；保留10月23日数据，不代表本次重新测得。": [
+   "数据来自 2026-10-23，之后未重新测量。",
+   "Data from 2026-10-23; not re-measured since."
+  ],
+  "成本原表显示$0.00，精度不足，不视为免费，也不参加成本排名。": [
+   "AA 显示的评测成本不足 $0.01，不代表免费，不参与成本排名。",
+   "AA’s measured cost is under $0.01. This does not mean it is free; it is excluded from the cost ranking."
+  ],
+  "已被新一代型号替代的历史型号；本次重读独立模型页，未取得同口径首块/总等待。": [
+   "已被新一代型号取代；缺少延迟数据。",
+   "Superseded by a newer model; latency data unavailable."
+  ],
+  "官方已发布。厂商内部任务评测不能换算为 AA 分数；缺少本次同口径完整独立成绩，保留强候选观察。": [
+   "已正式发布。厂商自测成绩不能换算成 AA 分数，目前缺少独立的综合评分。",
+   "Officially released. Vendor-run evaluations can’t be converted into AA scores; no independent score yet."
+  ],
+  "可核实官方产品页；未取得本次同口径完整独立成绩。": [
+   "官方产品页可查，但缺少独立的综合评分。",
+   "Listed on the official product page, but no independent score is available."
+  ],
+  "AA 标注估计分或尚未完整评测；不进入正式能力、成本、速度三榜。已有流速只作详情参考。": [
+   "AA 只给出估计分或尚未完成评测，因此不参与能力、成本和速度排名；已有的速度数据仅供参考。",
+   "AA shows only an estimated score or has not finished testing, so it is not ranked on intelligence, cost or speed; any speed data is for reference only."
+  ],
+  "48 分对应 max，45 分对应 xhigh。Meta 官方标准与 Contributor 入口价格和数据使用条件不同，不混算；AA 成本仍采用其公布路径。": [
+   "48 分对应 max 档，45 分对应 xhigh 档。Meta 标准版与 Contributor 版的价格和数据使用条款不同。",
+   "48 is the max setting, 45 is xhigh. Meta’s Standard and Contributor tiers have different pricing and data-use terms."
+  ],
+  "滚动别名缺少固定模型 ID 和独立完整评测；本轮不据此给出购买建议。": [
+   "这是会随厂商更新而指向不同版本的别名，没有固定的模型 ID，也没有独立的完整评测。",
+   "A rolling alias that points to different versions over time; no fixed model ID and no independent full evaluation."
+  ],
+  "官方列为 Pro/Business/Enterprise 用户可访问的 Astra Pro。不能拿普通 Astra max 的分数（v4.3.2 时 53，v5 为 57）代替此模式；没有完整同口径证据就不排定名次。": [
+   "OpenAI 向 Pro/Business/Enterprise 用户提供的 Astra Pro 模式。不能用普通 Astra max 的分数（v5 为 57）代替，因此不排名。",
+   "Astra Pro mode, available to OpenAI Pro/Business/Enterprise users. The regular Astra max score (57 on v5) can’t stand in for it, so it is not ranked."
+  ],
+  "10月23日复核官方页面，单独保留观察；本轮仍未取得独立AA完整综合分。": null,
+  "2026-10-31 复查 AA v5 统一榜单：仍无此条独立完整分。": [
+   "截至 2026-11-03，AA 尚未公布它的独立综合分。",
+   "As of 2026-11-03, AA has not published an independent score for it."
+  ],
+  "基于 Gemini 3.1 Pro 的专项推理模式。官方科学/推理专项成绩不换算成 AA 综合分；购买前另核地区、套餐及用量限制。": [
+   "基于 Gemini 3.1 Pro 的专项推理模式。Google 公布的科学/推理成绩不能换算成 AA 综合分；地区、套餐和用量限制以官方说明为准。",
+   "A specialized reasoning mode built on Gemini 3.1 Pro. Google’s published science/reasoning results can’t be converted into an AA score; see Google’s official documentation for regions, plans, and usage limits."
+  ],
+  "官方说明与 Fable 5.1 为相同模型、不同安全措施，访问受限。不是普通消费者可直接购买的默认候选；不复制 Fable 的路由分数。": [
+   "Anthropic 说明它与 Fable 5.1 是同一模型、安全措施不同，仅限受邀访问。本站不沿用 Fable 的分数。",
+   "Anthropic says it is the same model as Fable 5.1 with different safeguards; access is invitation-only. Fable’s scores are not reused here."
+  ],
+  "补充旧版漏掉的 5.1；官方确认已发布，另有人类偏好证据，但不将 Arena 分数折算为 AA 综合分。": [
+   "百度已正式发布；有 Arena 人类偏好数据，但 Arena 分数不能折算为 AA 综合分。",
+   "Officially released by Baidu. It has Arena human-preference data, but Arena scores can’t be converted into an AA score."
+  ],
+  "官方确认FlashX为Flash系列高速变体；没有找到FlashX独立AA综合分。Flash基础款分数（v4.3.2 时 42，v5 为 28）仅是参照，不计作FlashX的分数。厂商200 token/s宣传值不混入AA实测速度。": [
+   "Z.ai 说明 FlashX 是 Flash 系列的高速版本；AA 没有 FlashX 的独立综合分。Flash 基础款的分数（v5 为 28）仅供参考，不算作 FlashX 的分数；厂商宣传的 200 token/s 也不计入实测速度。",
+   "Z.ai describes FlashX as a high-speed variant of the Flash line; AA has no separate score for it. The base Flash score (28 on v5) is for reference only, and the vendor’s claimed 200 tokens/s is not treated as a measured speed."
+  ],
+  "AA v5.0 综合分 46（v4.3.2 时为 55，口径不同，不能算涨跌）。v5 公告称其为得分最高的开放权重候选，但官方模型文件计划 11月4日前公开；11月3日查 Moonshot 的 Hugging Face 账号仍无 K3.1 仓库，尚未开放。": [
+   "AA v5 综合分 46（旧版指数 v4.3.2 下为 55，两个版本不能直接比较）。AA 称其为得分最高的开放权重模型，但 Moonshot 计划 11 月 4 日前公开权重；截至 11 月 3 日，Hugging Face 上尚无 K3.1 仓库。",
+   "AA v5 score 46 (55 on the legacy v4.3.2 index; the two versions aren’t comparable). AA calls it the top-scoring open-weights model, but Moonshot plans to publish the weights by Nov 4; as of Nov 3 there was no K3.1 repository on Hugging Face."
+  ],
+  "官方已发布高速版，并宣称速度约为普通版的2–3倍；这是厂商描述，本轮未取得该高速版独立综合分或测速，不借用普通Pro的分数（v4.3.2 时 55，v5 为 46）或速度。": [
+   "Moonshot 已发布高速版，称速度约为普通版的 2–3 倍（厂商说法）。目前没有它的独立综合分或测速，不沿用普通版的分数（v5 为 46）和速度。",
+   "Moonshot has released a high-speed version it says is about 2–3× faster (vendor claim). There is no independent score or speed test for it yet; the regular version’s score (46 on v5) and speed are not reused."
+  ],
+  "2026-10-31 AA v5 榜仍未单列高速版。": [
+   "截至 2026-11-03，AA v5 榜单尚未单独收录高速版。",
+   "As of 2026-11-03, AA v5 does not list the high-speed version separately."
+  ],
+  "AA v5 综合分 59，本次读取仍为第1。官方 10月28日发布；未公开发售，普通用户与开发者暂不可用。价格见下方“官方价格”。": [
+   "AA v5 综合分 59，排名第 1。Google 于 10 月 28 日发布，尚未公开发售，开发者和普通用户暂时无法使用。价格见下方“官方价格”。",
+   "AA v5 score 59, ranked #1. Released by Google on Oct 28 but not yet for sale; developers and consumers can’t use it yet. See “Official pricing” below."
+  ],
+  "OpenAI 10月26日发布，接替 GPT-5.6 Terra；API 标价 $1/$5 每百万 token（官方页）。ChatGPT Work 与 Codex 的 Plus/Pro/Enterprise/Edu 可用。": [
+   "OpenAI 于 10 月 26 日发布，接替 GPT-5.6 Terra；API 价格 $1 / $5（每百万 token 输入 / 输出）。ChatGPT Work 和 Codex 的 Plus/Pro/Enterprise/Edu 用户可用。",
+   "Released by OpenAI on Oct 26, succeeding GPT-5.6 Terra; API price $1 / $5 per million input / output tokens. Available in ChatGPT Work and Codex on Plus/Pro/Enterprise/Edu plans."
+  ],
+  "Mistral 10月6日开放预览，10月29日发布改进版并开放权重（Mistral Ecosystem Open-Weight 许可，MaaS 商用需另签）。标价 $0.70/$2.10 每百万 token。": [
+   "Mistral 于 10 月 6 日开放预览，10 月 29 日发布改进版并开放权重（Mistral Ecosystem Open-Weight 许可，MaaS 商用需另行签约）。价格 $0.70 / $2.10（每百万 token）。",
+   "Mistral opened a preview on Oct 6 and released an improved, open-weights version on Oct 29 (Mistral Ecosystem Open-Weight license; commercial MaaS use needs a separate agreement). Price $0.70 / $2.10 per million tokens."
+  ],
+  "AA 10月30日补测的非思考档；评测成本于11月3日读取时已公布。速度为 AA 滚动代表值，可能随供应商变化。": [
+   "AA 于 10 月 30 日补测的非推理档。速度是 AA 的滚动代表值，可能随服务商变化。",
+   "The non-reasoning setting, added by AA on Oct 30. Speed is AA’s rolling representative value and may vary by provider."
+  ],
+  "v5 已测、上版未收录的型号（非本周新发布），补入以使本页覆盖 AA v5 全部已测配置。": null,
+  "AA 11月1日补测。未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。": [
+   "AA 于 11 月 1 日补测。尚未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。",
+   "Tested by AA on Nov 1. Not yet for sale; available only to selected cybersecurity defenders. See “Official pricing” below."
+  ],
+  "AA 11月2日补测；评测成本与速度 AA 暂未公布。未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。": [
+   "AA 于 11 月 2 日补测，评测成本和速度暂未公布。尚未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。",
+   "Tested by AA on Nov 2; cost per task and speed not yet published. Not yet for sale; available only to selected cybersecurity defenders. See “Official pricing” below."
+  ],
+  "AA 11月1日补测的 high 档；评测成本 AA 暂未公布。": [
+   "AA 于 11 月 1 日补测的 high 档，评测成本暂未公布。",
+   "The high setting, tested by AA on Nov 1; cost not yet published."
+  ],
+  "AA 11月2日新测。官方在 Hugging Face 以 Apache-2.0 开放权重，33B 稠密模型，上下文 524,288 token。发布日期按 AA 记录；官方型号卡未写日期（未核）。API 价格未核；评测成本与速度 AA 暂未公布。": [
+   "AA 于 11 月 2 日首次测试。官方在 Hugging Face 以 Apache-2.0 许可开放权重，33B 稠密模型，上下文 524,288 token。发布日期取自 AA 记录；API 价格未核实；评测成本和速度 AA 暂未公布。",
+   "First tested by AA on Nov 2. Open weights on Hugging Face under Apache-2.0; a 33B dense model with a 524,288-token context. Release date from AA’s records; API price not verified; AA has not yet published cost or speed."
+  ],
+  "AA v5 本次新出分（10月31日读取时无分），补入以覆盖 v5 全部已测配置。": null,
+  "截图仅写V4.1-Flash，无法确认平台已升级1017或使用Max；9月旧版Max在 v4.3.2 旧口径下为39。官方API已于10月17日升级。": [
+   "DeepSeek 官方 API 已于 10 月 17 日升级到 1017 版本；9 月旧版的 max 档在旧版指数 v4.3.2 下为 39 分。",
+   "DeepSeek’s official API was upgraded to the 1017 version on Oct 17; the older September version scored 39 at max on the legacy v4.3.2 index."
+  ],
+  "截图未展示思考档位；本条仅对应表列实测配置。": null,
+  "该旧版与1017分别保留，不能把同名菜单自动等同最新权重。": [
+   "这是 9 月的旧版本，与 1017 版本分开记录；同名入口不一定指向最新权重。",
+   "This is the older September version, kept separate from 1017; an entry with the same name may not point to the newest weights."
+  ],
+  "截图所示FlashX单独保留；不擅自替换为Flash，也不借用Flash成绩。": [
+   "FlashX 单独列出，不借用 Flash 的成绩。",
+   "FlashX is listed separately and does not borrow Flash’s scores."
+  ],
+  "普通Pro与Highspeed是不同服务型号，成绩不互借。原截图里的Kimi K3仍是旧版本。": [
+   "普通 Pro 与 Highspeed 是不同的服务型号，成绩不互相借用。",
+   "Regular Pro and Highspeed are different service models; scores are not shared between them."
+  ],
+  "受限开放、未公开发售：能看到分数不等于能买到。": [
+   "受限开放、尚未公开发售：有分数不代表能买到。",
+   "Limited access, not yet for sale: having a score doesn’t mean you can buy it."
+  ],
+  "AA v5 当前榜（2026-10-31）已不列此配置，已由 GPT-6.1 Terra 接替；保留 v4.3.2 原值与原日期，不作当前对照": [
+   "AA v5 榜单已不再收录此配置，已由 GPT-6.1 Terra 接替；这里保留旧版指数 v4.3.2 的原始数据",
+   "No longer listed on AA v5; succeeded by GPT-6.1 Terra. Original legacy v4.3.2 data kept here"
+  ],
+  "AA v5 当前榜（2026-10-31）已不列此配置，已由 Mistral Large 4 正式版 接替；保留 v4.3.2 原值与原日期，不作当前对照": [
+   "AA v5 榜单已不再收录此配置，已由 Mistral Large 4 正式版接替；这里保留旧版指数 v4.3.2 的原始数据",
+   "No longer listed on AA v5; succeeded by the full release of Mistral Large 4. Original legacy v4.3.2 data kept here"
+  ],
+  "官方9月更新日志说明旧Flash/Vision入口已退役或临时路由V4.1；保留AA旧权重评测，不代表原API仍调用该权重。": [
+   "DeepSeek 9 月更新日志称旧的 Flash/Vision 入口已退役或临时指向 V4.1；这里保留 AA 对旧权重的评测，不代表原 API 仍使用该权重。",
+   "DeepSeek’s September changelog says the old Flash/Vision endpoints were retired or temporarily routed to V4.1; AA’s results for the old weights are kept here, which doesn’t mean the API still serves them."
+  ],
+  "旧版型号，保留原快照；本轮已补入对应较新系列，旧记录不混入当前比较。": [
+   "已有更新版本，此为旧版记录。",
+   "A newer version exists; this is an older record."
+  ],
+  "官方已于10月17日更新；旧9月权重Max39分，新1017权重Max在 v4.3.2 旧口径下为45分（v5 为32）。第三方截图短名不能确认实际权重。": [
+   "DeepSeek 已于 10 月 17 日更新。9 月旧权重的 max 档为 39 分；1017 新权重的 max 档在旧版指数 v4.3.2 下为 45 分（v5 为 32 分）。",
+   "DeepSeek updated on Oct 17. The September weights scored 39 at max; the 1017 weights scored 45 at max on legacy v4.3.2 (32 on v5)."
+  ],
+  "保留9月22日旧榜记录；本轮未取得该配置的当日完整复核，不进入当前主榜或当前GPT/Claude近邻。不能据此断定型号停用。": [
+   "2026-09-22 的旧记录，之后未重新核验，仅供参考，不代表该型号已停用。",
+   "Record from 2026-09-22, not re-verified since; for reference only. This doesn’t mean the model has been retired."
+  ],
+  "旧版Muse Spark 1.3记录；已补入Muse Wonder与Wonder Full。旧记录日期仍为9月22日。": [
+   "Muse Spark 1.3 旧版记录（2026-09-22）；新版见 Muse Wonder 和 Wonder Full。",
+   "Older Muse Spark 1.3 record (2026-09-22); see Muse Wonder and Wonder Full for the newer models."
+  ],
+  "AA 公布配置": [
+   "默认配置",
+   "Default"
+  ],
+  "AA 公布配置 · 未单列思考档位": [
+   "默认配置（AA 未区分推理档位）",
+   "Default (no separate reasoning setting on AA)"
+  ],
+  "推理版": [
+   "推理版",
+   "Reasoning"
+  ],
+  "视觉 / 多模态": [
+   "视觉 / 多模态",
+   "Vision / multimodal"
+  ],
+  "0424 · 推理版": [
+   "0424 · 推理版",
+   "0424 · Reasoning"
+  ],
+  "latest-version · 滚动别名": [
+   "latest（滚动别名）",
+   "latest (rolling alias)"
+  ],
+  "独立付费模式；未取得同口径成绩": [
+   "独立付费模式",
+   "Separate paid mode"
+  ],
+  "Deep Think 专项推理模式": [
+   "Deep Think 推理模式",
+   "Deep Think reasoning mode"
+  ],
+  "可信访问计划": [
+   "受邀访问计划",
+   "Trusted access program"
+  ],
+  "正式版；本次 AA 数据缺失": [
+   "正式版",
+   "General release"
+  ],
+  "独立AA综合分未取得": [
+   "高速变体",
+   "High-speed variant"
+  ],
+  "未独立测分": [
+   "高速变体",
+   "High-speed variant"
+  ],
+  "高速服务版本 · 未取得独立分数": [
+   "高速服务版",
+   "High-speed service"
+  ],
+  "独立配置未核实": [
+   "高速服务版",
+   "High-speed service"
+  ],
+  "9月30日发布时仅向 Fairwind 计划的网络安全防御方开放；10月13日起全面开放：开发者用 Gemini API 付费层（AI Studio、Android Studio，免费层不可用）；个人在 Antigravity 中使用需 Google AI Ultra 订阅；企业可用 Gemini for business、API 与 Antigravity；普通用户需 Google AI Pro 或 Ultra 订阅，在 Gemini App 和搜索 AI 模式中使用": [
+   "9 月 30 日发布时仅向 Fairwind 计划的网络安全防御方开放；10 月 13 日起全面开放：开发者通过 Gemini API 付费层使用（AI Studio、Android Studio；免费层不可用）；个人在 Antigravity 中使用需 Google AI Ultra 订阅；企业可通过 Gemini for business、API 和 Antigravity 使用；普通用户需 Google AI Pro 或 Ultra 订阅，在 Gemini App 和搜索的 AI 模式中使用",
+   "At launch on Sep 30, available only to cybersecurity defenders in the Fairwind program; generally available since Oct 13: developers via the paid tier of the Gemini API (AI Studio, Android Studio; not on the free tier); individuals in Antigravity with a Google AI Ultra subscription; businesses via Gemini for business, the API and Antigravity; consumers with Google AI Pro or Ultra in the Gemini app and AI Mode in Search"
+  ],
+  "在线服务可用；模型文件尚未公开": [
+   "在线服务可用；模型权重尚未公开",
+   "Available as an online service; model weights not yet published"
+  ],
+  "尚未公开发售：10月28日起仅向部分网络安全防御方开放，再逐步扩到 Fairwind 计划的可信合作方；开发者、企业与消费者渠道“尽快”开放，官方未给日期。11月3日 Gemini API 价格页仍未列出 Carbon": [
+   "尚未公开发售：10 月 28 日起仅向部分网络安全防御方开放，之后逐步扩大到 Fairwind 计划的可信合作方；开发者、企业和消费者渠道将“尽快”开放，官方未给出日期。截至 11 月 3 日，Gemini API 价格页尚未列出 Carbon",
+   "Not yet for sale: since Oct 28 available only to selected cybersecurity defenders, expanding gradually to trusted partners in the Fairwind program; developer, business and consumer access is coming “soon”, with no date given. As of Nov 3, the Gemini API pricing page did not list Carbon"
+  ],
+  "API 标准价：截至 2026-11-30（含）$2 输入 / $10 输出（每百万 token，含思考 token），12月1日起 $4 / $20；缓存输入 $0.10 → $0.20（仅隐式缓存，不支持显式缓存）。Batch/Flex 半价；Priority 档 $3.60 / $18（12月1日起 $7.20 / $36），缓存 $0.18 → $0.36。AA 评测成本按 $4/$20 标准价计算。": [
+   "API 标准价：2026-11-30（含）前输入 $2 / 输出 $10（每百万 token，含思考 token），12 月 1 日起 $4 / $20；缓存输入 $0.10 → $0.20（仅隐式缓存，不支持显式缓存）。Batch/Flex 半价；Priority 档 $3.60 / $18（12 月 1 日起 $7.20 / $36），缓存 $0.18 → $0.36。AA 评测成本按 $4 / $20 标准价计算。",
+   "Standard API price: $2 input / $10 output per million tokens (thinking tokens included) through 2026-11-30, then $4 / $20 from Dec 1; cached input $0.10 → $0.20 (implicit caching only; explicit caching not supported). Batch/Flex at half price; Priority tier $3.60 / $18 ($7.20 / $36 from Dec 1), cache $0.18 → $0.36. AA’s cost figure uses the $4 / $20 standard price."
+  ],
+  "官方公布首发价与 Argon 相同：$2 输入 / $10 输出（每百万 token，缓存输入 95% 折扣），首发期结束后 $4 / $20，结束日期未公布。AA 评测成本按 $4/$20 标准价计算。": [
+   "官方公布的首发价与 Argon 相同：输入 $2 / 输出 $10（每百万 token，缓存输入 95% 折扣），首发期结束后为 $4 / $20，结束日期未公布。AA 评测成本按 $4 / $20 标准价计算。",
+   "Official launch price matches Argon: $2 input / $10 output per million tokens (95% discount on cached input), rising to $4 / $20 after the launch period; end date not announced. AA’s cost figure uses the $4 / $20 standard price."
+  ],
+  "1,048,576 token（输入输出合计上限；默认同步最大输出 65,536）": [
+   "1,048,576 token（输入与输出合计上限；默认最大输出 65,536）",
+   "1,048,576 tokens (combined input + output limit; default max output 65,536)"
+  ],
+  "v5 统一榜单给出单一评测成本 $3.68/任务（2026-10-31读取）。10月24日 v4.3.2 时期的 1.98 / 2.11 美元分歧属旧口径，保留在下方记录，不再影响排名。": [
+   "AA v5 榜单给出的评测成本为 $3.68/任务（2026-10-31 读取）。旧版指数时期（10 月 24 日）两处来源分别为 $1.98 和 $2.11，列在下方，不影响排名。",
+   "AA v5 lists a cost of $3.68 per task (read 2026-10-31). In the legacy-index period (Oct 24) two sources gave $1.98 and $2.11; they are listed below and don’t affect the ranking."
+  ],
+  "Google DeepMind 型号页自报。主表未逐项标注思考档位；Google 评测方法说明写明 Gemini 成绩默认用 Gemini API 最高思考设置（另有说明除外）。其中 AA Index、Terminal-Bench 4.0 / Science（AA）、Vals Index、CWE-bench 为 Google 页面转引的第三方成绩，其余为 Google 自测。同表对照：GPT-6 Astra 57、Claude Opus 5.5 58、Claude Fable 5.1 49（AA Index v5.0）。注意 AA 榜上 Fable 5.1 最高为 xhigh 档 50 分，厂商表的 49 未注明档位（方法说明称其他厂商默认取最高推理设置、拿不到时用可得最佳结果）。": [
+   "以下为 Google DeepMind 型号页公布的成绩（厂商自报，不参与排名）。表中未逐项标注思考档位；Google 的评测说明称 Gemini 成绩默认使用 Gemini API 的最高思考设置（另有说明除外）。其中 AA Index、Terminal-Bench 4.0 / Science（AA）、Vals Index、CWE-bench 是 Google 页面转引的第三方成绩，其余为 Google 自测。同表对照：GPT-6 Astra 57、Claude Opus 5.5 58、Claude Fable 5.1 49（AA Index v5.0）。注意：AA 榜上 Fable 5.1 的最高分是 xhigh 档 50 分，厂商表中的 49 未注明档位。",
+   "Results published on Google DeepMind’s model page (vendor-reported, not used for ranking). The table doesn’t label thinking settings per row; Google’s methodology says Gemini results use the highest thinking setting in the Gemini API unless noted. AA Index, Terminal-Bench 4.0 / Science (AA), Vals Index and CWE-bench are third-party results quoted by Google; the rest are Google’s own. Same table: GPT-6 Astra 57, Claude Opus 5.5 58, Claude Fable 5.1 49 (AA Index v5.0). Note: Fable 5.1’s best on AA is 50 at xhigh; the vendor table’s 49 doesn’t state the setting."
+  ],
+  "Google DeepMind 型号页自报。主表未逐项标注思考档位；Google 评测方法说明写明 Gemini 成绩默认用 Gemini API 最高思考设置（另有说明除外）。其中 AA Index、Terminal-Bench 4.0 / Science（AA）、Vals Index、CWE-bench 为 Google 页面转引的第三方成绩，其余为 Google 自测。同表对照：GPT-6 Astra 57、Claude Opus 5.5 58、Claude Fable 5.1 49（AA Index v5.0）。注意 AA 榜上 Fable 5.1 最高为 xhigh 档 50 分，厂商表的 49 未注明档位（方法说明称其他厂商默认取最高推理设置、拿不到时用可得最佳结果）。 另注：10月13日的 Argon 模型卡是较早的成绩表，数值不同（如 Terminal-Bench 4.0 57.4%、Terminal-Bench Science 57.6%、Vals Index 68.9%，OSWorld 为 2.0 版 69.2%）；本表照录 DeepMind 现行型号页。": [
+   "以下为 Google DeepMind 型号页公布的成绩（厂商自报，不参与排名）。表中未逐项标注思考档位；Google 的评测说明称 Gemini 成绩默认使用 Gemini API 的最高思考设置（另有说明除外）。其中 AA Index、Terminal-Bench 4.0 / Science（AA）、Vals Index、CWE-bench 是 Google 页面转引的第三方成绩，其余为 Google 自测。同表对照：GPT-6 Astra 57、Claude Opus 5.5 58、Claude Fable 5.1 49（AA Index v5.0）。注意：AA 榜上 Fable 5.1 的最高分是 xhigh 档 50 分，厂商表中的 49 未注明档位。另：10 月 13 日的 Argon 模型卡是更早的成绩表，数值不同（如 Terminal-Bench 4.0 57.4%、Terminal-Bench Science 57.6%、Vals Index 68.9%，OSWorld 2.0 为 69.2%）；本表取自 DeepMind 当前的型号页。",
+   "Results published on Google DeepMind’s model page (vendor-reported, not used for ranking). The table doesn’t label thinking settings per row; Google’s methodology says Gemini results use the highest thinking setting in the Gemini API unless noted. AA Index, Terminal-Bench 4.0 / Science (AA), Vals Index and CWE-bench are third-party results quoted by Google; the rest are Google’s own. Same table: GPT-6 Astra 57, Claude Opus 5.5 58, Claude Fable 5.1 49 (AA Index v5.0). Note: Fable 5.1’s best on AA is 50 at xhigh; the vendor table’s 49 doesn’t state the setting. Also: the Oct 13 Argon model card is an earlier table with different numbers (e.g. Terminal-Bench 4.0 57.4%, Terminal-Bench Science 57.6%, Vals Index 68.9%, OSWorld 2.0 69.2%); this table follows DeepMind’s current model page."
+  ],
+  "AA Index v5.0（厂商页转引）": [
+   "AA Index v5.0（Google 页面转引）",
+   "AA Index v5.0 (quoted by Google)"
+  ],
+  "OSWorld-2.1（离线子集）": [
+   "OSWorld-2.1（离线子集）",
+   "OSWorld-2.1 (offline subset)"
+  ],
+  "终端代码任务 · Terminal-Bench 4.0": [
+   "Terminal-Bench 4.0（终端编程）",
+   "Terminal-Bench 4.0 (terminal coding)"
+  ],
+  "办公专业任务 · GDPval-AA v2.1": [
+   "GDPval-AA v2.1（专业办公任务）",
+   "GDPval-AA v2.1 (professional knowledge work)"
+  ],
+  "软件办公流程 · AutomationBench-AA": [
+   "AutomationBench-AA（软件工作流）",
+   "AutomationBench-AA (software workflows)"
+  ],
+  "StealthMark 综合实测": [
+   "StealthMark 综合",
+   "StealthMark overall"
+  ],
+  "StealthMark 通用能力": [
+   "StealthMark 通用",
+   "StealthMark general"
+  ],
+  "StealthMark 视觉能力": [
+   "StealthMark 视觉",
+   "StealthMark vision"
+  ],
+  "AA独立评测；具体运行设置见来源": [
+   "AA 独立评测；运行设置见来源",
+   "Independent AA evaluation; see source for settings"
+  ],
+  "AA独立评测；相对评分": [
+   "AA 独立评测；相对评分",
+   "Independent AA evaluation; relative score"
+  ],
+  "Stealth Models公开测试；9项结果，未单列思考档位": [
+   "Stealth Models 公开测试，9 项结果，未区分推理档位",
+   "Public Stealth Models test; 9 results, no separate reasoning setting"
+  ],
+  "空间、物理推理等原创任务": [
+   "空间、物理推理等原创任务",
+   "Original tasks such as spatial and physical reasoning"
+  ],
+  "视觉构造与细节任务": [
+   "视觉构造与细节任务",
+   "Visual construction and detail tasks"
+  ],
+  "旧Kimi K3为13%；不与其他执行框架的同名测试混用。": [
+   "旧版 Kimi K3 为 13%；不与其他测试框架下的同名测试混用。",
+   "The older Kimi K3 scored 13%; not mixed with same-named tests run on other harnesses."
+  ],
+  "Elo是这项评测内部的相对分数，不是正确率。": [
+   "Elo 是这项评测内部的相对分数，不是正确率。",
+   "Elo is a relative score within this evaluation, not an accuracy rate."
+  ],
+  "旧Kimi K3为58%。": [
+   "旧版 Kimi K3 为 58%。",
+   "The older Kimi K3 scored 58%."
+  ],
+  "该榜内第11/52；旧K3为50.7。独立展示，不与AA加权或换算。": [
+   "在该榜 52 个模型中排第 11；旧版 K3 为 50.7。单独展示，不与 AA 分数合并或换算。",
+   "Ranked 11th of 52 on that board; the older K3 scored 50.7. Shown separately; not combined with or converted to AA scores."
+  ],
+  "测量范围与AA不同。": [
+   "测量范围与 AA 不同。",
+   "Measures different things from AA."
+  ],
+  "不等于所有识图或图像生成能力。": [
+   "不代表全部的识图或图像生成能力。",
+   "Doesn’t cover all image-understanding or image-generation abilities."
+  ],
+  "档位名对应；Arena 未标注回退设置": [
+   "Arena 未注明是否开启回退",
+   "Arena doesn’t state whether fallback was enabled"
+  ],
+  "名称与档位对应": null,
+  "型号与档位对应": null,
+  "型号与档位对应；仍是另一套测试": null,
+  "Arena 未标注 0902 修订号": [
+   "Arena 未注明 0902 修订号",
+   "Arena doesn’t show the 0902 revision"
+  ],
+  "不是新发布 V2.6-Pro": [
+   "旧版（新版为 MiMo-V2.6-Pro）",
+   "Older version (newer: MiMo-V2.6-Pro)"
+  ],
+  "不是新发布 Grok 4.7": [
+   "旧版（新版为 Grok 4.7）",
+   "Older version (newer: Grok 4.7)"
+  ],
+  "独立偏好证据；无本次 AA 综合分": [
+   "目前没有 AA 综合分",
+   "No AA score yet"
+  ],
+  "Arena 未标注思考档位": [
+   "Arena 未注明推理档位",
+   "Arena doesn’t state the reasoning setting"
+  ],
+  "AA 11月1日补测的 high 档；评测成本于11月4日读取时已公布。": [
+   "AA 于 11 月 1 日补测的 high 档，评测成本已于 11 月 4 日公布。",
+   "The high setting, tested by AA on Nov 1; cost published as of Nov 4."
+  ],
+  "AA 11月2日补测；评测成本与速度于11月4日读取时已公布。未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。": [
+   "AA 于 11 月 2 日补测，评测成本和速度已于 11 月 4 日公布。尚未公开发售，仅部分网络安全防御方可用。价格见下方“官方价格”。",
+   "Tested by AA on Nov 2; cost per task and speed published as of Nov 4. Not yet for sale; available only to selected cybersecurity defenders. See “Official pricing” below."
+  ],
+  "AA v5.0.1 综合分 46（v4.3.2 时为 55，口径不同，不能算涨跌）。v5 公告称其为得分最高的开放权重候选，但官方模型文件计划 11月4日前公开；11月4日（北京时间上午）查 Moonshot 的 Hugging Face 账号仍无 K3.1 仓库，尚未开放。": [
+   "AA v5.0.1 综合分 46（旧版指数 v4.3.2 下为 55，两个版本不能直接比较）。AA 称其为得分最高的开放权重模型，但 Moonshot 计划 11 月 4 日前公开权重；截至 11 月 4 日上午（北京时间），Hugging Face 上仍无 K3.1 仓库。",
+   "AA v5.0.1 score 46 (55 on the legacy v4.3.2 index; the two versions aren’t comparable). AA calls it the top-scoring open-weights model, but Moonshot plans to publish the weights by Nov 4; as of the morning of Nov 4 (Beijing time) there was still no K3.1 repository on Hugging Face."
+  ],
+  "AA v5.0.1 综合分 60（11月3日 AA 按 CritPt v2 重评后由 59 调为 60），本次读取仍为第1。官方 10月28日发布；未公开发售，普通用户与开发者暂不可用。价格见下方“官方价格”。": [
+   "AA v5.0.1 综合分 60（11 月 3 日 AA 按 CritPt v2 重新评分后由 59 调为 60），排名第 1。Google 于 10 月 28 日发布，尚未公开发售，开发者和普通用户暂时无法使用。价格见下方“官方价格”。",
+   "AA v5.0.1 score 60 (up from 59 after AA regraded CritPt v2 on Nov 3), ranked #1. Released by Google on Oct 28 but not yet for sale; developers and consumers can’t use it yet. See “Official pricing” below."
+  ],
+  "尚未公开发售：10月28日起仅向部分网络安全防御方开放，再逐步扩到 Fairwind 计划的可信合作方；开发者、企业与消费者渠道“尽快”开放，官方未给日期。11月4日 Gemini API 价格页与型号列表仍未列出 Carbon": [
+   "尚未公开发售：10 月 28 日起仅向部分网络安全防御方开放，之后逐步扩大到 Fairwind 计划的可信合作方；开发者、企业和消费者渠道将“尽快”开放，官方未给出日期。截至 11 月 4 日，Gemini API 价格页和模型列表仍未列出 Carbon",
+   "Not yet for sale: since Oct 28 available only to selected cybersecurity defenders, expanding gradually to trusted partners in the Fairwind program; developer, business and consumer access is coming “soon”, with no date given. As of Nov 4, the Gemini API pricing page and model list still did not include Carbon"
+  ],
+  "11月5日读取 AA 评测成本为 $9.95（11月4日为 $7.68）；同日 Gemini API 价格页与11月4日相同，AA 未说明成本变化原因。": [
+   "11 月 5 日 AA 公布的评测成本为 $9.95（11 月 4 日为 $7.68）；当天 Gemini API 价格页没有变化，AA 未说明成本变化的原因。",
+   "On Nov 5 AA listed an evaluation cost of $9.95 (it was $7.68 on Nov 4); the Gemini API pricing page was unchanged that day, and AA has not explained the change."
+  ],
+  "AA v5.0.1 综合分 46（v4.3.2 时为 55，口径不同，不能算涨跌）。v5 公告称其为得分最高的开放权重候选，模型文件已在 Moonshot 官方 Hugging Face 仓库 moonshotai/Kimi-K3.1-Pro 公开（Kimi K3.1 Pro License，无需申请即可下载）；11月5日（北京时间上午）查看时已公开，具体公开时间未核。": [
+   "AA v5.0.1 综合分 46（旧版指数 v4.3.2 下为 55，两个版本不能直接比较）。AA 称其为得分最高的开放权重模型；模型权重已在 Moonshot 官方 Hugging Face 仓库 moonshotai/Kimi-K3.1-Pro 公开（Kimi K3.1 Pro License，无需申请即可下载），11 月 5 日上午（北京时间）查看时已可下载，确切公开时间未确认。",
+   "AA v5.0.1 score 46 (55 on the legacy v4.3.2 index; the two versions aren’t comparable). AA calls it the top-scoring open-weights model. The weights are now public in Moonshot’s official Hugging Face repository moonshotai/Kimi-K3.1-Pro (Kimi K3.1 Pro License, no access request needed); they were available when checked on the morning of Nov 5 (Beijing time), exact release time not confirmed."
+  ],
+  "在线服务可用；Kimi K3.1 Pro 模型文件已在 Hugging Face 公开，高速版是否另有模型文件未核": [
+   "在线服务可用；Kimi K3.1 Pro 的模型权重已在 Hugging Face 公开，高速版是否另有权重未确认",
+   "Available as an online service; Kimi K3.1 Pro weights are public on Hugging Face; whether the Highspeed version has separate weights is not confirmed"
+  ],
+  "在线服务可用；模型文件已公开（Hugging Face：moonshotai/Kimi-K3.1-Pro，Kimi K3.1 Pro License）": [
+   "在线服务可用；模型权重已公开（Hugging Face：moonshotai/Kimi-K3.1-Pro，Kimi K3.1 Pro License）",
+   "Available as an online service; model weights published (Hugging Face: moonshotai/Kimi-K3.1-Pro, Kimi K3.1 Pro License)"
+  ],
+  "尚未公开发售：10月28日起仅向部分网络安全防御方开放，再逐步扩到 Fairwind 计划的可信合作方；开发者、企业与消费者渠道“尽快”开放，官方未给日期。11月5日 Gemini API 价格页仍未列出 Carbon": [
+   "尚未公开发售：10 月 28 日起仅向部分网络安全防御方开放，之后逐步扩大到 Fairwind 计划的可信合作方；开发者、企业和消费者渠道将“尽快”开放，官方未给出日期。截至 11 月 5 日，Gemini API 价格页仍未列出 Carbon",
+   "Not yet for sale: since Oct 28 available only to selected cybersecurity defenders, expanding gradually to trusted partners in the Fairwind program; developer, business and consumer access is coming “soon”, with no date given. As of Nov 5, the Gemini API pricing page still did not list Carbon"
+  ],
+  "2026-10-31 读取的 AA v5 当前榜未列此配置；11月5日 AA 性能基准 v3.0.0 也不再给出它的速度，速度留空；旧口径分数只在详情中展示。": [
+   "AA v5 榜单目前未收录此配置，这里只显示旧版指数的分数；Artificial Analysis 也不再提供它的速度数据，速度留空。",
+   "This configuration is not currently listed on the AA v5 board; only the legacy-index score is shown. Artificial Analysis no longer publishes speed for it, so speed is blank."
+  ],
+  "10月24日新模型发布评测再次确认旧K3 Max为44分；成本和原长文对照保留10月23日快照。": [
+   "成本和长文本对比数据来自 2026-10-23。",
+   "Cost and long-context comparisons are from 2026-10-23."
+  ],
+  "AA 主表现在只写档位，完整名称仍标注 Default Fallback：测试时保留了 Anthropic 服务端的默认回退机制，不能等同于关闭回退后的表现。": [
+   "Artificial Analysis 的完整名称标注 Default Fallback：测试时保留了 Anthropic 服务端的默认回退机制，结果不等同于关闭回退时的表现。",
+   "Artificial Analysis’s full name for this setting says “Default Fallback”: it was tested with Anthropic’s default server-side fallback enabled, and results may differ with fallback turned off."
+  ],
+  "AA v5.0.1 综合分 35（11月5日晚间统一榜单；AA 更新日志记 11月4日公布）。": [
+   "AA v5.0.1 综合分 35（11月5日晚间统一榜单；AA 更新日志记 11月4日公布）。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 35 (evening leaderboard on 5 Nov; changelog lists it on 4 Nov)."
+  ],
+  "与 Grok 4.7 high 同分；默认视图并列。": [
+   "与 Grok 4.7 high 同分；默认视图并列。",
+   "Tied with Grok 4.7 high; same place in the default view."
+  ],
+  "AA 未公布评测成本与速度（型号页写 No publicly available API），三项留空，不编造。": [
+   "AA 未公布评测成本与速度（型号页写 No publicly available API），三项留空，不编造。",
+   "Artificial Analysis has not published evaluation cost or speed (model page: “No publicly available API”); those fields stay blank—nothing invented."
+  ],
+  "腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月5日晚 Hugging Face 检索仍只有 tencent/Hy4-preview，正式版权重未核到。": [
+   "腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月5日晚 Hugging Face 检索仍只有 tencent/Hy4-preview，正式版权重未核到。",
+   "Tencent’s 4 Nov GA adds vision and computer-use versus Hy4 preview. The API is on Tencent Cloud TokenHub, OpenRouter, and more. Weights and a system card are promised “in the coming days”; a 5 Nov evening Hugging Face search still only found tencent/Hy4-preview—final weights not verified."
+  ],
+  "Hy4 Flash 官方写即将发布，本次不收录。价格见下方“官方价格”。": [
+   "Hy4 Flash 官方写即将发布，本次不收录。价格见下方“官方价格”。",
+   "Hy4 Flash is listed as coming soon and is not included here. See official pricing below."
+  ],
+  "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。": [
+   "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。",
+   "Tencent’s announcement (approx.): $0.90 input / $2.70 output / $0.045 cached input per million tokens—same as Hy4 preview; TokenHub list price 50% off through 31 Dec 2026."
+  ],
+  "OpenRouter 列表价 $0.834 / $2.501（缓存读 $0.042），页面另标 50% off。": [
+   "OpenRouter 列表价 $0.834 / $2.501（缓存读 $0.042），页面另标 50% off。",
+   "OpenRouter list price $0.834 / $2.501 (cache read $0.042), with an additional 50% off badge on the page."
+  ],
+  "AA 未给评测成本，本栏只记官方/渠道标价，不换算任务成本。": [
+   "AA 未给评测成本，本栏只记官方/渠道标价，不换算任务成本。",
+   "Artificial Analysis publishes no evaluation cost here; this field only records official/channel list prices, not a task-cost conversion."
+  ],
+  "API 已公开可买：腾讯云 TokenHub、WorkBuddy、CodeBuddy、元宝、企微 AI 助手等，以及 OpenRouter 等第三方；模型权重官方称“未来几天”公开，11月5日晚 Hugging Face 仍只有 Hy4-preview，正式版权重未核到。": [
+   "API 已公开可买：腾讯云 TokenHub、WorkBuddy、CodeBuddy、元宝、企微 AI 助手等，以及 OpenRouter 等第三方；模型权重官方称“未来几天”公开，11月5日晚 Hugging Face 仍只有 Hy4-preview，正式版权重未核到。",
+   "API is publicly available: Tencent Cloud TokenHub, WorkBuddy, CodeBuddy, Yuanbao, WeCom’s AI assistant, OpenRouter, and others. Weights are promised “in the coming days”; as of the 5 Nov evening Hugging Face still only listed Hy4-preview—final weights not verified."
+  ],
+  "1,048,576 token（OpenRouter 型号页；AA 主表写 1M；正式版官方公告未另写精确数字）": [
+   "1,048,576 token（OpenRouter 型号页；AA 主表写 1M；正式版官方公告未另写精确数字）",
+   "1,048,576 tokens (OpenRouter model page; Artificial Analysis table shows 1M; the GA announcement does not restate an exact figure)"
+  ],
+  "AA 短名 Tencent Hy4；本榜显示名 Hy4。AA 页标明本条为 reasoning 配置。不与已归档的 Hy4 preview 混用成绩。": [
+   "AA 短名 Tencent Hy4；本榜显示名 Hy4。AA 页标明本条为 reasoning 配置。不与已归档的 Hy4 preview 混用成绩。",
+   "Artificial Analysis short name “Tencent Hy4”; this board shows “Hy4”. The AA page marks this as the reasoning configuration. Do not mix scores with the archived Hy4 preview row."
+  ],
+  "正式版 Hy4（id=tencent-hy4）已于 2026-11-05 晚按 AA v5.0.1 综合分 35 录入主榜；本条仍为 preview 旧观察记录，不参与当前排名。": [
+   "正式版 Hy4（id=tencent-hy4）已于 2026-11-05 晚按 AA v5.0.1 综合分 35 录入主榜；本条仍为 preview 旧观察记录，不参与当前排名。",
+   "The GA Hy4 row (id=tencent-hy4) was added to the main board on the evening of 5 Nov 2026 with Artificial Analysis v5.0.1 score 35; this preview row remains historical and is not ranked."
+  ],
+  "AA v5.0.1 综合分 35（11月5日晚间统一榜单；AA 更新日志记 11月4日公布）。与 Grok 4.7 high 同分；默认视图并列。AA 未公布评测成本与速度（型号页写 No publicly available API），三项留空，不编造。腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月5日晚 Hugging Face 检索仍只有 tencent/Hy4-preview，正式版权重未核到。Hy4 Flash 官方写即将发布，本次不收录。价格见下方“官方价格”。": [
+   "AA v5.0.1 综合分 35（11月5日晚间统一榜单；AA 更新日志记 11月4日公布）。与 Grok 4.7 high 同分；默认视图并列。AA 未公布评测成本与速度（型号页写 No publicly available API），三项留空，不编造。腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月5日晚 Hugging Face 检索仍只有 tencent/Hy4-preview，正式版权重未核到。Hy4 Flash 官方写即将发布，本次不收录。价格见下方“官方价格”。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 35 (evening leaderboard on 5 Nov; changelog lists it on 4 Nov). Tied with Grok 4.7 high in the default view. Artificial Analysis has not published evaluation cost or speed (model page: “No publicly available API”); those three fields stay blank—nothing invented. Tencent’s 4 Nov GA adds vision and computer-use versus Hy4 preview. The API is on Tencent Cloud TokenHub, OpenRouter, and more. Weights and a system card are promised “in the coming days”; a 5 Nov evening Hugging Face search still only found tencent/Hy4-preview—final weights not verified. Hy4 Flash is listed as coming soon and is not included here. See official pricing below."
+  ],
+  "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。OpenRouter 列表价 $0.834 / $2.501（缓存读 $0.042），页面另标 50% off。AA 未给评测成本，本栏只记官方/渠道标价，不换算任务成本。": [
+   "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。OpenRouter 列表价 $0.834 / $2.501（缓存读 $0.042），页面另标 50% off。AA 未给评测成本，本栏只记官方/渠道标价，不换算任务成本。",
+   "Tencent’s announcement (approx.): $0.90 input / $2.70 output / $0.045 cached input per million tokens—same as Hy4 preview; TokenHub list price 50% off through 31 Dec 2026. OpenRouter list price $0.834 / $2.501 (cache read $0.042), with an additional 50% off badge on the page. Artificial Analysis publishes no evaluation cost here; this field only records official/channel list prices, not a task-cost conversion."
+  ],
+  "保留9月22日旧榜记录；本轮未取得该配置的当日完整复核，不进入当前主榜或当前GPT/Claude近邻。不能据此断定型号停用。 正式版 Hy4（id=tencent-hy4）已于 2026-11-05 晚按 AA v5.0.1 综合分 35 录入主榜；本条仍为 preview 旧观察记录，不参与当前排名。": [
+   "保留9月22日旧榜记录；本轮未取得该配置的当日完整复核，不进入当前主榜或当前GPT/Claude近邻。不能据此断定型号停用。 正式版 Hy4（id=tencent-hy4）已于 2026-11-05 晚按 AA v5.0.1 综合分 35 录入主榜；本条仍为 preview 旧观察记录，不参与当前排名。",
+   "Kept from the 22 Sep board as a historical row; it was not fully re-checked that day and is not on the current main board or GPT/Claude neighborhood. That does not mean the model was withdrawn. The GA Hy4 row (id=tencent-hy4) was added to the main board on the evening of 5 Nov 2026 with Artificial Analysis v5.0.1 score 35; this preview row remains historical and is not ranked."
+  ],
+  "AA v5.0.1 综合分 31（11月6日统一榜单；AA 更新日志记 11月5日公布）。与 Gemini 3.8 Flash high 同分。评测成本 $1.18；单任务耗时 21.5 分钟、输出速度 116 tok/s、首个答案 token 34.54 秒（AA 型号页显示，与主表一致）。Thinking Machines 11月5日发布：594B 总参 / 17B 激活 MoE，支持图像输入与可变思考档；现于 Tinker / Tinker Playground 可买可微调；权重当前关闭，官方称完成外部安全测试后将以 Apache 2.0 公开（“下周”/“未来几周”，日期未核）。价格见下方“官方价格”。不与 Inkling Small / Inkling 混用成绩。": [
+   "AA v5.0.1 综合分 31（11月6日统一榜单；AA 更新日志记 11月5日公布）。与 Gemini 3.8 Flash high 同分。评测成本 $1.18；单任务耗时 21.5 分钟、输出速度 116 tok/s、首个答案 token 34.54 秒（AA 型号页显示，与主表一致）。Thinking Machines 11月5日发布：594B 总参 / 17B 激活 MoE，支持图像输入与可变思考档；现于 Tinker / Tinker Playground 可买可微调；权重当前关闭，官方称完成外部安全测试后将以 Apache 2.0 公开（“下周”/“未来几周”，日期未核）。价格见下方“官方价格”。不与 Inkling Small / Inkling 混用成绩。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 31 (leaderboard on 6 Nov; changelog lists it on 5 Nov). Tied with Gemini 3.8 Flash high. Evaluation cost $1.18; 21.5 minutes per task, 116 tok/s output, 34.54 s to first answer token (AA model-page display, matching the main table). Thinking Machines released it on 5 Nov: 594B total / 17B active MoE, image input and variable effort; available to buy and fine-tune on Tinker / Tinker Playground; weights closed for now, with an Apache 2.0 release promised after external safety testing (“next week” / “coming weeks”, date not verified). See official pricing below. Do not mix scores with Inkling Small or Inkling."
+  ],
+  "Tinker 标价（官方定价页，每百万 token）：推理/采样 $0.30 输入 / $1.00 输出 / $0.03 缓存输入；训练另计（64K 上下文 $1.50、256K $3.00）。与 AA 型号页 $0.30/$1.00/$0.03 一致。本栏只记官方标价；评测成本以 AA 主表 $1.18 为准。": [
+   "Tinker 标价（官方定价页，每百万 token）：推理/采样 $0.30 输入 / $1.00 输出 / $0.03 缓存输入；训练另计（64K 上下文 $1.50、256K $3.00）。与 AA 型号页 $0.30/$1.00/$0.03 一致。本栏只记官方标价；评测成本以 AA 主表 $1.18 为准。",
+   "Tinker list price (official pricing page, per million tokens): inference/sampling $0.30 input / $1.00 output / $0.03 cached input; training billed separately ($1.50 at 64K context, $3.00 at 256K). Matches the Artificial Analysis model page $0.30/$1.00/$0.03. This field only records official list prices; evaluation cost follows the AA main-table $1.18."
+  ],
+  "API / 微调已在 Thinking Machines Tinker 与 Tinker Playground 公开可买；权重当前关闭，官方称外部安全测试完成后以 Apache 2.0 公开（日期未核）。": [
+   "API / 微调已在 Thinking Machines Tinker 与 Tinker Playground 公开可买；权重当前关闭，官方称外部安全测试完成后以 Apache 2.0 公开（日期未核）。",
+   "API and fine-tuning are publicly available on Thinking Machines Tinker and Tinker Playground; weights are closed for now, with an Apache 2.0 release promised after external safety testing (date not verified)."
+  ],
+  "AA 短名 Inkling 2 Small。AA 页标明 reasoning 配置。与 Inkling Small、Inkling 分列，不混用成绩。": [
+   "AA 短名 Inkling 2 Small。AA 页标明 reasoning 配置。与 Inkling Small、Inkling 分列，不混用成绩。",
+   "Artificial Analysis short name “Inkling 2 Small”. The AA page marks this as the reasoning configuration. Listed separately from Inkling Small and Inkling—do not mix scores."
+  ],
+  "AA 型号页与主表写 1M；Tinker 训练/采样 SKU 另列 64K 与 256K 档，不以 SKU 上限覆盖 AA 上下文。": [
+   "AA 型号页与主表写 1M；Tinker 训练/采样 SKU 另列 64K 与 256K 档，不以 SKU 上限覆盖 AA 上下文。",
+   "The Artificial Analysis model page and main table list 1M; Tinker training/sampling SKUs also list 64K and 256K tiers—do not override the AA context with a SKU cap."
+  ],
+  "统一主表公开精度；不擅自补小数。输出速度取 AA 型号页显示取整。": [
+   "统一主表公开精度；不擅自补小数。输出速度取 AA 型号页显示取整。",
+   "Main-table public precision only; no invented decimals. Output speed uses the Artificial Analysis model-page display, rounded."
+  ],
+  "AA v5.0.1 综合分 35（11月5日晚间统一榜单入榜；11月6日主表补齐评测成本 $1.03、单任务耗时 13.9 分钟、输出速度 94 tok/s、首个答案 token 103.27 秒）。与 Grok 4.7 high 同分；默认视图并列。腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月6日未再核 HF 正式版权重。Hy4 Flash 官方写即将发布，本次仍不收录。价格见下方“官方价格”。": [
+   "AA v5.0.1 综合分 35（11月5日晚间统一榜单入榜；11月6日主表补齐评测成本 $1.03、单任务耗时 13.9 分钟、输出速度 94 tok/s、首个答案 token 103.27 秒）。与 Grok 4.7 high 同分；默认视图并列。腾讯 11月4日正式发布：相对 Hy4 preview 首次加入视觉理解与 computer-use；API 已在腾讯云 TokenHub、OpenRouter 等可用；官方称模型权重与 system card“未来几天”公开，11月6日未再核 HF 正式版权重。Hy4 Flash 官方写即将发布，本次仍不收录。价格见下方“官方价格”。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 35 (joined the evening leaderboard on 5 Nov; on 6 Nov the main table filled evaluation cost $1.03, 13.9 minutes per task, 94 tok/s output, and 103.27 s to first answer). Tied with Grok 4.7 high in the default view. Tencent’s 4 Nov GA adds vision and computer-use versus Hy4 preview. The API is on Tencent Cloud TokenHub, OpenRouter, and more. Weights and a system card are promised “in the coming days”; final Hugging Face weights were not re-checked on 6 Nov. Hy4 Flash is still listed as coming soon and is not included. See official pricing below."
+  ],
+  "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。分数和性能对应此具体配置；不代表聊天产品的默认设置。": [
+   "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。分数和性能对应此具体配置；不代表聊天产品的默认设置。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 41 (changelog lists it on 4 Nov; the 6 Nov leaderboard has evaluation cost $4.56, 9.0 minutes per task, 9.83 s to first answer; output speed 125 tok/s from the AA model-page display). The same family’s max profile at 44 remains the default-view representative; this is the high profile, visible when all profiles are expanded. Scores and performance apply to this exact configuration—not a chat product’s defaults."
+  ],
+  "AA 短名 Muse Wonder (high)。同型号 max / Full max 已在榜；本条不抢默认视图代表档。": [
+   "AA 短名 Muse Wonder (high)。同型号 max / Full max 已在榜；本条不抢默认视图代表档。",
+   "Artificial Analysis short name “Muse Wonder (high)”. The family’s max / Full max rows are already on the board; this profile does not take the default-view representative slot."
+  ],
+  "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。": [
+   "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 41 (changelog lists it on 4 Nov; the 6 Nov leaderboard has evaluation cost $4.56, 9.0 minutes per task, 9.83 s to first answer; output speed 125 tok/s from the AA model-page display). The same family’s max profile at 44 remains the default-view representative; this is the high profile, visible when all profiles are expanded."
+  ],
+  "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。": [
+   "AA v5.0.1 综合分 41（更新日志记 11月4日公布；11月6日统一榜单已有评测成本 $4.56、单任务耗时 9.0 分钟、首个答案 token 9.83 秒；输出速度 125 tok/s 取自 AA 型号页显示）。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 41 (changelog lists it on 4 Nov; the 6 Nov leaderboard has evaluation cost $4.56, 9.0 minutes per task, 9.83 s to first answer; output speed 125 tok/s from the AA model-page display)."
+  ],
+  "同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。": [
+   "同型号 max 档 44 分仍是默认视图代表档；本条为 high 档，展开全部档位可见。",
+   "The same family’s max profile at 44 remains the default-view representative; this is the high profile, visible when all profiles are expanded."
+  ],
+  "API 已公开可买：腾讯云 TokenHub、WorkBuddy、CodeBuddy、元宝、企微 AI 助手等，以及 OpenRouter 等第三方；模型权重官方称“未来几天”公开，正式版权重是否已上 Hugging Face 尚未核对。": [
+   "API 已公开可买：腾讯云 TokenHub、WorkBuddy、CodeBuddy、元宝、企微 AI 助手等，以及 OpenRouter 等第三方；模型权重官方称“未来几天”公开，正式版权重是否已上 Hugging Face 尚未核对。",
+   "API is publicly available: Tencent Cloud TokenHub, WorkBuddy, CodeBuddy, Yuanbao, WeCom’s AI assistant, OpenRouter, and others. Weights are promised “in the coming days”; whether final weights are on Hugging Face has not been verified."
+  ],
+  "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。OpenRouter 列表价沿用先前快照。AA 现已公布评测成本 $1.03，与官方标价分列。": [
+   "腾讯官方公告（约）：$0.90 输入 / $2.70 输出 / $0.045 缓存输入（每百万 token），与 Hy4 preview 同价；腾讯云 TokenHub 标准价 5 折至 2026-12-31。OpenRouter 列表价沿用先前快照。AA 现已公布评测成本 $1.03，与官方标价分列。",
+   "Tencent’s announcement (approx.): $0.90 input / $2.70 output / $0.045 cached input per million tokens—same as Hy4 preview; TokenHub list price 50% off through 31 Dec 2026. OpenRouter list prices follow the earlier snapshot. Artificial Analysis now publishes evaluation cost $1.03, kept separate from official list prices."
+  ],
+  "AA v5.0.1 综合分 8（11月7日统一榜单首次出现该分，此前主表为 --；AA 更新日志未单独发文，按主表照录）。": [
+   "AA v5.0.1 综合分 8（11月7日统一榜单首次出现该分，此前主表为 --；AA 更新日志未单独发文，按主表照录）。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 8 (first appeared on the 7 Nov leaderboard; previously “--” on the main table; no separate changelog article—recorded from the main table)."
+  ],
+  "评测成本与速度三项 AA 均未公布（型号页写 No publicly available API），留空，不编造。": [
+   "评测成本与速度三项 AA 均未公布（型号页写 No publicly available API），留空，不编造。",
+   "Artificial Analysis has not published evaluation cost or the three speed fields (model page: “No publicly available API”); left blank—nothing invented."
+  ],
+  "LG AI Research 2026-08-12 发布：750B 总参 / 37B 激活 MoE，文本输入输出，上下文主表 262k；开放权重，Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B，许可证 Apache 2.0（可商用）；无公开托管 API 标价。": [
+   "LG AI Research 2026-08-12 发布：750B 总参 / 37B 激活 MoE，文本输入输出，上下文主表 262k；开放权重，Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B，许可证 Apache 2.0（可商用）；无公开托管 API 标价。",
+   "Released by LG AI Research on 12 Aug 2026: 750B total / 37B active MoE, text in/out, 262k context on the main table; open weights on Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B under Apache 2.0 (commercial use allowed); no public hosted-API list price."
+  ],
+  "不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。": [
+   "不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。",
+   "Do not mix scores with EXAONE 4.x or earlier K-EXAONE rows."
+  ],
+  "开放权重可自托管下载（Hugging Face，Apache 2.0 可商用）；AA 写无公开托管 API。": [
+   "开放权重可自托管下载（Hugging Face，Apache 2.0 可商用）；AA 写无公开托管 API。",
+   "Open weights are downloadable for self-hosting (Hugging Face, Apache 2.0, commercial use allowed); Artificial Analysis lists no public hosted API."
+  ],
+  "AA 短名 K-EXAONE 2.0。不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。": [
+   "AA 短名 K-EXAONE 2.0。不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。",
+   "Artificial Analysis short name “K-EXAONE 2.0”. Do not mix scores with EXAONE 4.x or earlier K-EXAONE rows."
+  ],
+  "AA v5.0.1 综合分 8（11月7日统一榜单首次出现该分，此前主表为 --；AA 更新日志未单独发文，按主表照录）。评测成本与速度三项 AA 均未公布（型号页写 No publicly available API），留空，不编造。LG AI Research 2026-08-12 发布：750B 总参 / 37B 激活 MoE，文本输入输出，上下文主表 262k；开放权重，Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B，许可证 Apache 2.0（可商用）；无公开托管 API 标价。不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。": [
+   "AA v5.0.1 综合分 8（11月7日统一榜单首次出现该分，此前主表为 --；AA 更新日志未单独发文，按主表照录）。评测成本与速度三项 AA 均未公布（型号页写 No publicly available API），留空，不编造。LG AI Research 2026-08-12 发布：750B 总参 / 37B 激活 MoE，文本输入输出，上下文主表 262k；开放权重，Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B，许可证 Apache 2.0（可商用）；无公开托管 API 标价。不与 EXAONE 4.x / 旧版 K-EXAONE 混用成绩。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 8 (first appeared on the 7 Nov leaderboard; previously “--” on the main table; no separate changelog article—recorded from the main table). Artificial Analysis has not published evaluation cost or the three speed fields (model page: “No publicly available API”); left blank—nothing invented. Released by LG AI Research on 12 Aug 2026: 750B total / 37B active MoE, text in/out, 262k context on the main table; open weights on Hugging Face LGAI-EXAONE/K-EXAONE-2.0-750B-A37B under Apache 2.0 (commercial use allowed); no public hosted-API list price. Do not mix scores with EXAONE 4.x or earlier K-EXAONE rows."
+  ],
+  "AA 11月10日统一榜单已不列 Claude Fable 5.1（AA 标记为已弃用），已由 Claude Fable 5.2 接替；保留 11月5日最后一次读取的 v5.0.1 原分数与成本，不作当前对照。Anthropic 定价页仍列 5.1（$10 / $50 每百万 token）。": [
+   "AA 11月10日统一榜单已不列 Claude Fable 5.1（AA 标记为已弃用），已由 Claude Fable 5.2 接替；保留 11月5日最后一次读取的 v5.0.1 原分数与成本，不作当前对照。Anthropic 定价页仍列 5.1（$10 / $50 每百万 token）。",
+   "Artificial Analysis’s 10 Nov leaderboard no longer lists Claude Fable 5.1 (marked deprecated) and Claude Fable 5.2 has succeeded it; the v5.0.1 score and cost last checked on 5 Nov are kept and not used as a current comparison. Anthropic’s pricing page still lists 5.1 ($10 / $50 per million tokens)."
+  ],
+  "AA v5.0.1 综合分与评测成本来自 11月10日统一榜单；AA 暂未公布单任务耗时、输出速度、首个答案 token 三项，留空，不编造。Meta 2026-11-09 发布，称是 Muse 系列最小、最高效的模型，面向工具调用、代码子任务、路由、抽取与长文档解析；推理强度 minimal 至 max，默认 max。": [
+   "AA v5.0.1 综合分与评测成本来自 11月10日统一榜单；AA 暂未公布单任务耗时、输出速度、首个答案 token 三项，留空，不编造。Meta 2026-11-09 发布，称是 Muse 系列最小、最高效的模型，面向工具调用、代码子任务、路由、抽取与长文档解析；推理强度 minimal 至 max，默认 max。",
+   "Artificial Analysis Intelligence Index v5.0.1 score and evaluation cost come from the 10 Nov leaderboard; Artificial Analysis has not yet published time per task, output speed or first-answer-token time, so they are left blank—nothing invented. Released by Meta on 9 Nov 2026 and described as the smallest, most efficient Muse model, built for tool calls, coding subtasks, routing, extraction and long-document parsing; reasoning effort ranges from minimal to max, default max."
+  ],
+  "AA 完整名称标注 Default Fallback：测试时保留了 Anthropic 服务端的默认回退机制，不能等同于关闭回退后的表现。": [
+   "AA 完整名称标注 Default Fallback：测试时保留了 Anthropic 服务端的默认回退机制，不能等同于关闭回退后的表现。",
+   "Artificial Analysis’s full name is marked “Default Fallback”: tested with Anthropic’s default server-side fallback enabled; results are not equivalent to running with fallback turned off."
+  ],
+  "AA 短名 Claude Fable 5.2（档位）。不与 Fable 5.1 / Mythos 5.2 混用成绩；Arena 尚未收录 5.2。": [
+   "AA 短名 Claude Fable 5.2（档位）。不与 Fable 5.1 / Mythos 5.2 混用成绩；Arena 尚未收录 5.2。",
+   "Artificial Analysis short name “Claude Fable 5.2” (by effort level). Do not mix scores with Fable 5.1 or Mythos 5.2; Arena has not listed 5.2 yet."
+  ],
+  "AA 短名 Muse Ember（档位）。Muse Ember 是新型号，不与 Muse Spark / Muse Wonder / Muse Glimmer 混用成绩；Arena 尚未收录。": [
+   "AA 短名 Muse Ember（档位）。Muse Ember 是新型号，不与 Muse Spark / Muse Wonder / Muse Glimmer 混用成绩；Arena 尚未收录。",
+   "Artificial Analysis short name “Muse Ember” (by effort level). Muse Ember is a new model; do not mix scores with Muse Spark, Muse Wonder or Muse Glimmer; Arena has not listed it yet."
+  ],
+  "Anthropic 官方标价（每百万 token）：输入 $8 / 输出 $40；5 分钟缓存写入 $10、1 小时 $16、缓存读取 $0.20；Batch API 五折；快速模式（输出最高约 2.5 倍速）输入 $16 / 输出 $80。比 Fable 5.1（$10 / $50）降价约 20%。本栏只记官方标价；评测成本以 AA 主表为准。": [
+   "Anthropic 官方标价（每百万 token）：输入 $8 / 输出 $40；5 分钟缓存写入 $10、1 小时 $16、缓存读取 $0.20；Batch API 五折；快速模式（输出最高约 2.5 倍速）输入 $16 / 输出 $80。比 Fable 5.1（$10 / $50）降价约 20%。本栏只记官方标价；评测成本以 AA 主表为准。",
+   "Anthropic list price (per million tokens): input $8 / output $40; 5-minute cache write $10, 1-hour $16, cache read $0.20; Batch API 50% off; fast mode (up to about 2.5x output speed) input $16 / output $80. About 20% cheaper than Fable 5.1 ($10 / $50). This field records the official list price only; evaluation cost follows the Artificial Analysis main table."
+  ],
+  "Meta Model API 官方标价（每百万 token）：≤200K 输入的请求 输入 $0.10 / 缓存输入 0.004 美元 / 输出 $0.50；超过 200K 输入时整单按 $0.30 / 0.012 美元 / $1.50 计。网页搜索另计 $2.50 / 千次。本栏只记官方标价；评测成本以 AA 主表为准。": [
+   "Meta Model API 官方标价（每百万 token）：≤200K 输入的请求 输入 $0.10 / 缓存输入 0.004 美元 / 输出 $0.50；超过 200K 输入时整单按 $0.30 / 0.012 美元 / $1.50 计。网页搜索另计 $2.50 / 千次。本栏只记官方标价；评测成本以 AA 主表为准。",
+   "Meta Model API list price (per million tokens): requests up to 200K input tokens — input $0.10 / cached input $0.004 / output $0.50; requests above 200K input tokens are billed in full at $0.30 / $0.012 / $1.50. Web search is billed separately at $2.50 per 1,000 queries. This field records the official list price only; evaluation cost follows the Artificial Analysis main table."
+  ],
+  "已公开可用（2026-11-09）：Claude API（claude-fable-5-2）、Claude Platform on AWS、Google Cloud、Amazon Bedrock、Microsoft Foundry。同代 Claude Mythos 5.2 仅限经 Anthropic 验证计划认证的机构，不在本榜。": [
+   "已公开可用（2026-11-09）：Claude API（claude-fable-5-2）、Claude Platform on AWS、Google Cloud、Amazon Bedrock、Microsoft Foundry。同代 Claude Mythos 5.2 仅限经 Anthropic 验证计划认证的机构，不在本榜。",
+   "Publicly available since 9 Nov 2026: Claude API (claude-fable-5-2), Claude Platform on AWS, Google Cloud, Amazon Bedrock and Microsoft Foundry. Claude Mythos 5.2, from the same generation, is limited to organizations verified through Anthropic’s verification programs and is not on this board."
+  ],
+  "已公开可用（2026-11-09）：Meta Model API（muse-ember-1.0，标准模式，按量付费）与 Muse Code 全部订阅档。权重未公开；无 Contributor 模式。": [
+   "已公开可用（2026-11-09）：Meta Model API（muse-ember-1.0，标准模式，按量付费）与 Muse Code 全部订阅档。权重未公开；无 Contributor 模式。",
+   "Publicly available since 9 Nov 2026: Meta Model API (muse-ember-1.0, standard mode, pay-as-you-go) and all Muse Code subscription plans. Weights are not public; no Contributor mode."
+  ]
+ },
+ "vendors": {
+  "SpaceXAI": "xAI",
+  "xAI": "xAI",
+  "Z AI": "Z.ai",
+  "Z.ai / 智谱": "Z.ai",
+  "Baidu / 百度": "Baidu",
+  "Tencent / 腾讯": "Tencent",
+  "Xiaomi / 小米": "Xiaomi",
+  "ByteDance / 字节": "ByteDance",
+  "Kimi": "Moonshot AI",
+  "Tencent": "Tencent",
+  "LG AI Research": "LG AI Research"
+ },
+ "vendorNames": {
+  "xAI": [
+   "xAI",
+   "xAI"
+  ],
+  "Z.ai": [
+   "智谱 Z.ai",
+   "Z.ai (Zhipu AI)"
+  ],
+  "Baidu": [
+   "百度 Baidu",
+   "Baidu"
+  ],
+  "Tencent": [
+   "腾讯 Tencent",
+   "Tencent"
+  ],
+  "Xiaomi": [
+   "小米 Xiaomi",
+   "Xiaomi"
+  ],
+  "ByteDance": [
+   "字节跳动 ByteDance",
+   "ByteDance"
+  ],
+  "Moonshot AI": [
+   "月之暗面 Moonshot AI",
+   "Moonshot AI"
+  ],
+  "Alibaba": [
+   "阿里巴巴 Alibaba",
+   "Alibaba"
+  ],
+  "StepFun": [
+   "阶跃星辰 StepFun",
+   "StepFun"
+  ],
+  "DeepSeek": [
+   "深度求索 DeepSeek",
+   "DeepSeek"
+  ],
+  "MiniMax": [
+   "MiniMax",
+   "MiniMax"
+  ],
+  "LG AI Research": [
+   "LG AI Research",
+   "LG AI Research"
+  ]
+ },
+ "sources": {
+  "hy4-official": [
+   "腾讯 · Hy4 preview 模型卡（Hugging Face）",
+   "Tencent · Hy4 preview model card (Hugging Face)"
+  ],
+  "aa-glm52": [
+   "Artificial Analysis · GLM-5.2",
+   "Artificial Analysis · GLM-5.2"
+  ],
+  "aa-kimi26": [
+   "Artificial Analysis · Kimi-K2.6",
+   "Artificial Analysis · Kimi-K2.6"
+  ],
+  "aa-glm51": [
+   "Artificial Analysis · GLM-5.1",
+   "Artificial Analysis · GLM-5.1"
+  ],
+  "aa-glm5v": [
+   "Artificial Analysis · GLM-5V-Turbo",
+   "Artificial Analysis · GLM-5V-Turbo"
+  ],
+  "kimi-preview-official": [
+   "Moonshot AI · Kimi K2.8 Preview 产品页",
+   "Moonshot AI · Kimi K2.8 Preview product page"
+  ],
+  "aa-audit-board": [
+   "Artificial Analysis · 模型榜单",
+   "Artificial Analysis · Models leaderboard"
+  ],
+  "aa-audit-method": [
+   "Artificial Analysis · Intelligence Index v4.3.2 方法",
+   "Artificial Analysis · Intelligence Index v4.3.2 methodology"
+  ],
+  "aa-audit-performance": [
+   "Artificial Analysis · 速度测试方法",
+   "Artificial Analysis · Performance benchmarking methodology"
+  ],
+  "aa-index-definition": [
+   "Artificial Analysis · Intelligence Index 页面（评测成本）",
+   "Artificial Analysis · Intelligence Index page (cost per task)"
+  ],
+  "aa-fable-fallback": [
+   "Artificial Analysis · Claude Fable 5.1 发布文章（回退机制）",
+   "Artificial Analysis · Claude Fable 5.1 launch article (fallback)"
+  ],
+  "aa-mimo26p": [
+   "Artificial Analysis · MiMo-V2.6-Pro",
+   "Artificial Analysis · MiMo-V2.6-Pro"
+  ],
+  "mimo26-official": [
+   "小米 · MiMo-V2.6-Pro 型号与价格",
+   "Xiaomi · MiMo-V2.6-Pro model and pricing"
+  ],
+  "mimo26-card": [
+   "小米 · MiMo-V2.6-Pro-RL 模型卡（Hugging Face）",
+   "Xiaomi · MiMo-V2.6-Pro-RL model card (Hugging Face)"
+  ],
+  "aa-qwen24t": [
+   "Artificial Analysis · Qwen3.8 2.4T A95B",
+   "Artificial Analysis · Qwen3.8 2.4T A95B"
+  ],
+  "astra-launch": [
+   "OpenAI · GPT-6 Astra 与 Astra Pro",
+   "OpenAI · GPT-6 Astra and Astra Pro"
+  ],
+  "deepthink-official": [
+   "Google DeepMind · Gemini 3.1 Deep Think",
+   "Google DeepMind · Gemini 3.1 Deep Think"
+  ],
+  "mythos-official": [
+   "Anthropic · Claude Fable 与 Mythos 5.1",
+   "Anthropic · Claude Fable and Mythos 5.1"
+  ],
+  "meta-api-terms": [
+   "Meta · Muse Spark 价格与数据使用条款",
+   "Meta · Muse Spark pricing and data-use terms"
+  ],
+  "ernie-current": [
+   "百度 · ERNIE 官方页面",
+   "Baidu · ERNIE official site"
+  ],
+  "arena-evidence": [
+   "Arena · 文本榜（2026-09-13 页面）",
+   "Arena · Text leaderboard (page dated 2026-09-13)"
+  ],
+  "aa-current-board": [
+   "Artificial Analysis · 模型榜单（2026-10-23）",
+   "Artificial Analysis · Models leaderboard (2026-10-23)"
+  ],
+  "aa-current-method": [
+   "Artificial Analysis · Intelligence Index v4.3.2 方法",
+   "Artificial Analysis · Intelligence Index v4.3.2 methodology"
+  ],
+  "aa-current-speed": [
+   "Artificial Analysis · 速度测试方法（性能基准 v3.0.0）",
+   "Artificial Analysis · Speed methodology (Performance Benchmarking v3.0.0)"
+  ],
+  "aa-current-changelog": [
+   "Artificial Analysis · 更新日志",
+   "Artificial Analysis · Changelog"
+  ],
+  "arena-current": [
+   "Arena · 文本榜（2026-10-22 页面）",
+   "Arena · Text leaderboard (page dated 2026-10-22)"
+  ],
+  "deepseek-current": [
+   "DeepSeek · 官方更新日志",
+   "DeepSeek · Official changelog"
+  ],
+  "zai-flashx": [
+   "Z.ai · GLM-5.3-Flash / FlashX 文档",
+   "Z.ai · GLM-5.3-Flash / FlashX docs"
+  ],
+  "aa-ds-glm": [
+   "Artificial Analysis · DeepSeek V4.1 Flash 1017 对比 GLM-5.3",
+   "Artificial Analysis · DeepSeek V4.1 Flash 1017 vs GLM-5.3"
+  ],
+  "aa-ds-old-glm": [
+   "Artificial Analysis · DeepSeek V4.1 Flash（9 月版）对比 GLM-5.3",
+   "Artificial Analysis · DeepSeek V4.1 Flash (September) vs GLM-5.3"
+  ],
+  "aa-glm-kimi": [
+   "Artificial Analysis · GLM-5.3 对比 Kimi K3",
+   "Artificial Analysis · GLM-5.3 vs Kimi K3"
+  ],
+  "aa-flash-glm": [
+   "Artificial Analysis · GLM-5.3-Flash 对比 GLM-5.3",
+   "Artificial Analysis · GLM-5.3-Flash vs GLM-5.3"
+  ],
+  "aa-model-claude-opus-5-5": [
+   "Artificial Analysis · Claude Opus 5.5",
+   "Artificial Analysis · Claude Opus 5.5"
+  ],
+  "opus55-official": [
+   "Anthropic · Claude Opus 5.5 发布",
+   "Anthropic · Claude Opus 5.5 announcement"
+  ],
+  "aa-model-claude-sonnet-5-5": [
+   "Artificial Analysis · Claude Sonnet 5.5",
+   "Artificial Analysis · Claude Sonnet 5.5"
+  ],
+  "sonnet55-official": [
+   "Anthropic · Claude Sonnet 5.5 发布",
+   "Anthropic · Claude Sonnet 5.5 announcement"
+  ],
+  "aa-model-muse-wonder-full": [
+   "Artificial Analysis · Muse Wonder Full",
+   "Artificial Analysis · Muse Wonder Full"
+  ],
+  "wonder-official": [
+   "Meta · Muse Wonder 与 Wonder Full 发布",
+   "Meta · Introducing Muse Wonder and Wonder Full"
+  ],
+  "aa-model-claude-fable-5-1": [
+   "Artificial Analysis · Claude Fable 5.1",
+   "Artificial Analysis · Claude Fable 5.1"
+  ],
+  "aa-model-gpt-6-astra": [
+   "Artificial Analysis · GPT-6 Astra",
+   "Artificial Analysis · GPT-6 Astra"
+  ],
+  "argon-official": [
+   "Google · 面向开发者开放 Gemini 4 Argon",
+   "Google · Build with Gemini 4 Argon"
+  ],
+  "aa-model-gpt-6-1-sol": [
+   "Artificial Analysis · GPT-6.1 Sol",
+   "Artificial Analysis · GPT-6.1 Sol"
+  ],
+  "sol61-official": [
+   "OpenAI · GPT-6.1 Sol 发布",
+   "OpenAI · Introducing GPT-6.1 Sol"
+  ],
+  "aa-model-grok-4-7": [
+   "Artificial Analysis · Grok 4.7",
+   "Artificial Analysis · Grok 4.7"
+  ],
+  "aa-model-glm-5-3": [
+   "Artificial Analysis · GLM-5.3",
+   "Artificial Analysis · GLM-5.3"
+  ],
+  "aa-model-kimi-k3": [
+   "Artificial Analysis · Kimi K3",
+   "Artificial Analysis · Kimi K3"
+  ],
+  "aa-model-claude-haiku-5-5": [
+   "Artificial Analysis · Claude Haiku 5.5",
+   "Artificial Analysis · Claude Haiku 5.5"
+  ],
+  "minimax31-official": [
+   "MiniMax · M3.1 Flash 发布",
+   "MiniMax · M3.1 Flash announcement"
+  ],
+  "aa-model-deepseek-v4-pro": [
+   "Artificial Analysis · DeepSeek V4 Pro 0813",
+   "Artificial Analysis · DeepSeek V4 Pro 0813"
+  ],
+  "astra-pro-current": [
+   "OpenAI · Astra Pro 访问说明",
+   "OpenAI · Astra Pro access"
+  ],
+  "deepthink-current": [
+   "Google DeepMind · Gemini 3.1 Deep Think",
+   "Google DeepMind · Gemini 3.1 Deep Think"
+  ],
+  "mythos-current": [
+   "Anthropic · Mythos 5.1 与 Fable 5.1 的区别",
+   "Anthropic · Mythos 5.1 vs Fable 5.1"
+  ],
+  "aa-board-20261024": [
+   "Artificial Analysis · 模型榜单（2026-10-24）",
+   "Artificial Analysis · Models leaderboard (2026-10-24)"
+  ],
+  "aa-index-20261024": [
+   "Artificial Analysis · Intelligence Index v4.3.2",
+   "Artificial Analysis · Intelligence Index v4.3.2"
+  ],
+  "aa-kimi31-launch": [
+   "Artificial Analysis · Kimi K3.1 Pro 发布评测",
+   "Artificial Analysis · Kimi K3.1 Pro launch benchmarks"
+  ],
+  "kimi31-official": [
+   "Moonshot AI · Kimi K3.1 Pro 发布（厂商说明）",
+   "Moonshot AI · Kimi K3.1 Pro announcement (vendor)"
+  ],
+  "stealth-kimi31": [
+   "StealthMark · Kimi K3.1 Pro",
+   "StealthMark · Kimi K3.1 Pro"
+  ],
+  "aa-board-20261031": [
+   "Artificial Analysis · 模型榜单（2026-10-31）",
+   "Artificial Analysis · Models leaderboard (2026-10-31)"
+  ],
+  "aa-v5-method": [
+   "Artificial Analysis · Intelligence Index v5.0.1 方法",
+   "Artificial Analysis · Intelligence Index v5.0.1 methodology"
+  ],
+  "aa-v5-announce": [
+   "Artificial Analysis · Intelligence Index v5 发布说明",
+   "Artificial Analysis · Intelligence Index v5 announcement"
+  ],
+  "aa-changelog-20261031": [
+   "Artificial Analysis · 更新日志（10 月 24–30 日）",
+   "Artificial Analysis · Changelog (Oct 24–30)"
+  ],
+  "aa-carbon": [
+   "Artificial Analysis · Gemini 4 Carbon 评测文章",
+   "Artificial Analysis · Gemini 4 Carbon article"
+  ],
+  "carbon-official": [
+   "Google · Gemini 4 Carbon 发布",
+   "Google · Introducing Gemini 4 Carbon"
+  ],
+  "aa-terra61": [
+   "Artificial Analysis · GPT-6.1 Terra 评测文章（v4.3.2）",
+   "Artificial Analysis · GPT-6.1 Terra article (v4.3.2)"
+  ],
+  "terra61-official": [
+   "OpenAI · GPT-6.1 Terra 发布",
+   "OpenAI · Introducing GPT-6.1 Terra"
+  ],
+  "terra61-docs": [
+   "OpenAI API 文档 · gpt-6.1-terra",
+   "OpenAI API docs · gpt-6.1-terra"
+  ],
+  "ml4-official": [
+   "Mistral · Mistral Large 4 开放权重",
+   "Mistral · Mistral Large 4 open weights"
+  ],
+  "ml4-docs": [
+   "Mistral 文档 · Mistral Large 4",
+   "Mistral docs · Mistral Large 4"
+  ],
+  "arena-20261027": [
+   "Arena · 文本榜（2026-10-27 页面）",
+   "Arena · Text leaderboard (page dated 2026-10-27)"
+  ],
+  "aa-board-20261103": [
+   "Artificial Analysis · 模型榜单（2026-11-03）",
+   "Artificial Analysis · Models leaderboard (2026-11-03)"
+  ],
+  "aa-changelog-20261103": [
+   "Artificial Analysis · 更新日志（10 月 31 日–11 月 2 日）",
+   "Artificial Analysis · Changelog (Oct 31–Nov 2)"
+  ],
+  "argon-announce": [
+   "Google · Gemini 4 Argon 发布",
+   "Google · Gemini 4 Argon announcement"
+  ],
+  "argon-ga": [
+   "Google · Gemini 4 Argon 全面开放",
+   "Google · Gemini 4 Argon general availability"
+  ],
+  "gemini-api-pricing": [
+   "Gemini API · 价格页",
+   "Gemini API · Pricing"
+  ],
+  "argon-model-doc": [
+   "Gemini API 文档 · gemini-4-argon",
+   "Gemini API docs · gemini-4-argon"
+  ],
+  "deepmind-gemini4": [
+   "Google DeepMind · Gemini 4 型号页（厂商自报成绩）",
+   "Google DeepMind · Gemini 4 model page (vendor-reported)"
+  ],
+  "deepmind-evals-gemini4": [
+   "Google DeepMind · Gemini 4 评测方法说明",
+   "Google DeepMind · Gemini 4 evaluation methodology"
+  ],
+  "moonshot-hf-20261103": [
+   "Moonshot AI · Hugging Face 主页",
+   "Moonshot AI · Hugging Face page"
+  ],
+  "nanbeige43-hf": [
+   "Nanbeige · Nanbeige4.3-33B 模型卡（Hugging Face）",
+   "Nanbeige · Nanbeige4.3-33B model card (Hugging Face)"
+  ],
+  "arena-changelog": [
+   "Arena · 榜单更新日志",
+   "Arena · Leaderboard changelog"
+  ],
+  "argon-model-card": [
+   "Google DeepMind · Gemini 4 Argon 模型卡（10 月 13 日版）",
+   "Google DeepMind · Gemini 4 Argon model card (Oct 13)"
+  ],
+  "aa-board-20261104": [
+   "Artificial Analysis · 模型榜单（2026-11-04）",
+   "Artificial Analysis · Models leaderboard (2026-11-04)"
+  ],
+  "aa-changelog-20261104": [
+   "Artificial Analysis · 更新日志（11 月 3 日：Intelligence Index v5.0.1）",
+   "Artificial Analysis · Changelog (Nov 3: Intelligence Index v5.0.1)"
+  ],
+  "moonshot-hf-20261104": [
+   "Moonshot AI · Hugging Face 主页（11 月 4 日查看）",
+   "Moonshot AI · Hugging Face page (checked Nov 4)"
+  ],
+  "aa-board-20261105": [
+   "Artificial Analysis · 模型榜单（2026-11-05）",
+   "Artificial Analysis · Models leaderboard (2026-11-05)"
+  ],
+  "aa-changelog-20261105": [
+   "Artificial Analysis · 更新日志（11 月 3 日：性能基准 v3.0.0）",
+   "Artificial Analysis · Changelog (Nov 3: Performance Benchmarking v3.0.0)"
+  ],
+  "kimi31-hf-repo": [
+   "Moonshot AI · Kimi-K3.1-Pro 模型权重（Hugging Face）",
+   "Moonshot AI · Kimi-K3.1-Pro model weights (Hugging Face)"
+  ],
+  "aa-speed-v3-20261105": [
+   "Artificial Analysis 榜单 · 单任务耗时、输出速度、首个答案时间（2026-11-05）",
+   "Artificial Analysis leaderboard · time per task, output speed, time to first answer token (2026-11-05)"
+  ],
+  "aa-perf-method-v3": [
+   "Artificial Analysis · 性能基准方法 v3.0.0",
+   "Artificial Analysis · Performance Benchmarking methodology v3.0.0"
+  ],
+  "aa-method-defs": [
+   "Artificial Analysis · 方法总览（单任务耗时的定义）",
+   "Artificial Analysis · Methodology overview (definition of time per task)"
+  ],
+  "aa-board-20261105b": [
+   "Artificial Analysis 11月5日晚间统一榜单 · Tencent Hy4 综合分 35（评测成本与速度未公布）",
+   "Artificial Analysis evening leaderboard (5 Nov) · Tencent Hy4 score 35 (evaluation cost and speed not published)"
+  ],
+  "aa-hy4-model": [
+   "Artificial Analysis 型号页 · Tencent Hy4（综合分 35；未公布公开 API 成本）",
+   "Artificial Analysis model page · Tencent Hy4 (score 35; no public API cost published)"
+  ],
+  "aa-changelog-hy4-20261105": [
+   "Artificial Analysis 更新日志 · 11月4日公布 Tencent Hy4 综合分 35",
+   "Artificial Analysis changelog · 4 Nov listing for Tencent Hy4 score 35"
+  ],
+  "hy4-ga-official": [
+   "腾讯官方公告 · 发布 Hy4（2026-11-04）",
+   "Tencent official announcement · Hy4 launch (4 Nov 2026)"
+  ],
+  "hy4-openrouter": [
+   "OpenRouter · tencent/hy4 列表价与上下文",
+   "OpenRouter · tencent/hy4 list price and context"
+  ],
+  "hy4-hf-search-20261105": [
+   "Hugging Face 检索 · 正式版 Hy4 权重尚未出现（仍见 Hy4-preview）",
+   "Hugging Face search · final Hy4 weights not found yet (Hy4-preview still listed)"
+  ],
+  "aa-board-20261106": [
+   "Artificial Analysis · 11月6日统一榜单（Inkling 2 Small / Hy4 成本速度 / Muse Wonder high）",
+   "Artificial Analysis · 6 Nov leaderboard (Inkling 2 Small / Hy4 cost-speed / Muse Wonder high)"
+  ],
+  "aa-inkling-2-small": [
+   "Artificial Analysis · Inkling 2 Small",
+   "Artificial Analysis · Inkling 2 Small"
+  ],
+  "aa-changelog-inkling-2-small-20261106": [
+   "Artificial Analysis 更新日志 · Inkling 2 Small（11月5日）",
+   "Artificial Analysis changelog · Inkling 2 Small (5 Nov)"
+  ],
+  "tm-inkling-2-small-official": [
+   "Thinking Machines · Introducing Inkling 2 Small",
+   "Thinking Machines · Introducing Inkling 2 Small"
+  ],
+  "tm-tinker-pricing-20261106": [
+   "Thinking Machines · Tinker Pricing",
+   "Thinking Machines · Tinker Pricing"
+  ],
+  "tm-inkling-family-20261106": [
+   "Thinking Machines · Inkling 家族页",
+   "Thinking Machines · Inkling family page"
+  ],
+  "aa-hy4-model-20261106": [
+   "Artificial Analysis · Tencent Hy4（11月6日成本与速度）",
+   "Artificial Analysis · Tencent Hy4 (6 Nov cost and speed)"
+  ],
+  "aa-muse-wonder-high-20261106": [
+   "Artificial Analysis · Muse Wonder (high)",
+   "Artificial Analysis · Muse Wonder (high)"
+  ],
+  "aa-changelog-muse-wonder-high-20261106": [
+   "Artificial Analysis 更新日志 · Muse Wonder (High)（11月4日）",
+   "Artificial Analysis changelog · Muse Wonder (High) (4 Nov)"
+  ],
+  "aa-board-20261107": [
+   "Artificial Analysis · 11月7日统一榜单（K-EXAONE 2.0 / Nemotron 成本微调）",
+   "Artificial Analysis · 7 Nov leaderboard (K-EXAONE 2.0 / Nemotron cost tweak)"
+  ],
+  "aa-k-exaone-2-0-20261107": [
+   "Artificial Analysis · K-EXAONE 2.0",
+   "Artificial Analysis · K-EXAONE 2.0"
+  ],
+  "hf-k-exaone-2-0-20261107": [
+   "Hugging Face · LGAI-EXAONE/K-EXAONE-2.0-750B-A37B",
+   "Hugging Face · LGAI-EXAONE/K-EXAONE-2.0-750B-A37B"
+  ],
+  "arena-text-20261106": [
+   "Arena 文本榜 · 页面日期 2026-11-06",
+   "Arena text leaderboard · page date 2026-11-06"
+  ],
+  "aa-board-20261110": [
+   "Artificial Analysis · 统一榜单（2026-11-10）",
+   "Artificial Analysis · Unified leaderboard (10 Nov 2026)"
+  ],
+  "aa-changelog-20261110": [
+   "Artificial Analysis · 更新日志（2026-11-09 评测结果）",
+   "Artificial Analysis · Changelog (9 Nov 2026 evaluation results)"
+  ],
+  "anthropic-fable-5-2-20261110": [
+   "Anthropic · Claude Fable 5.2 与 Mythos 5.2 发布公告",
+   "Anthropic · Introducing Claude Fable 5.2 and Claude Mythos 5.2"
+  ],
+  "anthropic-fable-5-2-docs-20261110": [
+   "Claude Platform 文档 · Claude Fable 5.2",
+   "Claude Platform docs · Claude Fable 5.2"
+  ],
+  "anthropic-pricing-20261110": [
+   "Claude Platform · 定价",
+   "Claude Platform · Pricing"
+  ],
+  "arena-text-20261109": [
+   "Arena · 文本榜（页面日期 2026-11-09）",
+   "Arena · Text leaderboard (page dated 9 Nov 2026)"
+  ],
+  "meta-model-api-pricing-20261110": [
+   "Meta Model API · 定价与限额",
+   "Meta Model API · Pricing and rate limits"
+  ],
+  "meta-muse-ember-blog-20261110": [
+   "Meta · Muse Ember 发布博客",
+   "Meta · Introducing Muse Ember"
+  ],
+  "meta-muse-ember-docs-20261110": [
+   "Meta Model API 文档 · Muse Ember",
+   "Meta Model API docs · Muse Ember"
+  ]
+ },
+ "highlights": {
+  "title": [
+   "Claude Fable 5.2 登顶综合指数；Muse Ember 入榜",
+   "Claude Fable 5.2 takes #1 on the Intelligence Index; Muse Ember joins the board"
+  ],
+  "lines": [
+   [
+    "Claude Fable 5.2（max）Artificial Analysis 综合分 65，高于此前第一的 Gemini 4 Carbon（60）；官方标价 $8 / $40 每百万 token。",
+    "Claude Fable 5.2 (max) scores 65 on Artificial Analysis, ahead of the previous leader Gemini 4 Carbon (60); list price $8 / $40 per million tokens."
+   ],
+   [
+    "Meta Muse Ember（max）综合分 36，评测成本仅 $0.14；官方标价 $0.10 / $0.50 每百万 token，权重未公开。",
+    "Meta Muse Ember (max) scores 36 at an evaluation cost of only $0.14; list price $0.10 / $0.50 per million tokens, weights not public."
+   ],
+   [
+    "Arena 文本榜（11-09）尚未收录 Fable 5.2：Carbon 1、Argon 2、Muse Wonder Max 3、Opus 5.5 High 4。",
+    "Arena’s text leaderboard (9 Nov) does not list Fable 5.2 yet: Carbon #1, Argon #2, Muse Wonder Max #3, Opus 5.5 High #4."
+   ]
+  ],
+  "button": "fable52-max"
+ },
+ "changes": [
+  [
+   "新增 Claude Fable 5.2（2026-11-09 发布）5 档：max 65 / xhigh 62 / high 62 / medium 56 / low 54；max 档排第 1。官方标价 $8 / $40 每百万 token（5.1 为 $10 / $50）。",
+   "Added Claude Fable 5.2 (released 9 Nov 2026), five effort levels: max 65 / xhigh 62 / high 62 / medium 56 / low 54; the max level ranks #1. List price $8 / $40 per million tokens (5.1 was $10 / $50)."
+  ],
+  [
+   "新增 Meta Muse Ember（2026-11-09 发布）2 档：max 36 / xhigh 34；max 档评测成本 $0.14，速度三项暂未公布。官方标价 $0.10 / $0.50 每百万 token。",
+   "Added Meta Muse Ember (released 9 Nov 2026), two effort levels: max 36 / xhigh 34; the max level has an evaluation cost of $0.14 and its three speed fields are not yet published. List price $0.10 / $0.50 per million tokens."
+  ],
+  [
+   "Claude Fable 5.1 五档因 Artificial Analysis 主表不再列出（已弃用，由 5.2 接替）转入历史，保留原值与日期。",
+   "Claude Fable 5.1’s five levels moved to history because Artificial Analysis no longer lists them (deprecated, succeeded by 5.2); original values and dates are kept."
+  ],
+  [
+   "Muse Glimmer (high) 评测成本 $0.16 → $0.17；Nemotron 3.5 Lightning 评测成本 $0.29 → $0.31（分数不变）。Arena 文本榜页面日期更新为 2026-11-09。",
+   "Muse Glimmer (high) evaluation cost $0.16 → $0.17; Nemotron 3.5 Lightning evaluation cost $0.29 → $0.31 (scores unchanged). Arena text leaderboard page date is now 2026-11-09."
+  ],
+  [
+   "未收录：Agnes 2.5 Pro Theta（官方信息未核）；Claude Mythos 5.2（仅限验证机构）；既有低分空缺暂不扩。",
+   "Not listed: Agnes 2.5 Pro Theta (official details not verified); Claude Mythos 5.2 (verified organizations only); pre-existing low-score gaps are not expanded this round."
+  ]
+ ],
+ "crosscheck": [
+  "Arena 是人类对文本对话回答的偏好投票，与 Artificial Analysis 的任务评测是两套测量；名次区间重叠时无法判定先后。下表只列出与本榜对应的条目，名次为 Arena 全榜名次（中间空缺的是本站未收录的型号），使用默认的风格控制（Style Control）视图。页面日期 2026-11-09；Claude Fable 5.2 与 Muse Ember 尚未出现在该页。",
+  "Arena is a human-preference vote on text chat answers, a different measurement from Artificial Analysis’s task benchmarks; when rank ranges overlap, the order is not settled. The table lists only entries that match models on this page; ranks are Arena’s overall ranks (gaps are models not listed here), using the default Style Control view. Page date 2026-11-09; Claude Fable 5.2 and Muse Ember do not appear on that page yet."
+ ],
+ "ui": {
+  "meta.title": {
+   "zh": "Models Rank · AI 模型榜单：能力、成本与速度对比",
+   "en": "Models Rank · AI Model Leaderboard: Intelligence, cost, and speed comparison"
+  },
+  "meta.desc": {
+   "zh": "汇总 Artificial Analysis、Arena 等公开第三方评测，比较 Gemini、Claude、GPT、Grok、DeepSeek、Qwen 等主流大模型的综合能力、评测成本和速度。每周更新。",
+   "en": "Compare leading AI models such as Gemini, Claude, GPT, Grok, DeepSeek and Qwen on intelligence, cost and speed, using public third-party benchmarks from Artificial Analysis and Arena. Updated weekly."
+  },
+  "brand": {
+   "zh": "Models Rank",
+   "en": "Models Rank"
+  },
+  "nav.board": {
+   "zh": "排行榜",
+   "en": "Leaderboard"
+  },
+  "nav.watch": {
+   "zh": "观察名单",
+   "en": "Watchlist"
+  },
+  "nav.about": {
+   "zh": "关于与方法",
+   "en": "About & methodology"
+  },
+  "nav.changes": {
+   "zh": "数据变化",
+   "en": "What changed"
+  },
+  "nav.sources": {
+   "zh": "来源",
+   "en": "Sources"
+  },
+  "theme.aria": {
+   "zh": "切换深浅色",
+   "en": "Toggle light/dark theme"
+  },
+  "theme.light": {
+   "zh": "浅色",
+   "en": "Light"
+  },
+  "theme.dark": {
+   "zh": "深色",
+   "en": "Dark"
+  },
+  "skip": {
+   "zh": "跳到排行榜",
+   "en": "Skip to leaderboard"
+  },
+  "h1": {
+   "zh": "AI 模型榜单",
+   "en": "AI Model Leaderboard"
+  },
+  "lead": {
+   "zh": "汇总公开的第三方评测，用同一套标准比较主流大模型的能力、成本和速度。",
+   "en": "Public third-party benchmarks in one place, comparing leading AI models on intelligence, cost and speed with the same yardstick."
+  },
+  "fresh.ok": {
+   "zh": "数据更新：{date} · 每周更新",
+   "en": "Data updated {date} · weekly"
+  },
+  "fresh.stale": {
+   "zh": "数据更新于 {date}（{days} 天前）",
+   "en": "Data updated {date} ({days} days ago)"
+  },
+  "stat.models": {
+   "zh": "个型号",
+   "en": "models"
+  },
+  "stat.configs": {
+   "zh": "个有完整评分的配置",
+   "en": "fully scored configurations"
+  },
+  "stat.dims": {
+   "zh": "排序维度：能力 · 成本 · 速度",
+   "en": "Sort by intelligence · cost · speed"
+  },
+  "hl.button": {
+   "zh": "查看 Gemini 4 Carbon 详情",
+   "en": "View Gemini 4 Carbon details"
+  },
+  "board.title": {
+   "zh": "排行榜",
+   "en": "Leaderboard"
+  },
+  "board.sub": {
+   "zh": "综合分来自",
+   "en": "Scores from"
+  },
+  "board.sub2": {
+   "zh": "；点击表头切换排序。",
+   "en": "; click a column header to sort."
+  },
+  "tabs.aria": {
+   "zh": "排序维度",
+   "en": "Sort by"
+  },
+  "tab.score": {
+   "zh": "能力",
+   "en": "Intelligence"
+  },
+  "tab.cost": {
+   "zh": "成本",
+   "en": "Cost"
+  },
+  "tab.speed": {
+   "zh": "速度",
+   "en": "Speed"
+  },
+  "filters.summary": {
+   "zh": "筛选",
+   "en": "Filters"
+  },
+  "f.query": {
+   "zh": "搜索型号 / 厂商",
+   "en": "Search model / vendor"
+  },
+  "f.queryPh": {
+   "zh": "例如 Gemini、Qwen、max",
+   "en": "e.g. Gemini, Qwen, max"
+  },
+  "f.vendor": {
+   "zh": "厂商",
+   "en": "Vendor"
+  },
+  "f.allVendors": {
+   "zh": "全部厂商",
+   "en": "All vendors"
+  },
+  "f.min": {
+   "zh": "最低综合分",
+   "en": "Minimum score"
+  },
+  "f.noMin": {
+   "zh": "不限",
+   "en": "Any"
+  },
+  "f.atLeast": {
+   "zh": "至少 {n}",
+   "en": "At least {n}"
+  },
+  "f.view": {
+   "zh": "展示范围",
+   "en": "Show"
+  },
+  "f.speed": {
+   "zh": "速度指标",
+   "en": "Speed metric"
+  },
+  "f.tps": {
+   "zh": "输出速度（tokens/秒，越高越快）",
+   "en": "Output speed (tokens/s, higher is faster)"
+  },
+  "viewopt.primary": {
+   "zh": "每个型号的最高档",
+   "en": "Highest setting per model"
+  },
+  "viewopt.all": {
+   "zh": "全部推理档位",
+   "en": "All reasoning settings"
+  },
+  "viewopt.new": {
+   "zh": "本期新增",
+   "en": "New this update"
+  },
+  "viewopt.recent": {
+   "zh": "近 30 天发布",
+   "en": "Released in the last 30 days"
+  },
+  "viewopt.legacy": {
+   "zh": "旧版指数 v4.3.2（v5 尚未测）",
+   "en": "Legacy index v4.3.2 (not yet on v5)"
+  },
+  "viewopt.archived": {
+   "zh": "历史记录",
+   "en": "Historical records"
+  },
+  "view.primary": {
+   "zh": "每个型号的最高档",
+   "en": "highest setting per model"
+  },
+  "view.all": {
+   "zh": "全部推理档位",
+   "en": "all reasoning settings"
+  },
+  "view.new": {
+   "zh": "本期新增",
+   "en": "new this update"
+  },
+  "view.recent": {
+   "zh": "近 30 天发布",
+   "en": "released in the last 30 days"
+  },
+  "view.legacy": {
+   "zh": "旧版指数 v4.3.2",
+   "en": "legacy index v4.3.2"
+  },
+  "view.archived": {
+   "zh": "历史记录",
+   "en": "historical records"
+  },
+  "result": {
+   "zh": "{n} 个配置 · {valid} 个有该项数据 · {scope}",
+   "en": "{n} configurations · {valid} with data for this metric · {scope}"
+  },
+  "result.hint": {
+   "zh": "点击型号查看详情与来源",
+   "en": "Click a model for details and sources"
+  },
+  "table.aria": {
+   "zh": "AI 模型比较表",
+   "en": "AI model comparison table"
+  },
+  "col.rank": {
+   "zh": "名次",
+   "en": "Rank"
+  },
+  "col.model": {
+   "zh": "模型 / 配置",
+   "en": "Model / configuration"
+  },
+  "col.score": {
+   "zh": "综合分",
+   "en": "Score"
+  },
+  "col.cost": {
+   "zh": "评测成本",
+   "en": "Cost per task"
+  },
+  "col.tps": {
+   "zh": "输出速度",
+   "en": "Output speed"
+  },
+  "col.scoreTip": {
+   "zh": "Artificial Analysis Intelligence Index，0–100，不是正确率",
+   "en": "Artificial Analysis Intelligence Index, 0–100; not an accuracy rate"
+  },
+  "col.costTip": {
+   "zh": "AA 跑完整套评测的平均单任务成本（美元），不是你每次提问的费用",
+   "en": "AA’s average cost per evaluation task (USD); not what you pay per prompt"
+  },
+  "col.tpsTip": {
+   "zh": "整次请求每秒输出的 token 数（含思考 token），含等待首个 token 的时间；单次请求与多轮代理任务的平均",
+   "en": "Output tokens (including thinking tokens) per second over the whole request, including the wait for the first token; averaged over single requests and multi-turn agent tasks"
+  },
+  "unit.legacy": {
+   "zh": "v4.3.2 分数",
+   "en": "v4.3.2 score"
+  },
+  "unit.cost": {
+   "zh": "美元 / 任务",
+   "en": "USD / task"
+  },
+  "unit.conflict": {
+   "zh": "来源不一致，暂不排名",
+   "en": "Sources disagree; not ranked"
+  },
+  "unit.tps": {
+   "zh": "tokens/秒",
+   "en": "tokens/s"
+  },
+  "unit.sec": {
+   "zh": "秒",
+   "en": "s"
+  },
+  "empty": {
+   "zh": "当前条件下没有数据，请降低门槛或调整筛选。",
+   "en": "No data for these filters. Try a lower minimum score or different filters."
+  },
+  "board.fine": {
+   "zh": "同分并列按来源公布的取整值计算；相差 1–2 分不代表能力有确定差距。名次只在当前筛选结果内有效。",
+   "en": "Ties use the rounded values published by the source; a 1–2 point gap is not a reliable difference. Ranks apply only within the current filters."
+  },
+  "note.score": {
+   "zh": "<strong>按综合分排序。</strong>Artificial Analysis Intelligence Index {idx}，分数越高越好；v5 题目更难，分数普遍低于旧版 v4.3.2，两者不能直接比较。",
+   "en": "<strong>Sorted by score.</strong> Artificial Analysis Intelligence Index {idx}; higher is better. v5 is harder than the legacy v4.3.2, so scores are generally lower and not directly comparable."
+  },
+  "note.cost": {
+   "zh": "<strong>先达到能力门槛，再比成本。</strong>默认只看综合分 ≥ {min} 的配置，按评测成本从低到高。这是 AA 跑评测的花费，不是你每次提问的费用；不足 $0.01 或缺失的成本不参与排名。",
+   "en": "<strong>Meet a score bar first, then compare cost.</strong> By default only configurations scoring ≥ {min} are shown, sorted by cost from low to high. This is what AA spent to run the benchmark, not what you pay per prompt; missing costs or costs under $0.01 are not ranked."
+  },
+  "note.tps": {
+   "zh": "<strong>按输出速度排序（越高越快）。</strong>按整次请求计算，含思考 token 和等待首个 token 的时间，取单次请求与多轮代理任务、过去 5 天的平均。输出快不代表整个任务先完成。",
+   "en": "<strong>Sorted by output speed (higher is faster).</strong> Measured over the whole request, counting thinking tokens and the wait for the first token, and averaged over single requests and multi-turn agent tasks across the past 5 days. Faster output doesn’t mean the whole task finishes first."
+  },
+  "note.legacy": {
+   "zh": "<strong>旧版指数：</strong>AA 尚未用 v5 重新测试这些配置，这里按 v4.3.2 的分数和成本排列，不能与 v5 比较。",
+   "en": "<strong>Legacy index:</strong> AA hasn’t re-tested these configurations on v5; they are ranked by v4.3.2 score and cost and can’t be compared with v5."
+  },
+  "note.archived": {
+   "zh": "<strong>历史记录：</strong>旧版本或已被取代的配置，保留原始日期，仅供参考。",
+   "en": "<strong>Historical records:</strong> older or superseded configurations, kept with their original dates for reference only."
+  },
+  "badge.new": {
+   "zh": "新增",
+   "en": "New"
+  },
+  "badge.updated": {
+   "zh": "有更新",
+   "en": "Updated"
+  },
+  "badge.history": {
+   "zh": "历史记录",
+   "en": "Historical"
+  },
+  "badge.legacy": {
+   "zh": "旧版指数 v4.3.2",
+   "en": "Legacy index v4.3.2"
+  },
+  "badge.restricted": {
+   "zh": "受限开放",
+   "en": "Limited access"
+  },
+  "badge.notSale": {
+   "zh": "受限开放 · 未公开发售",
+   "en": "Limited access · not for sale"
+  },
+  "released": {
+   "zh": "发布",
+   "en": "Released"
+  },
+  "checked": {
+   "zh": "读取",
+   "en": "Checked"
+  },
+  "cfg.default": {
+   "zh": "默认配置",
+   "en": "Default"
+  },
+  "hist.default": {
+   "zh": "旧版记录，之后未重新核验",
+   "en": "Older record, not re-verified"
+  },
+  "watch.title": {
+   "zh": "观察名单",
+   "en": "Watchlist"
+  },
+  "watch.sub": {
+   "zh": "已发布但暂无独立综合分、属于特殊产品模式或仅限受邀访问的模型。没有分数不代表模型弱。",
+   "en": "Released models without an independent score, special product modes, or invitation-only models. No score doesn’t mean a weak model."
+  },
+  "watch.count": {
+   "zh": "{n} 个条目，不参与排名",
+   "en": "{n} entries, not ranked"
+  },
+  "watch.legacyMore": {
+   "zh": "；另有 {n} 个配置见“旧版指数 v4.3.2”视图",
+   "en": "; {n} more configurations in the “Legacy index v4.3.2” view"
+  },
+  "watch.estimated": {
+   "zh": "仅有估计分",
+   "en": "Estimated score only"
+  },
+  "watch.restricted": {
+   "zh": "受邀访问",
+   "en": "Invitation only"
+  },
+  "watch.mode": {
+   "zh": "特殊产品模式",
+   "en": "Special product mode"
+  },
+  "watch.unverified": {
+   "zh": "尚未核实",
+   "en": "Not yet verified"
+  },
+  "watch.unscored": {
+   "zh": "暂无独立评分",
+   "en": "No independent score"
+  },
+  "watch.more": {
+   "zh": "查看详情 ↗",
+   "en": "Details ↗"
+  },
+  "watch.none": {
+   "zh": "当前筛选下没有观察条目。",
+   "en": "No watchlist entries for these filters."
+  },
+  "about.title": {
+   "zh": "关于与方法",
+   "en": "About & methodology"
+  },
+  "about.h": {
+   "zh": "这是什么",
+   "en": "What this is"
+  },
+  "about.p1": {
+   "zh": "本站汇总公开的第三方 AI 模型评测，用同一套标准比较各家模型的能力、成本和速度，并区分版本和推理强度（reasoning effort）。本站不自行跑分。",
+   "en": "This site collects public third-party AI model benchmarks and compares models on intelligence, cost and speed with the same yardstick, keeping versions and reasoning effort separate. We don’t run benchmarks ourselves."
+  },
+  "about.p2": {
+   "zh": "<strong>数据更新于 {date}，每周更新。</strong>每个指标的读取日期见模型详情。",
+   "en": "<strong>Data updated {date}; updated weekly.</strong> Each metric’s check date is shown in the model details."
+  },
+  "method.h": {
+   "zh": "怎么排名",
+   "en": "How ranking works"
+  },
+  "method.score": {
+   "zh": "<strong>能力：</strong>Artificial Analysis Intelligence Index v5.0.1，由 9 项评测组成（知识工作、编程、科学、通用四类各占 25%），同分并列。v5.0.1 于 2026-11-03 发布，评测组成和权重与 v5.0 相同，只把 CritPt 按 v2 重新评分，所有模型都已重评。",
+   "en": "<strong>Intelligence:</strong> Artificial Analysis Intelligence Index v5.0.1, built from 9 evaluations (knowledge work, coding, science and general, 25% each); ties share a rank. v5.0.1, released 2026-11-03, keeps the same evaluations and weights as v5.0 but regrades CritPt (v2); all models were regraded."
+  },
+  "method.cost": {
+   "zh": "<strong>成本：</strong>只比较综合分达到门槛（默认 35 分）的配置，按 AA 跑完整套评测的平均单任务成本从低到高排序。",
+   "en": "<strong>Cost:</strong> only configurations meeting a score bar (35 by default), sorted by AA’s average cost per evaluation task, low to high."
+  },
+  "method.speed": {
+   "zh": "<strong>速度：</strong>采用 Artificial Analysis 性能基准 v3.0.0（2026 年 11 月 3 日公布）。切到速度排序时，默认只看综合分 ≥ 25 的配置，可一键显示全部。默认看<strong>单任务耗时</strong>：完成一道综合指数评测题平均要几分钟（输出 token 数 ÷ 输出速度，按指数权重平均，是估算值）。也可看<strong>输出速度</strong>（整次请求每秒输出的 token 数，含思考 token 和等待首个 token 的时间；服务端失败的请求按 0 计）和<strong>首个答案时间</strong>（发出请求到收到第一个答案 token 的秒数，含思考时间）。数值来自每个模型的代表端点（通常是厂商官方 API），取单次请求与多轮代理任务、过去 5 天的平均。新方法与旧方法测得的速度数据不能直接比较；Artificial Analysis 没有给出数值的配置留空。 <a href=\"https://artificialanalysis.ai/methodology/performance-benchmarking\" target=\"_blank\" rel=\"noopener noreferrer\">AA 速度方法 ↗</a>",
+   "en": "<strong>Speed:</strong> uses Artificial Analysis Performance Benchmarking v3.0.0 (published Nov 3, 2026). Speed sorts show only configurations scoring ≥ 25 by default; one click shows all. The default is <strong>time per task</strong>: the average minutes needed to finish one Intelligence Index task (output tokens ÷ output speed, weighted like the index; an estimate). You can also sort by <strong>output speed</strong> (output tokens per second over the whole request, counting thinking tokens and the wait for the first token; requests that fail on the provider’s side count as 0) or <strong>time to first answer token</strong> (seconds from sending a request to the first answer token, including thinking time). Values come from each model’s representative endpoint (usually the model maker’s own API), averaged over single requests and multi-turn agent tasks across the past 5 days. They can’t be compared directly with speed figures measured under the previous method; configurations Artificial Analysis hasn’t measured are left blank. <a href=\"https://artificialanalysis.ai/methodology/performance-benchmarking\" target=\"_blank\" rel=\"noopener noreferrer\">AA speed methodology ↗</a>"
+  },
+  "limits.h": {
+   "zh": "需要注意",
+   "en": "Caveats"
+  },
+  "limits.p1": {
+   "zh": "综合分不是 IQ 或正确率；评测偏重英文。成本是 AA 跑评测的花费，不是你每次提问的费用。速度在美国服务器上测得，不代表你所在地区的体验；单任务耗时是估算值，不是计时。",
+   "en": "The score is not an IQ or accuracy rate, and the benchmarks lean toward English. Cost is what AA spent running the benchmark, not your per-prompt price. Speed is measured on US servers and may differ where you are; time per task is an estimate, not a stopwatch time."
+  },
+  "limits.p2": {
+   "zh": "厂商自测成绩只在详情里展示，不参与排名。旧版指数 v4.3.2 的分数单独展示，不与 v5 混排。Arena 人类偏好分单独展示，不并入综合分。",
+   "en": "Vendor-reported results appear only in details and are not ranked. Legacy v4.3.2 scores are shown separately and never mixed with v5. Arena human-preference scores are shown separately and not merged into the score."
+  },
+  "disc.h": {
+   "zh": "免责声明",
+   "en": "Disclaimer"
+  },
+  "disc.p": {
+   "zh": "本站与 Artificial Analysis、Arena 及各模型厂商均无隶属关系。数据和商标归各自所有者所有，来源见下方链接。数据可能有误或滞后，仅供参考，不构成购买建议。",
+   "en": "This site is not affiliated with Artificial Analysis, Arena or any model vendor. Data and trademarks belong to their respective owners; sources are linked below. Data may contain errors or be out of date. For reference only; not purchasing advice."
+  },
+  "arena.h": {
+   "zh": "另一个视角：Arena 人类偏好（不并入综合分）",
+   "en": "Another view: Arena human preference (not part of the score)"
+  },
+  "arena.rank": {
+   "zh": "Arena 名次",
+   "en": "Arena rank"
+  },
+  "arena.entry": {
+   "zh": "条目",
+   "en": "Entry"
+  },
+  "arena.score": {
+   "zh": "偏好分",
+   "en": "Preference score"
+  },
+  "arena.range": {
+   "zh": "名次区间",
+   "en": "Rank range"
+  },
+  "arena.dates": {
+   "zh": "页面日期 {date}，读取于 {read}。",
+   "en": "Page dated {date}, checked {read}."
+  },
+  "prelim": {
+   "zh": "（初步）",
+   "en": " (preliminary)"
+  },
+  "calc.h": {
+   "zh": "自测工具：完成一件合格工作的实际成本",
+   "en": "Calculator: real cost per successful task"
+  },
+  "calc.p1": {
+   "zh": "用你自己的任务、相同的资料和验收标准测试候选模型，把失败和重试的花费也算进去。",
+   "en": "Test candidate models on your own tasks with the same inputs and acceptance criteria, and count the cost of failures and retries."
+  },
+  "calc.p2": {
+   "zh": "<strong>单任务实际成本 = 全部实际支出 ÷ 最终验收通过的任务数。</strong>",
+   "en": "<strong>Real cost per task = total spend ÷ tasks that finally passed.</strong>"
+  },
+  "calc.spent": {
+   "zh": "实际总支出（同一币种）",
+   "en": "Total spend (one currency)"
+  },
+  "calc.tasks": {
+   "zh": "任务数（不含重试）",
+   "en": "Tasks (excluding retries)"
+  },
+  "calc.passed": {
+   "zh": "验收通过数",
+   "en": "Tasks passed"
+  },
+  "calc.local": {
+   "zh": "只在你的浏览器里计算，不发送也不保存。",
+   "en": "Calculated only in your browser; nothing is sent or stored."
+  },
+  "calc.empty": {
+   "zh": "输入数据后计算",
+   "en": "Enter numbers to calculate"
+  },
+  "calc.bad": {
+   "zh": "请检查数值：通过数应是 0 到任务数之间的整数。",
+   "en": "Check the numbers: tasks passed must be a whole number between 0 and the number of tasks."
+  },
+  "calc.zero": {
+   "zh": "0 个通过，无法计算单任务成本。",
+   "en": "0 passed: cost per successful task can’t be calculated."
+  },
+  "calc.result": {
+   "zh": "<div><strong>{v}</strong> / 每个通过任务<br><span class=\"mini\">通过率 {rate}% · 与输入同币种</span></div>",
+   "en": "<div><strong>{v}</strong> per passed task<br><span class=\"mini\">Pass rate {rate}% · same currency as input</span></div>"
+  },
+  "changes.title": {
+   "zh": "数据变化",
+   "en": "What changed"
+  },
+  "changes.sub": {
+   "zh": "{date} 更新",
+   "en": "{date} update"
+  },
+  "sources.title": {
+   "zh": "数据来源",
+   "en": "Sources"
+  },
+  "sources.sub": {
+   "zh": "每个数字都可以追溯到下列公开页面；读取日期见各条目。",
+   "en": "Every number traces back to the public pages below; check dates are listed with each entry."
+  },
+  "src.aa": {
+   "zh": "综合分、评测成本、单任务耗时、输出速度、首个答案时间",
+   "en": "Scores, cost per task, time per task, output speed, time to first answer token"
+  },
+  "src.arena": {
+   "zh": "人类偏好分（文本榜）",
+   "en": "Human-preference scores (text leaderboard)"
+  },
+  "src.vendors.h": {
+   "zh": "各厂商官方页面",
+   "en": "Official vendor pages"
+  },
+  "src.vendors": {
+   "zh": "发布日期、价格、开放范围、厂商自报成绩（链接见下方及模型详情）",
+   "en": "Release dates, pricing, availability and vendor-reported results (links below and in model details)"
+  },
+  "sources.all": {
+   "zh": "全部参考链接（{n}）",
+   "en": "All reference links ({n})"
+  },
+  "footer.l": {
+   "zh": "Models Rank（模型榜）· 数据更新于 {date} · 每周更新",
+   "en": "Models Rank · data updated {date} · weekly"
+  },
+  "footer.r": {
+   "zh": "数据来源：Artificial Analysis、Arena 及各厂商官方页面。本站与上述机构无隶属关系。",
+   "en": "Sources: Artificial Analysis, Arena, and official vendor pages. Not affiliated with any of these organizations."
+  },
+  "detail.close": {
+   "zh": "关闭",
+   "en": "Close"
+  },
+  "kind.model": {
+   "zh": "模型",
+   "en": "Model"
+  },
+  "kind.special": {
+   "zh": "特殊访问 / 模式",
+   "en": "Special access / mode"
+  },
+  "kind.history": {
+   "zh": "历史记录",
+   "en": "Historical record"
+  },
+  "d.score": {
+   "zh": "AA {idx} 综合分",
+   "en": "AA {idx} score"
+  },
+  "d.estimated": {
+   "zh": "估计 {s}",
+   "en": "Estimated {s}"
+  },
+  "d.notV5": {
+   "zh": "v5 尚未测试",
+   "en": "Not yet tested on v5"
+  },
+  "d.noscore": {
+   "zh": "暂无独立评分",
+   "en": "No independent score"
+  },
+  "d.sec": {
+   "zh": " / 秒",
+   "en": " / s"
+  },
+  "d.source": {
+   "zh": "来源",
+   "en": "Source"
+  },
+  "d.version": {
+   "zh": "版本说明：",
+   "en": "Version note: "
+  },
+  "d.history": {
+   "zh": "历史记录：",
+   "en": "Historical record: "
+  },
+  "d.availability": {
+   "zh": "开放情况：",
+   "en": "Availability: "
+  },
+  "d.weightsPlan": {
+   "zh": "官方计划于 {date} 前公开权重。",
+   "en": "Weights planned for release by {date}."
+  },
+  "d.official": {
+   "zh": "官方说明",
+   "en": "Official page"
+  },
+  "d.legacy": {
+   "zh": "旧版指数（{v}）：",
+   "en": "Legacy index ({v}): "
+  },
+  "d.legacyBody": {
+   "zh": "综合分 {s}，评测成本 {c}，读取于 {date}。与 {idx} 分数不能换算或比较涨跌。",
+   "en": "score {s}, cost {c}, checked {date}. Not convertible to or comparable with {idx}."
+  },
+  "d.costnote": {
+   "zh": "评测成本说明：",
+   "en": "Cost note: "
+  },
+  "d.price": {
+   "zh": "官方价格：",
+   "en": "Official pricing: "
+  },
+  "d.context": {
+   "zh": "上下文：",
+   "en": "Context: "
+  },
+  "d.vendorClaims": {
+   "zh": "厂商自报（不参与排名）",
+   "en": "Vendor-reported (not ranked)"
+  },
+  "d.bench": {
+   "zh": "评测",
+   "en": "Benchmark"
+  },
+  "d.vendorValue": {
+   "zh": "厂商公布值",
+   "en": "Vendor value"
+  },
+  "d.otherEvals": {
+   "zh": "其他独立评测",
+   "en": "Other independent evaluations"
+  },
+  "d.otherEvalsNote": {
+   "zh": "各项测试单独解读，不与综合分合并或换算。",
+   "en": "Each test stands on its own and is not merged with or converted to the score."
+  },
+  "d.method": {
+   "zh": "方法说明",
+   "en": "Methodology"
+  },
+  "d.conditions": {
+   "zh": "速度来自 Artificial Analysis 在美国服务器上对每个模型代表端点（通常是厂商官方 API）的测试，取单次请求与多轮代理任务、过去 5 天的平均，不代表你所在地区、网络或订阅应用的体验。",
+   "en": "Speed comes from Artificial Analysis tests, run from US servers, of each model’s representative endpoint (usually the model maker’s own API), averaged over single requests and multi-turn agent tasks across the past 5 days, and may not match your region, network, or subscription app."
+  },
+  "d.compare": {
+   "zh": "与 GPT / Claude 对比",
+   "en": "Compare with GPT / Claude"
+  },
+  "cmp.gpt": {
+   "zh": "GPT 对比",
+   "en": "GPT comparison"
+  },
+  "cmp.claude": {
+   "zh": "Claude 对比",
+   "en": "Claude comparison"
+  },
+  "cmp.archived": {
+   "zh": "历史记录不与当前版本对比。",
+   "en": "Historical records aren’t compared with current models."
+  },
+  "cmp.none": {
+   "zh": "没有可对比的当前配置。",
+   "en": "No current configuration to compare."
+  },
+  "cmp.auto": {
+   "zh": "分数最接近的配置共 {n} 个，默认选中其中之一，仅为方便显示。",
+   "en": "{n} configurations are tied for closest in score; one is preselected for display convenience only."
+  },
+  "cmp.noself": {
+   "zh": "该模型没有当前综合分，无法给出数字对比。",
+   "en": "This model has no current score, so no numeric comparison is possible."
+  },
+  "cmp.invalid": {
+   "zh": "该模型没有当前综合分，无法对比。",
+   "en": "No current score; comparison unavailable."
+  },
+  "cmp.result": {
+   "zh": "综合分：{a} 对 {b}（{d}）<br>评测成本：{ca} 对 {cb}<br>单任务耗时：{ma} 对 {mb} 分钟<br>输出速度：{ta} 对 {tb} tokens/秒<br><strong>分数接近不代表能力相同。</strong>",
+   "en": "Score: {a} vs {b} ({d})<br>Cost per task: {ca} vs {cb}<br>Time per task: {ma} vs {mb} min<br>Output speed: {ta} vs {tb} tokens/s<br><strong>Similar scores don’t mean equal ability.</strong>"
+  },
+  "d.arena": {
+   "zh": "Arena 人类偏好",
+   "en": "Arena human preference"
+  },
+  "d.arenaBody": {
+   "zh": "Arena 条目：{label}；偏好分 {score}；名次 {rank}（区间 {range}）；投票 {votes} 次；页面日期 {date}。",
+   "en": "Arena entry: {label}; preference score {score}; rank {rank} (range {range}); {votes} votes; page dated {date}."
+  },
+  "d.arenaNote": {
+   "zh": "Arena 分数不与 AA 综合分相加或换算。",
+   "en": "Arena scores are not added to or converted into the AA score."
+  },
+  "d.arenaLink": {
+   "zh": "查看 Arena 榜单",
+   "en": "View Arena leaderboard"
+  },
+  "d.sources": {
+   "zh": "来源",
+   "en": "Sources"
+  },
+  "f.taskMin": {
+   "zh": "单任务耗时（分钟，越低越快）",
+   "en": "Time per task (minutes, lower is faster)"
+  },
+  "f.ttfat": {
+   "zh": "首个答案时间（秒，越低越快）",
+   "en": "Time to first answer token (s, lower is faster)"
+  },
+  "col.taskMin": {
+   "zh": "单任务耗时",
+   "en": "Time per task"
+  },
+  "col.taskMinTip": {
+   "zh": "Artificial Analysis 估算：完成一道综合指数评测题平均需要的分钟数（输出 token 数 ÷ 输出速度，按指数权重平均）",
+   "en": "Artificial Analysis estimate: average minutes to finish one Intelligence Index task (output tokens ÷ output speed, weighted like the index)"
+  },
+  "col.ttfat": {
+   "zh": "首个答案时间",
+   "en": "Time to first answer"
+  },
+  "col.ttfatTip": {
+   "zh": "从发出请求到收到第一个答案 token 的秒数；推理模型包含思考时间",
+   "en": "Seconds from sending a request to receiving the first answer token; includes thinking time for reasoning models"
+  },
+  "unit.min": {
+   "zh": "分钟",
+   "en": "min"
+  },
+  "unit.task": {
+   "zh": "分钟 / 任务",
+   "en": "min / task"
+  },
+  "note.taskMin": {
+   "zh": "<strong>按单任务耗时排序（越低越快）。</strong>Artificial Analysis 估算的完成一道综合指数评测题的平均分钟数，同时反映输出速度和模型要写多少 token（含思考）。这是估算值，不是计时；没有综合分的配置没有此值。",
+   "en": "<strong>Sorted by time per task (lower is faster).</strong> Artificial Analysis’s estimate of the average minutes needed to finish one Intelligence Index task. It reflects both output speed and how many tokens (including thinking) the model writes. It is an estimate, not a stopwatch time; configurations without a score have no value."
+  },
+  "note.ttfat": {
+   "zh": "<strong>按首个答案时间排序（越低越快）。</strong>从发出请求到收到第一个答案 token 的秒数，推理模型包含思考时间；这是开始看到答案的等待，不是答完的时间。",
+   "en": "<strong>Sorted by time to first answer token (lower is faster).</strong> Seconds from sending a request to receiving the first answer token, including thinking time for reasoning models. It is the wait until the answer starts, not until it finishes."
+  },
+  "d.min": {
+   "zh": " / 分钟",
+   "en": " / min"
+  },
+  "d.speedNote": {
+   "zh": "<strong>速度说明：</strong>Artificial Analysis 性能基准 v3.0.0。单任务耗时 = 每道综合指数评测题的输出 token（含思考）÷ 输出速度，按指数权重平均，是估算值；输出速度按整次请求计算，含思考 token 和等待首个 token 的时间；首个答案时间包含思考时间。没有数值的项目留空。",
+   "en": "<strong>About speed:</strong> Artificial Analysis Performance Benchmarking v3.0.0. Time per task = output tokens per Intelligence Index task (including thinking) ÷ output speed, weighted like the index; it is an estimate. Output speed covers the whole request, counting thinking tokens and the wait for the first token. Time to first answer token includes thinking time. Blank means no value has been published."
+  },
+  "speed.thrOn": {
+   "zh": "当前只显示综合分 ≥ {n} 的配置：速度排名只在够用于实际工作的模型之间才有意义。",
+   "en": "Showing only configurations scoring ≥ {n}: a speed ranking is only useful among models good enough for real work."
+  },
+  "speed.showAll": {
+   "zh": "显示全部",
+   "en": "Show all"
+  },
+  "speed.thrOff": {
+   "zh": "当前显示全部配置，包括综合分很低的小模型。",
+   "en": "Showing all configurations, including very low-scoring small models."
+  },
+  "speed.onlyN": {
+   "zh": "只看 ≥ {n} 分",
+   "en": "Only ≥ {n}"
+  },
+  "seo.dataset.name": {
+   "zh": "AI 模型能力、成本与速度数据集",
+   "en": "AI model intelligence, cost and speed dataset"
+  },
+  "seo.dataset.description": {
+   "zh": "Models Rank 汇总第三方公开评测，比较 AI 模型的能力、单任务成本和速度；本站不自行跑分。",
+   "en": "Models Rank compiles public third-party evaluations to compare AI model intelligence, cost per task and speed; it does not run its own benchmarks."
+  },
+  "seo.itemlist.name": {
+   "zh": "当前默认榜单前 20 个配置",
+   "en": "First 20 configurations in the default rankings"
+  },
+  "seo.image.alt": {
+   "zh": "Models Rank：AI 模型能力、成本与速度榜单",
+   "en": "Models Rank: AI model intelligence, cost and speed rankings"
+  },
+  "seo.notfound": {
+   "zh": "页面不存在",
+   "en": "Page not found"
+  },
+  "seo.home": {
+   "zh": "返回中文首页",
+   "en": "English homepage"
+  },
+  "seo.pages": {
+   "zh": "页面",
+   "en": "Pages"
+  },
+  "seo.page": {
+   "zh": "中文榜单",
+   "en": "English rankings"
+  },
+  "seo.sources": {
+   "zh": "来源",
+   "en": "Sources"
+  },
+  "seo.updated": {
+   "zh": "数据更新：{date}",
+   "en": "Data updated: {date}"
+  },
+  "seo.scope": {
+   "zh": "默认显示当前指数版本、未归档且标记为代表配置的模型；旧版指数、Arena 偏好分及厂商自报成绩不混入综合排名。",
+   "en": "The default view includes primary configurations on the current index version, excluding archived entries. Legacy indices, Arena preference scores and vendor-reported results are not mixed into the intelligence rankings."
+  },
+  "seo.cost": {
+   "zh": "成本是 AA 评测的平均单任务美元成本，不是每百万 token 的 API 标价，也不是用户每次提问的费用。",
+   "en": "Cost is AA’s average USD cost per evaluation task, not an API price per million tokens or the price of each user prompt."
+  },
+  "detail.title": {
+   "zh": "{name} 评分、成本与速度 | Models Rank",
+   "en": "{name}: score, cost and speed | Models Rank"
+  },
+  "detail.desc.scored": {
+   "zh": "{name}（{profile}）的 AA {index} 综合分为 {score}。查看成本、速度、上下文与来源。",
+   "en": "{name} ({profile}) scores {score} on AA {index}. Explore cost, speed, context and sources."
+  },
+  "detail.desc.legacy": {
+   "zh": "{name}（{profile}）当前指数暂无评分。查看旧指数成绩、成本与来源。",
+   "en": "{name} ({profile}) has no current-index score. View legacy results, cost and sources."
+  },
+  "detail.desc.unscored": {
+   "zh": "{name}（{profile}）暂无独立评分。查看模型资料、开放情况与来源。",
+   "en": "{name} ({profile}) has no independent score. View model information, availability and sources."
+  },
+  "detail.rank": {
+   "zh": "当前榜单名次",
+   "en": "Current ranking"
+  },
+  "detail.unranked": {
+   "zh": "未排名",
+   "en": "Not ranked"
+  },
+  "detail.notcurrent": {
+   "zh": "当前指数暂无评分",
+   "en": "No current-index score"
+  },
+  "detail.unscored": {
+   "zh": "暂无独立评分",
+   "en": "No independent score"
+  },
+  "detail.configuration": {
+   "zh": "当前代表配置",
+   "en": "Current representative configuration"
+  },
+  "detail.other": {
+   "zh": "其他已测配置",
+   "en": "Other tested configurations"
+  },
+  "detail.current": {
+   "zh": "当前指数",
+   "en": "Current index"
+  },
+  "detail.legacy": {
+   "zh": "旧指数",
+   "en": "Legacy index"
+  },
+  "detail.date": {
+   "zh": "数据日期",
+   "en": "Data date"
+  },
+  "detail.index": {
+   "zh": "指数版本",
+   "en": "Index version"
+  },
+  "detail.missing": {
+   "zh": "未提供",
+   "en": "Not provided"
+  },
+  "detail.back": {
+   "zh": "返回榜单",
+   "en": "Back to rankings"
+  },
+  "detail.view": {
+   "zh": "在榜单中查看",
+   "en": "View in rankings"
+  },
+  "detail.scope": {
+   "zh": "详情页涵盖未归档型号的代表配置。中文地址为 /m/{base}/，英文地址为 /en/m/{base}/。缺少当前评分的条目明确标注状态。",
+   "en": "Detail pages cover representative configurations of non-archived models. Chinese URLs use /m/{base}/ and English URLs use /en/m/{base}/. Entries without a current score show their status."
+  },
+  "detail.pages": {
+   "zh": "模型详情页",
+   "en": "Model detail pages"
+  },
+  "allmodels.heading": {
+   "zh": "全部模型",
+   "en": "All models"
+  },
+  "allmodels.current": {
+   "zh": "当前指数有分",
+   "en": "Current-index scores"
+  },
+  "allmodels.legacy": {
+   "zh": "仅旧指数分",
+   "en": "Legacy-index scores only"
+  },
+  "allmodels.unscored": {
+   "zh": "暂无评分",
+   "en": "No scores yet"
+  },
+  "allmodels.archived": {
+   "zh": "已归档",
+   "en": "Archived"
+  },
+  "detail.breadcrumb.home": {
+   "zh": "榜单",
+   "en": "Rankings"
+  },
+  "detail.desc.archived": {
+   "zh": "{name} 的历史记录，配置为 {profile}。不参与当前排名。",
+   "en": "Historical record for {name}, using the {profile} configuration. Excluded from current rankings."
+  },
+  "detail.configuration.archived": {
+   "zh": "历史配置",
+   "en": "Historical configuration"
+  },
+  "detail.title.archived": {
+   "zh": "{name} · 已归档 | Models Rank",
+   "en": "{name} · Archived | Models Rank"
+  },
+  "detail.version.missing": {
+   "zh": "版本未记录",
+   "en": "Version not recorded"
+  }
+ }
+}

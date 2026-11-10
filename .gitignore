@@ -1,0 +1,16 @@
+# Data is not redistributed here (see README). 数据不在此仓库分发，见 README。
+model-data*.json
+!example/sample-data.json
+public/site/
+public/AI 模型榜单_公开版_*.html
+public/.published_urls.*.tmp
+preview/
+shots*/
+check-result*.json
+*.err
+__pycache__/
+*.pyc
+.DS_Store
+.env*
+.wrangler/
+node_modules/

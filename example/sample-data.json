@@ -1,0 +1,154 @@
+{
+ "date": "2026-01-01",
+ "benchmarkVersion": "v5.0.1",
+ "legacyBenchmarkVersion": "v4.3.2",
+ "costDefaultThreshold": 35,
+ "speedDefaultThreshold": 25,
+ "staleAfterDays": 10,
+ "rows": [
+  {
+   "id": "example-alpha-high",
+   "base": "example-alpha",
+   "name": "Example Alpha",
+   "vendor": "Example Lab",
+   "effort": "high",
+   "profile": null,
+   "reference": true,
+   "primary": true,
+   "score": 50.0,
+   "cost": 1.23,
+   "estimatedScore": null,
+   "status": "complete",
+   "checked": "2026-01-01",
+   "benchmarkVersion": "v5.0.1",
+   "kind": "model",
+   "lifecycle": "current",
+   "added": false,
+   "updated": false,
+   "context": "1M",
+   "released": "2025-12-01",
+   "taskMin": 5.0,
+   "tps": 100,
+   "ttfat": 10.0,
+   "fieldSources": {
+    "score": "aa-v5-method",
+    "cost": "aa-v5-method",
+    "taskMin": "aa-v5-method",
+    "ttfat": "aa-v5-method",
+    "tps": "aa-v5-method"
+   },
+   "fieldChecked": {
+    "score": "2026-01-01",
+    "cost": "2026-01-01",
+    "taskMin": "2026-01-01",
+    "ttfat": "2026-01-01",
+    "tps": "2026-01-01"
+   },
+   "sources": [
+    "aa-v5-method"
+   ],
+   "note": null
+  },
+  {
+   "id": "example-beta-high",
+   "base": "example-beta",
+   "name": "Example Beta",
+   "vendor": "Example Lab",
+   "effort": "high",
+   "profile": null,
+   "reference": true,
+   "primary": true,
+   "score": 40.0,
+   "cost": 0.45,
+   "estimatedScore": null,
+   "status": "complete",
+   "checked": "2026-01-01",
+   "benchmarkVersion": "v5.0.1",
+   "kind": "model",
+   "lifecycle": "current",
+   "added": false,
+   "updated": false,
+   "context": "256K",
+   "released": "2025-12-01",
+   "taskMin": 3.0,
+   "tps": 150,
+   "ttfat": 5.0,
+   "fieldSources": {
+    "score": "aa-v5-method",
+    "cost": "aa-v5-method",
+    "taskMin": "aa-v5-method",
+    "ttfat": "aa-v5-method",
+    "tps": "aa-v5-method"
+   },
+   "fieldChecked": {
+    "score": "2026-01-01",
+    "cost": "2026-01-01",
+    "taskMin": "2026-01-01",
+    "ttfat": "2026-01-01",
+    "tps": "2026-01-01"
+   },
+   "sources": [
+    "aa-v5-method"
+   ],
+   "note": null
+  },
+  {
+   "id": "example-gamma-high",
+   "base": "example-gamma",
+   "name": "Example Gamma",
+   "vendor": "Sample AI",
+   "effort": "high",
+   "profile": null,
+   "reference": true,
+   "primary": true,
+   "score": 30.0,
+   "cost": 0.12,
+   "estimatedScore": null,
+   "status": "complete",
+   "checked": "2026-01-01",
+   "benchmarkVersion": "v5.0.1",
+   "kind": "model",
+   "lifecycle": "current",
+   "added": false,
+   "updated": false,
+   "context": "128K",
+   "released": "2025-12-01",
+   "taskMin": 2.0,
+   "tps": 200,
+   "ttfat": 2.0,
+   "fieldSources": {
+    "score": "aa-v5-method",
+    "cost": "aa-v5-method",
+    "taskMin": "aa-v5-method",
+    "ttfat": "aa-v5-method",
+    "tps": "aa-v5-method"
+   },
+   "fieldChecked": {
+    "score": "2026-01-01",
+    "cost": "2026-01-01",
+    "taskMin": "2026-01-01",
+    "ttfat": "2026-01-01",
+    "tps": "2026-01-01"
+   },
+   "sources": [
+    "aa-v5-method"
+   ],
+   "note": null
+  }
+ ],
+ "sources": [
+  {
+   "id": "aa-v5-method",
+   "title": "Artificial Analysis Intelligence Index methodology",
+   "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+   "checked": "2026-01-01"
+  }
+ ],
+ "crosscheck": {
+  "source": "aa-v5-method",
+  "pageDate": "2026-01-01",
+  "retrieved": "2026-01-01",
+  "note": "",
+  "rows": []
+ }
+}
