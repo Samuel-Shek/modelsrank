@@ -14,7 +14,8 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$PRIV/public"
 FILES=(build_public_261105.py check_public_261105.py
        public_text_261105.json published_urls.json url_redirects.json
-       assets/og.png assets/make_og.py assets/google529a71ca053abf05.html)
+       assets/og.png assets/make_og.py assets/google529a71ca053abf05.html
+       assets/make_icons.py assets/favicon.ico assets/favicon.png assets/apple-touch-icon.png)
 # Every page template (public, model, about, ...) is included automatically.
 # 所有页面模板（首页、详情、关于……）自动包含。
 shopt -s nullglob

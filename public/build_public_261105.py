@@ -288,10 +288,10 @@ def auxiliary_files():
     return {'robots.txt': robots, 'sitemap.xml': ET.tostring(root, encoding='unicode', xml_declaration=True) + '\n',
             '404.html': error, 'llms.txt': '\n'.join(lines) + '\n'}
 
-def validate_png(path):
+def validate_png(path, size=(1200, 630)):
     data = path.read_bytes()
-    if data[:8] != b'\x89PNG\r\n\x1a\n' or data[12:16] != b'IHDR' or len(data) < 24 or struct.unpack('>II', data[16:24]) != (1200, 630):
-        raise ValueError('Expected a 1200 x 630 PNG: ' + str(path))
+    if data[:8] != b'\x89PNG\r\n\x1a\n' or data[12:16] != b'IHDR' or len(data) < 24 or struct.unpack('>II', data[16:24]) != size:
+        raise ValueError('Expected a %s x %s PNG: %s' % (*size, path))
 
 def detail_eligible(row):
     return row.get('primary') is True and row.get('lifecycle') != 'archived'
@@ -956,6 +956,19 @@ for name, content in auxiliary_files().items():
 image_source = HERE / 'assets/og.png'
 validate_png(image_source)
 outputs[SITE_DIR / 'og.png'] = image_source.read_bytes()
+for icon_name, size in [('favicon.png', 32), ('apple-touch-icon.png', 180), ('favicon.ico', None)]:
+    icon_source = HERE / 'assets' / icon_name
+    icon_bytes = icon_source.read_bytes()
+    if size is not None:
+        validate_png(icon_source, (size, size))
+    else:
+        if len(icon_bytes) < 6 or icon_bytes[:4] != b'\x00\x00\x01\x00':
+            raise ValueError('Expected an ICO: ' + str(icon_source))
+        count = struct.unpack_from('<H', icon_bytes, 4)[0]
+        if len(icon_bytes) < 6 + count * 16 or not {(16, 16), (32, 32)} <= {
+                (icon_bytes[6 + i * 16] or 256, icon_bytes[7 + i * 16] or 256) for i in range(count)}:
+            raise ValueError('Expected a 16/32 ICO directory: ' + str(icon_source))
+    outputs[SITE_DIR / icon_name] = icon_bytes
 verification_name = 'google529a71ca053abf05'
 verification = (HERE / 'assets' / (verification_name + '.html')).read_bytes()
 if verification.rstrip(b'\r\n') != b'google-site-verification: google529a71ca053abf05.html':

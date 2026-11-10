@@ -93,6 +93,59 @@ res['input_html'] = {'ok': INPUT_HTML.is_file() and (SITE_ROOT / 'index.html').i
                      'path': str(INPUT_HTML)}
 pub = str(SITE_ROOT / 'index.html')
 ORIGIN = 'https://modelsrank.org'
+ICONS = {
+    ORIGIN + '/favicon.ico': ('icon', '16x16 32x32', 'image/x-icon'),
+    ORIGIN + '/favicon.png': ('icon', '32x32', 'image/png'),
+    ORIGIN + '/apple-touch-icon.png': ('apple-touch-icon', '180x180', 'image/png'),
+}
+
+
+def serve_icon(route):
+    """Resolve only the three production icon URLs from local build artifacts."""
+    if route.request.url not in ICONS:
+        return False
+    route.fulfill(path=str(SITE_ROOT / urlsplit(route.request.url).path.lstrip('/')),
+                  content_type=ICONS[route.request.url][2])
+    return True
+
+
+def local_file_route(route):
+    if not serve_icon(route):
+        if urlsplit(route.request.url).scheme in ('http', 'https'):
+            route.abort()
+        else:
+            route.continue_()
+
+
+def icon_checks():
+    from PIL import Image
+    failures = []
+    pages = list(SITE_ROOT.rglob('index.html'))
+    for url, (rel, sizes, mime) in ICONS.items():
+        name = urlsplit(url).path.lstrip('/')
+        try:
+            with Image.open(SITE_ROOT / name) as icon:
+                icon.load()
+                if name.endswith('.ico'):
+                    assert icon.format == 'ICO' and {(16, 16), (32, 32)} <= icon.ico.sizes()
+                    for size in icon.ico.sizes():
+                        icon.ico.getimage(size).load()
+                else:
+                    size = 180 if rel == 'apple-touch-icon' else 32
+                    assert icon.format == 'PNG' and icon.size == (size, size)
+                    assert icon.convert('RGBA').getextrema()[3] == (255, 255)
+            assert (SITE_ROOT / name).read_bytes() == (SOURCE_ROOT / 'assets' / name).read_bytes()
+        except Exception as error:
+            failures.append(name + ': ' + str(error))
+    for path in pages:
+        links = Document(path.read_text()).root.all('link')
+        icons = [n.attrs for n in links if n.attrs.get('rel') in ('icon', 'apple-touch-icon')]
+        if len(icons) != 3 or any(not any(n.get('href') == url and n.get('rel') == rel and n.get('sizes') == sizes for n in icons)
+                                  for url, (rel, sizes, mime) in ICONS.items()):
+            failures.append(str(path.relative_to(SITE_ROOT)) + ': icon links')
+    return {'ok': bool(pages) and not failures, 'pages': len(pages), 'failures': failures}
+
+
 GOOGLE_HTML = '/google529a71ca053abf05.html'
 GOOGLE_PROXY = GOOGLE_HTML + ' /_verification/google529a71ca053abf05.txt 200'
 DATA = json.loads((SOURCE_ROOT / 'model-data_261105.json').read_text())
@@ -494,9 +547,10 @@ def about_checks():
                 require(not any(k.startswith('on') for k in n.attrs), 'No About event handlers: ' + lg)
                 resources.extend(v for k, v in n.attrs.items() if k in ('src', 'srcset', 'poster', 'data', 'background'))
                 if n.tag == 'link' and n.attrs.get('rel') not in ('canonical', 'alternate'):
-                    resources.append(n.attrs.get('href'))
+                    if n.attrs.get('href') not in ICONS or n.attrs.get('rel') != ICONS[n.attrs['href']][0]:
+                        resources.append(n.attrs.get('href'))
             css = '\n'.join(n.raw_text() for n in doc.all('style')) + '\n'.join(n.attrs.get('style', '') for n in doc.all())
-            require(not resources and not re.search(r'url\s*\(|@import', css, re.I), 'Zero About resource dependencies: ' + lg)
+            require(not resources and not re.search(r'url\s*\(|@import', css, re.I), 'No About resources except brand icons: ' + lg)
             scan_links(doc, url)
             pages.append({'lang': lg, 'faq_count': len(visible_faq), 'source_count': len(actual)})
         except (KeyError, IndexError, TypeError, ValueError) as error:
@@ -526,11 +580,11 @@ def about_browser_checks(browser):
     for lg, relative in [('zh', 'about/index.html'), ('en', 'en/about/index.html')]:
         for width in (1440, 390):
             context = browser.new_context(viewport={'width': width, 'height': 900}, is_mobile=width == 390)
-            context.route('**/*', lambda route: route.abort() if urlsplit(route.request.url).scheme in ('http', 'https') else route.continue_())
+            context.route('**/*', local_file_route)
             page = context.new_page()
             page.on('pageerror', lambda error: result['errors'].append(str(error)))
             page.on('console', lambda msg: result['errors'].append(msg.text) if msg.type == 'error' else None)
-            page.on('request', lambda request: result['external_requests'].append(request.url) if urlsplit(request.url).scheme in ('http', 'https') else None)
+            page.on('request', lambda request: result['external_requests'].append(request.url) if urlsplit(request.url).scheme in ('http', 'https') and request.url not in ICONS else None)
             try:
                 page.goto((SITE_ROOT / relative).as_uri())
                 page.wait_for_load_state('load')
@@ -758,6 +812,8 @@ def detail_browser_checks(browser):
         ctx = browser.new_context()
         def route(request_route):
             url = request_route.request.url
+            if serve_icon(request_route):
+                return
             if urlsplit(url).netloc != urlsplit(origin).netloc:
                 result['nonlocal_requests'].append(url)
                 request_route.abort()
@@ -844,7 +900,8 @@ except Exception as error:
     res['products'] = {'ok': False, 'failures': [str(error)]}
 res['links'] = {'ok': not LINK_FAILURES, 'checked': LINK_COUNT, 'failures': LINK_FAILURES}
 
-res['static_pass'] = all(res[k]['ok'] for k in ('input_html', 'about', 'products', 'detail_static', 'links'))
+res['icons'] = icon_checks()
+res['static_pass'] = all(res[k]['ok'] for k in ('input_html', 'about', 'products', 'detail_static', 'links', 'icons'))
 
 with sync_playwright() as p:
     try:
@@ -859,9 +916,10 @@ with sync_playwright() as p:
     res['links'] = {'ok': not LINK_FAILURES, 'checked': LINK_COUNT, 'failures': LINK_FAILURES}
     def page(path, **kw):
         ctx = b.new_context(**kw); pg = ctx.new_page()
+        ctx.route('**/*', local_file_route)
         pg.on('pageerror', lambda e: res['errors'].append(f'{path}: {e}'))
         pg.on('console', lambda m: m.type == 'error' and res['errors'].append(f'{path}: {m.text}'))
-        pg.on('request', lambda rq: (not rq.url.startswith(('file:', 'data:', 'about:'))) and res['external_requests'].append(rq.url))
+        pg.on('request', lambda rq: (not rq.url.startswith(('file:', 'data:', 'about:'))) and rq.url not in ICONS and res['external_requests'].append(rq.url))
         pg.goto('file://' + path); pg.wait_for_timeout(500); return ctx, pg
     # Compare actual static table nodes against the same page after startup.
     row_state = """()=>Array.from(document.querySelectorAll('#rows tr'),r=>({
@@ -993,7 +1051,7 @@ with sync_playwright() as p:
     b.close()
 res['errors'] = [e for e in res['errors'] if priv not in e] + [e for e in res['errors'] if priv in e and False]
 res['pass'] = (res['speed_threshold']['ok'] and not res['errors'] and not res['external_requests'] and not res['parity']['diffs'] and all(res[f'mobile_{l}']['scrollW'] <= 390 and res[f'mobile_{l}']['innerW'] == 390 for l in ['zh', 'en']) and res['zero_dollar_cells'] == 0)
-res['pass'] = bool(res['pass'] and res['about']['ok'] and res['about_browser']['ok'] and res['input_html']['ok'] and res['products']['ok'] and res['detail_static']['ok'] and res['detail_browser']['ok'] and res['links']['ok'] and all(x['ok'] for key in ['static_first_screen', 'language_paths', 'fixed_metadata'] for x in res[key])
+res['pass'] = bool(res['pass'] and res['icons']['ok'] and res['about']['ok'] and res['about_browser']['ok'] and res['input_html']['ok'] and res['products']['ok'] and res['detail_static']['ok'] and res['detail_browser']['ok'] and res['links']['ok'] and all(x['ok'] for key in ['static_first_screen', 'language_paths', 'fixed_metadata'] for x in res[key])
                    and not res['han_in_en_ui']  # blacklist hits stay informational (pre-existing product names in data)
                    and res['url_restore']['canonical_en'] == res['url_restore']['canonical_zh'] == res['url_restore']['og_url_en'] == 'https://modelsrank.org/'
                    and res['mobile_en']['lang'] == 'en' and res['mobile_zh']['lang'] == 'zh-CN')
