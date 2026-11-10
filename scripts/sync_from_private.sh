@@ -12,9 +12,14 @@ set -euo pipefail
 PRIV="${1:?private repo dir required}"; PUSH="${2:-}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SRC="$PRIV/public"
-FILES=(build_public_261105.py check_public_261105.py template_public_261105.html template_model_261105.html
+FILES=(build_public_261105.py check_public_261105.py
        public_text_261105.json published_urls.json url_redirects.json
        assets/og.png assets/make_og.py assets/google529a71ca053abf05.html)
+# Every page template (public, model, about, ...) is included automatically.
+# 所有页面模板（首页、详情、关于……）自动包含。
+shopt -s nullglob
+for t in "$SRC"/template_*_261105.html; do FILES+=("$(basename "$t")"); done
+shopt -u nullglob
 for f in "${FILES[@]}"; do
   [ -f "$SRC/$f" ] || { echo "missing: $SRC/$f" >&2; exit 1; }
   mkdir -p "$ROOT/public/$(dirname "$f")"; cp "$SRC/$f" "$ROOT/public/$f"

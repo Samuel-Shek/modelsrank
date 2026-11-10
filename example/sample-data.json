@@ -142,6 +142,18 @@
    "title": "Artificial Analysis Intelligence Index methodology",
    "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
    "checked": "2026-01-01"
+  },
+  {
+   "id": "aa-board",
+   "title": "Artificial Analysis leaderboard",
+   "url": "https://artificialanalysis.ai/leaderboards/models",
+   "checked": "2026-01-01"
+  },
+  {
+   "id": "arena-text",
+   "title": "Arena text leaderboard",
+   "url": "https://arena.ai/leaderboard/text",
+   "checked": "2026-01-01"
   }
  ],
  "crosscheck": {
