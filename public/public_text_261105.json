@@ -674,6 +674,50 @@
   "已公开可用（2026-11-09）：Meta Model API（muse-ember-1.0，标准模式，按量付费）与 Muse Code 全部订阅档。权重未公开；无 Contributor 模式。": [
    "已公开可用（2026-11-09）：Meta Model API（muse-ember-1.0，标准模式，按量付费）与 Muse Code 全部订阅档。权重未公开；无 Contributor 模式。",
    "Publicly available since 9 Nov 2026: Meta Model API (muse-ember-1.0, standard mode, pay-as-you-go) and all Muse Code subscription plans. Weights are not public; no Contributor mode."
+  ],
+  "AA v5.0.1 综合分与评测成本取 2026-11-10 上午主表公开值；单任务耗时用分钟，输出速度按性能数据取整。厂商采用官方名称 Agnes AI；AA 主表创建者写为 Sapiens AI。不与 Agnes 2.5 Pro Beta 混用成绩。": [
+   "AA v5.0.1 综合分与评测成本取 2026-11-10 上午主表公开值；单任务耗时用分钟，输出速度按性能数据取整。厂商采用官方名称 Agnes AI；AA 主表创建者写为 Sapiens AI。不与 Agnes 2.5 Pro Beta 混用成绩。",
+   "AA v5.0.1 score and evaluation cost use the public main-table values from the morning of 10 Nov 2026. Time per task is in minutes; output speed is rounded from the performance data. The vendor uses the official name Agnes AI; the AA table lists the creator as Sapiens AI. Results are not shared with Agnes 2.5 Pro Beta."
+  ],
+  "Agnes AI 官方文档标价（每百万 token）：缓存命中 $0.01 / 输入 $0.10 / 输出 $0.30。价格及可用性可能因账户、地区、计费配置或后续调价而异，以 Agnes AI 控制台为账户实价来源；评测成本以 AA 主表为准。": [
+   "Agnes AI 官方文档标价（每百万 token）：缓存命中 $0.01 / 输入 $0.10 / 输出 $0.30。价格及可用性可能因账户、地区、计费配置或后续调价而异，以 Agnes AI 控制台为账户实价来源；评测成本以 AA 主表为准。",
+   "Agnes AI documentation list prices per million tokens: cache read $0.01 / input $0.10 / output $0.30. Pricing and availability may vary by account, region, billing configuration or later updates. The Agnes AI dashboard is the source of truth for account-specific prices; evaluation cost uses the AA main table."
+  ],
+  "官方提供 API：https://apihub.agnes-ai.com/v1，模型名 agnes-2.5-pro-theta；支持 Chat Completions、Responses 与 Messages 接口。实际可用性和限额取决于账户及 API key 权限。": [
+   "官方提供 API：https://apihub.agnes-ai.com/v1，模型名 agnes-2.5-pro-theta；支持 Chat Completions、Responses 与 Messages 接口。实际可用性和限额取决于账户及 API key 权限。",
+   "Official API: https://apihub.agnes-ai.com/v1, model agnes-2.5-pro-theta; supports Chat Completions, Responses and Messages endpoints. Actual availability and rate limits depend on the account and API key permissions."
+  ],
+  "AA v5.0.1 综合分 60（11月3日 AA 按 CritPt v2 重评后由 59 调为 60）。官方 10月28日发布，11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。": [
+   "AA v5.0.1 综合分 60（11月3日 AA 按 CritPt v2 重评后由 59 调为 60）。官方 10月28日发布，11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。",
+   "Artificial Analysis Intelligence Index v5.0.1 score 60 (up from 59 after Artificial Analysis regraded CritPt v2 on 3 Nov). Released by Google on 28 Oct and generally available since 10 Nov (Gemini API paid tier, Gemini for business, Google AI Ultra). See “Official pricing” below."
+  ],
+  "AA 11月1日补测。11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。": [
+   "AA 11月1日补测。11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。",
+   "Tested by Artificial Analysis on 1 Nov. Generally available since 10 Nov (Gemini API paid tier, Gemini for business, Google AI Ultra). See “Official pricing” below."
+  ],
+  "AA 11月2日补测；评测成本与速度于11月4日读取时已公布。11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。": [
+   "AA 11月2日补测；评测成本与速度于11月4日读取时已公布。11月10日起正式开放（Gemini API 付费层、Gemini for business、Google AI Ultra）。价格见下方“官方价格”。",
+   "Tested by Artificial Analysis on 2 Nov; cost per task and speed published as of 4 Nov. Generally available since 10 Nov (Gemini API paid tier, Gemini for business, Google AI Ultra). See “Official pricing” below."
+  ],
+  "11月10日起正式开放：Gemini API 付费层（无免费层）、Gemini for business 与 Google AI Ultra 订阅可用。": [
+   "11月10日起正式开放：Gemini API 付费层（无免费层）、Gemini for business 与 Google AI Ultra 订阅可用。",
+   "Generally available since 10 Nov: Gemini API paid tier (no free tier), Gemini for business and Google AI Ultra subscriptions."
+  ],
+  "已公开可用（2026-11-10）：开发者用 Gemini API 付费层（Google AI Studio、Android Studio；免费层不可用）；企业用 Gemini for business（API 或模型下拉菜单）、Google Antigravity 与 CodeMender；Google AI Ultra 订阅用户在 Antigravity、Gemini 应用和搜索 AI 模式中逐步开放。网络安全专用的 Carbon for cyber 仍需通过 Fairwind 计划申请": [
+   "已公开可用（2026-11-10）：开发者用 Gemini API 付费层（Google AI Studio、Android Studio；免费层不可用）；企业用 Gemini for business（API 或模型下拉菜单）、Google Antigravity 与 CodeMender；Google AI Ultra 订阅用户在 Antigravity、Gemini 应用和搜索 AI 模式中逐步开放。网络安全专用的 Carbon for cyber 仍需通过 Fairwind 计划申请",
+   "Publicly available since 10 Nov 2026: developers via the Gemini API paid tier (Google AI Studio, Android Studio; not on the free tier); enterprises via Gemini for business (API or model picker), Google Antigravity and CodeMender; rolling out to Google AI Ultra subscribers in Antigravity, the Gemini app and AI Mode in Search. The cybersecurity-specific Carbon for cyber still requires applying through the Fairwind Program"
+  ],
+  "Gemini API 付费层标准价：截至 2026-11-30（含）$2 输入 / $10 输出（每百万 token，含思考 token），12月1日起 $4 / $20；缓存输入 $0.10 → $0.20（仅隐式缓存）。Batch/Flex 截至 11-30 为 $1 / $5，12月1日起 $2 / $10。免费层不可用。AA 评测成本按 $4/$20 标准价计算。": [
+   "Gemini API 付费层标准价：截至 2026-11-30（含）$2 输入 / $10 输出（每百万 token，含思考 token），12月1日起 $4 / $20；缓存输入 $0.10 → $0.20（仅隐式缓存）。Batch/Flex 截至 11-30 为 $1 / $5，12月1日起 $2 / $10。免费层不可用。AA 评测成本按 $4/$20 标准价计算。",
+   "Gemini API paid-tier standard price: through 30 Nov 2026, $2 input / $10 output per million tokens (output includes thinking tokens), then $4 / $20 from 1 Dec; cached input $0.10 → $0.20 (implicit caching only). Batch/Flex: $1 / $5 through 30 Nov, then $2 / $10 from 1 Dec. Not available on the free tier. Artificial Analysis evaluation cost uses the $4 / $20 standard price."
+  ],
+  "官方说明与 Fable 5.2 为同一底座模型，Fable 5.2 加了网络安全与生物安全防护后向所有用户开放；Mythos 5.2 仅向通过 Anthropic 网络安全或生命科学验证计划的机构开放（Claude Enterprise 客户可经 Claude Security 间接使用）。不是普通消费者可直接购买的默认候选；不复制 Fable 5.2 的成绩。2026-11-11 复查 AA 统一榜单：无此条独立完整分。": [
+   "官方说明与 Fable 5.2 为同一底座模型，Fable 5.2 加了网络安全与生物安全防护后向所有用户开放；Mythos 5.2 仅向通过 Anthropic 网络安全或生命科学验证计划的机构开放（Claude Enterprise 客户可经 Claude Security 间接使用）。不是普通消费者可直接购买的默认候选；不复制 Fable 5.2 的成绩。2026-11-11 复查 AA 统一榜单：无此条独立完整分。",
+   "Anthropic says it is the same underlying model as Fable 5.2; Fable 5.2 adds cybersecurity and biology safeguards and is open to all users, while Mythos 5.2 is available only to organizations approved through Anthropic’s Cyber or Life Sciences Verification Programs (Claude Enterprise customers can use it indirectly via Claude Security). Not a default option ordinary consumers can buy; Fable 5.2’s scores are not copied over. Rechecked the Artificial Analysis leaderboard on 11 Nov 2026: no separate complete score for this entry."
+  ],
+  "已由 Claude Mythos 5.2（2026-11-09 发布）接替；保留 10月23日的观察记录，不作当前对照。": [
+   "已由 Claude Mythos 5.2（2026-11-09 发布）接替；保留 10月23日的观察记录，不作当前对照。",
+   "Succeeded by Claude Mythos 5.2 (released 9 Nov 2026); the watch-list record from 23 Oct is kept and not used as a current comparison."
   ]
  },
  "vendors": {
@@ -737,6 +781,10 @@
   "LG AI Research": [
    "LG AI Research",
    "LG AI Research"
+  ],
+  "Agnes AI": [
+   "Agnes AI",
+   "Agnes AI"
   ]
  },
  "sources": {
@@ -1219,49 +1267,57 @@
   "meta-muse-ember-docs-20261110": [
    "Meta Model API 文档 · Muse Ember",
    "Meta Model API docs · Muse Ember"
+  ],
+  "aa-speed-v3-20261110": [
+   "AA 2026-11-10 上午性能数据（09:02，v3.0.0）",
+   "AA performance data, 10 Nov 2026 morning (09:02, v3.0.0)"
+  ],
+  "agnes-theta-docs-20261110": [
+   "Agnes AI 官方文档 · Agnes 2.5 Pro Theta：API 与定价",
+   "Agnes AI official documentation: Agnes 2.5 Pro Theta API and pricing"
+  ],
+  "carbon-ga-20261110": [
+   "Google · Gemini 4 Carbon 正式开放",
+   "Google · Gemini 4 Carbon is now available"
   ]
  },
  "highlights": {
   "title": [
-   "Claude Fable 5.2 登顶综合指数；Muse Ember 入榜",
-   "Claude Fable 5.2 takes #1 on the Intelligence Index; Muse Ember joins the board"
+   "Gemini 4 Carbon 正式开放；Mythos 5.2 进入观察清单",
+   "Gemini 4 Carbon is now generally available; Mythos 5.2 joins the watch list"
   ],
   "lines": [
    [
-    "Claude Fable 5.2（max）Artificial Analysis 综合分 65，高于此前第一的 Gemini 4 Carbon（60）；官方标价 $8 / $40 每百万 token。",
-    "Claude Fable 5.2 (max) scores 65 on Artificial Analysis, ahead of the previous leader Gemini 4 Carbon (60); list price $8 / $40 per million tokens."
+    "Gemini 4 Carbon 11月10日起正式开放：Gemini API 付费层、Gemini for business 与 Google AI Ultra 可用，不再是受限开放。",
+    "Gemini 4 Carbon has been generally available since 10 Nov: Gemini API paid tier, Gemini for business and Google AI Ultra; it is no longer limited access."
    ],
    [
-    "Meta Muse Ember（max）综合分 36，评测成本仅 $0.14；官方标价 $0.10 / $0.50 每百万 token，权重未公开。",
-    "Meta Muse Ember (max) scores 36 at an evaluation cost of only $0.14; list price $0.10 / $0.50 per million tokens, weights not public."
+    "首发价 $2 / $10 每百万 token 至 11月30日，12月1日起 $4 / $20；Batch/Flex 首发期 $1 / $5。",
+    "Introductory price $2 / $10 per million tokens through 30 Nov, then $4 / $20 from 1 Dec; Batch/Flex $1 / $5 during the introductory period."
    ],
    [
-    "Arena 文本榜（11-09）尚未收录 Fable 5.2：Carbon 1、Argon 2、Muse Wonder Max 3、Opus 5.5 High 4。",
-    "Arena’s text leaderboard (9 Nov) does not list Fable 5.2 yet: Carbon #1, Argon #2, Muse Wonder Max #3, Opus 5.5 High #4."
+    "Claude Mythos 5.2 替换 Mythos 5.1 进入观察清单：与 Fable 5.2 同底座，仅限验证计划机构，不参与排名。",
+    "Claude Mythos 5.2 replaces Mythos 5.1 on the watch list: same underlying model as Fable 5.2, verified organizations only, not ranked."
    ]
   ],
-  "button": "fable52-max"
+  "button": "gemini-4-carbon-high"
  },
  "changes": [
   [
-   "新增 Claude Fable 5.2（2026-11-09 发布）5 档：max 65 / xhigh 62 / high 62 / medium 56 / low 54；max 档排第 1。官方标价 $8 / $40 每百万 token（5.1 为 $10 / $50）。",
-   "Added Claude Fable 5.2 (released 9 Nov 2026), five effort levels: max 65 / xhigh 62 / high 62 / medium 56 / low 54; the max level ranks #1. List price $8 / $40 per million tokens (5.1 was $10 / $50)."
+   "Google Gemini 4 Carbon 于 2026-11-10 正式开放：Gemini API 付费层（AI Studio，无免费层）、Gemini for business，并向 Google AI Ultra 订阅用户逐步开放；三档去掉“受限开放 · 未公开发售”标记。",
+   "Google Gemini 4 Carbon became generally available on 10 Nov 2026: Gemini API paid tier (AI Studio, no free tier), Gemini for business, and rolling out to Google AI Ultra subscribers; the “Limited access · not for sale” label is removed from all three levels."
   ],
   [
-   "新增 Meta Muse Ember（2026-11-09 发布）2 档：max 36 / xhigh 34；max 档评测成本 $0.14，速度三项暂未公布。官方标价 $0.10 / $0.50 每百万 token。",
-   "Added Meta Muse Ember (released 9 Nov 2026), two effort levels: max 36 / xhigh 34; the max level has an evaluation cost of $0.14 and its three speed fields are not yet published. List price $0.10 / $0.50 per million tokens."
+   "Gemini 4 Carbon 官方价格：首发价截至 2026-11-30，$2 / $10 每百万 token（含思考 token），12月1日起 $4 / $20；Batch/Flex $1 / $5，之后 $2 / $10。分数、评测成本与速度不变。",
+   "Gemini 4 Carbon official price: introductory $2 / $10 per million tokens (including thinking tokens) through 30 Nov 2026, then $4 / $20 from 1 Dec; Batch/Flex $1 / $5, then $2 / $10. Score, evaluation cost and speed are unchanged."
   ],
   [
-   "Claude Fable 5.1 五档因 Artificial Analysis 主表不再列出（已弃用，由 5.2 接替）转入历史，保留原值与日期。",
-   "Claude Fable 5.1’s five levels moved to history because Artificial Analysis no longer lists them (deprecated, succeeded by 5.2); original values and dates are kept."
+   "观察清单：Claude Mythos 5.2（2026-11-09，与 Fable 5.2 同底座，仅限验证计划机构）替换 Mythos 5.1，不进主榜。",
+   "Watch list: Claude Mythos 5.2 (9 Nov 2026; same underlying model as Fable 5.2, verified organizations only) replaces Mythos 5.1 and is not ranked."
   ],
   [
-   "Muse Glimmer (high) 评测成本 $0.16 → $0.17；Nemotron 3.5 Lightning 评测成本 $0.29 → $0.31（分数不变）。Arena 文本榜页面日期更新为 2026-11-09。",
-   "Muse Glimmer (high) evaluation cost $0.16 → $0.17; Nemotron 3.5 Lightning evaluation cost $0.29 → $0.31 (scores unchanged). Arena text leaderboard page date is now 2026-11-09."
-  ],
-  [
-   "未收录：Agnes 2.5 Pro Theta（官方信息未核）；Claude Mythos 5.2（仅限验证机构）；既有低分空缺暂不扩。",
-   "Not listed: Agnes 2.5 Pro Theta (official details not verified); Claude Mythos 5.2 (verified organizations only); pre-existing low-score gaps are not expanded this round."
+   "未收录 GPT-6 Cyber（仅限 Daybreak Red 计划的专项模型，无综合分）。此次未重刷分数、成本与速度。",
+   "Not listed: GPT-6 Cyber (a specialized model limited to the Daybreak Red program, no Intelligence Index score). Scores, costs and speeds were not refreshed in this update."
   ]
  ],
  "crosscheck": [
@@ -2209,8 +2265,7 @@
    "zh": "版本未记录",
    "en": "Version not recorded"
   }
- }
-,
+ },
  "about_config": {
   "operator": {
    "name": {
@@ -2313,6 +2368,22 @@
   "method.intro": {
    "zh": "指标含义及适用范围如下；常见疑问见下方问答。",
    "en": "The metrics and their scope are explained below. Common questions are answered further down this page."
+  },
+  "data_license.heading": {
+   "zh": "数据使用条款",
+   "en": "Data terms"
+  },
+  "data_license": {
+   "zh": "榜单中的评测数据（综合分、评测成本、速度等）来自 Artificial Analysis，权利归 Artificial Analysis 所有，使用和转载须遵守其{aa_terms}。本站不以任何开放许可证再授权这些数据。Arena 分数、价格和厂商资料归各自来源所有。Models Rank 对这些数据的整理与说明仅供参考。网站代码以 MIT 许可证在 {repo} 开源，MIT 许可证只适用于代码，不适用于数据。",
+   "en": "Benchmark data on this site (Intelligence Index scores, cost per task, speed and so on) comes from Artificial Analysis, which retains its rights; use and redistribution are subject to its {aa_terms}. Models Rank does not relicense this data under any open license. Arena scores, prices and vendor details belong to their respective sources. Models Rank’s compilation and notes are for reference only. The site code is open source under the MIT License on {repo}; the MIT License covers the code only, not the data."
+  },
+  "data_license.aa_terms": {
+   "zh": "使用条款",
+   "en": "Terms of Use"
+  },
+  "data_license.repo": {
+   "zh": "GitHub",
+   "en": "GitHub"
   },
   "updates.heading": {
    "zh": "更新频率与纠错",
@@ -2445,5 +2516,4 @@
    }
   }
  ]
-
 }

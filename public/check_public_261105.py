@@ -354,7 +354,7 @@ def about_input_checks():
                 literals = ''
                 for literal, field, spec, conversion in Formatter().parse(normalized):
                     literals += literal
-                    if field is not None and (field not in {'date', 'operator_name', 'correction'} or spec or conversion):
+                    if field is not None and (field not in {'date', 'operator_name', 'correction', 'aa_terms', 'repo'} or spec or conversion):
                         errors.append('Unknown About placeholder: ' + path)
                 if re.search(r'\d|[{}]', literals):
                     errors.append('Literal number or brace in About copy: ' + path)
@@ -455,7 +455,7 @@ def about_checks():
             for field, value in [('og:title', copy('title', lg)), ('og:description', copy('description', lg)), ('og:url', url)]:
                 require([n.attrs.get('content') for n in doc.all('meta', property=field)] == [value], 'About ' + field + ': ' + lg)
             require([n.text() for n in doc.all('h1')] == [copy('heading', lg)], 'About h1: ' + lg)
-            require([n.attrs.get('id') for n in body.all('section')] == ['operator', 'sources', 'methodology', 'updates', 'faq', 'disclaimer'], 'About section order: ' + lg)
+            require([n.attrs.get('id') for n in body.all('section')] == ['operator', 'sources', 'methodology', 'data-license', 'updates', 'faq', 'disclaimer'], 'About section order: ' + lg)
             require(bool(doc.all('meta', name='robots', content='noindex')) == (not ABOUT_STATE['ready']), 'About indexing state: ' + lg)
             require([n.text() for n in doc.all('p', **{'class': 'preview'})] == ([] if ABOUT_STATE['ready'] else [copy('preview', lg)]), 'About preview state: ' + lg)
             require([n.text() for n in doc.all(id='operator')[0].all('p')] == [copy('operator' if ABOUT_STATE['names'][lg] else 'operator.placeholder', lg), copy('purpose', lg)] + ([copy('source.license', lg)] if ABOUT_STATE['source_repo'] else []), 'About operator body matches config: ' + lg)

@@ -240,6 +240,7 @@ def build_jsonld(lg, selected):
     if ABOUT_STATE['ready']:
         graph[0]['publisher'] = {'@id': SITE['zh'] + '#operator'}
         graph[1]['creator'] = {'@id': SITE['zh'] + '#operator'}
+        graph[1]['license'] = ABOUT_URLS[lg] + '#data-license'
         graph.append(operator_entity(lg))
     return {'@context': 'https://schema.org', '@graph': graph}
 
@@ -624,7 +625,7 @@ def render_detail(row, lg, archived=False):
 
 # About is deliberately self-contained here; the checker validates inputs independently.
 ABOUT_URLS = {lg: url + 'about/' for lg, url in SITE.items()}
-ABOUT_FIELDS = {'date', 'operator_name', 'correction'}
+ABOUT_FIELDS = {'date', 'operator_name', 'correction', 'aa_terms', 'repo'}
 ABOUT_BLACK = ['暂时保持', 'Nov 4 values', '72 小时', '72-hour', '首 token 延迟', 'speedV2', '图中型号', '截图', '双子', '本轮', '复核', 'Codex', 'SHA', '请先更新', '上版', '口径', '本次未复核', 'screenshot', 'rawPrevious', 'auditChanges', '导出当前 CSV', '完整数据 JSON', '本机', '离线快照', 'SpaceXAI', 'draft translation']
 
 def validate_about():
@@ -730,14 +731,15 @@ def validate_about():
             'missing_fields': sorted(missing), 'ready': not missing}
 
 
-def about_copy(key, lg):
+def about_copy(key, lg, **links):
     value = T['about_page'][key][lg]
-    return expand_about(value, lg)
+    # Escape copy before inserting caller-built, escaped anchor elements.
+    return expand_about(esc(value) if links else value, lg, **links)
 
 
-def expand_about(value, lg):
+def expand_about(value, lg, **fields):
     import unicodedata
-    result = value.format(date=date, operator_name=ABOUT_STATE['names'][lg], correction=ABOUT_STATE['value'])
+    result = value.format(date=date, operator_name=ABOUT_STATE['names'][lg], correction=ABOUT_STATE['value'], **fields)
     if re.search(r'[{}]', unicodedata.normalize('NFKC', html.unescape(result))):
         raise ValueError('Unfilled About placeholder')
     return result
@@ -855,6 +857,11 @@ def render_about(lg):
     body += section('sources', 'sources.heading', paragraph('sources.intro') + render_about_sources(lg))
     # Existing public HTML strings are reused exactly, with no migration or parameterization.
     body += section('methodology', 'method.heading', paragraph('method.intro') + ''.join('<p class="method-copy" data-method="' + k + '">' + UI[k][lg] + '</p>' for k in ('method.score', 'method.cost', 'method.speed')))
+    aa_terms = '<a href="https://artificialanalysis.ai/terms-of-use">' + esc(about_copy('data_license.aa_terms', lg)) + '</a>'
+    repo = esc(about_copy('data_license.repo', lg))
+    if ABOUT_STATE['source_repo']:
+        repo = '<a href="' + esc(ABOUT_STATE['source_repo']) + '">' + repo + '</a>'
+    body += section('data-license', 'data_license.heading', '<p>' + about_copy('data_license', lg, aa_terms=aa_terms, repo=repo) + '</p>')
     corrections = '<h3>' + esc(about_copy('corrections.heading', lg)) + '</h3>'
     if ABOUT_STATE['channels']:
         corrections += paragraph('corrections')
